@@ -1,0 +1,1064 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1" name="viewport" />
+  <title>AI Sejarah Kuliner - CitaRasa</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet" />
+  
+  <style>
+    /* -----------------------------------------------
+       AI SEJARAH KULINER - CITARASA
+    ----------------------------------------------- */
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --primary-50: #fef3e2;
+      --primary-100: #fde6c5;
+      --primary-200: #fbce9c;
+      --primary-300: #f9b573;
+      --primary-400: #f79d4a;
+      --primary-500: #f58421;
+      --primary-600: #d96a0c;
+      --primary-700: #b45309;
+      --primary-800: #8f3f07;
+      --primary-900: #6a2e05;
+      
+      --ai-50: #eef2ff;
+      --ai-100: #e0e7ff;
+      --ai-200: #c7d2fe;
+      --ai-300: #a5b4fc;
+      --ai-400: #818cf8;
+      --ai-500: #6366f1;
+      --ai-600: #4f46e5;
+      --ai-700: #4338ca;
+      --ai-800: #3730a3;
+      --ai-900: #312e81;
+      
+      --neutral-50: #faf7f2;
+      --neutral-100: #f5efe6;
+      --neutral-200: #e9dfd2;
+      --neutral-300: #ddd0be;
+      --neutral-400: #d1c0aa;
+      --neutral-500: #b8a48c;
+      --neutral-600: #9c8870;
+      --neutral-700: #7f6c54;
+      --neutral-800: #625038;
+      --neutral-900: #45341f;
+      
+      --font-primary: 'Plus Jakarta Sans', sans-serif;
+      --shadow-sm: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+      --shadow-md: 0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -2px rgba(0, 0, 0, 0.025);
+      --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.05), 0 10px 10px -5px rgba(0, 0, 0, 0.02);
+      --shadow-xl: 0 25px 50px -12px rgba(0, 0, 0, 0.15);
+    }
+
+    body {
+      font-family: var(--font-primary);
+      background: linear-gradient(135deg, #faf7f2 0%, #ffffff 100%);
+      color: var(--neutral-800);
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+      height: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: var(--neutral-200);
+    }
+    ::-webkit-scrollbar-thumb {
+      background: var(--ai-500);
+      border-radius: 20px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: var(--ai-600);
+    }
+
+    .gradient-text {
+      background: linear-gradient(135deg, var(--ai-700) 0%, var(--ai-500) 70%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    /* Navbar */
+    .glass-nav {
+      background: rgba(255, 255, 255, 0.9);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(99, 102, 241, 0.2);
+    }
+
+    .nav-link {
+      position: relative;
+      font-weight: 500;
+      transition: color 0.2s;
+      color: var(--neutral-700);
+    }
+    .nav-link:hover {
+      color: var(--ai-600);
+    }
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--ai-600);
+      transition: width 0.2s ease;
+    }
+    .nav-link:hover::after {
+      width: 100%;
+    }
+    .nav-link.active {
+      color: var(--ai-600);
+      font-weight: 600;
+    }
+    .nav-link.active::after {
+      width: 100%;
+    }
+
+    /* Chat AI Container */
+    .chat-ai-container {
+      background: white;
+      border-radius: 32px;
+      box-shadow: var(--shadow-xl);
+      overflow: hidden;
+      border: 1px solid rgba(99, 102, 241, 0.2);
+      height: 600px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .chat-ai-header {
+      background: linear-gradient(135deg, var(--ai-700) 0%, var(--ai-500) 100%);
+      color: white;
+      padding: 20px 24px;
+    }
+
+    .chat-ai-messages {
+      flex-grow: 1;
+      padding: 24px;
+      overflow-y: auto;
+      background: #faf9ff;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .message-ai {
+      max-width: 80%;
+      padding: 16px 20px;
+      border-radius: 24px;
+      line-height: 1.6;
+      font-size: 15px;
+      animation: fadeIn 0.3s ease;
+      white-space: pre-line;
+      box-shadow: var(--shadow-sm);
+    }
+    .message-ai.user {
+      background: linear-gradient(135deg, var(--ai-600) 0%, var(--ai-500) 100%);
+      color: white;
+      align-self: flex-end;
+      border-bottom-right-radius: 4px;
+    }
+    .message-ai.bot {
+      background: white;
+      color: var(--neutral-800);
+      align-self: flex-start;
+      border-bottom-left-radius: 4px;
+      border: 1px solid rgba(99, 102, 241, 0.2);
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .chat-ai-input-container {
+      display: flex;
+      padding: 20px 24px;
+      gap: 12px;
+      background: white;
+      border-top: 1px solid rgba(99, 102, 241, 0.2);
+    }
+
+    .chat-ai-input {
+      flex-grow: 1;
+      border: 2px solid #e9dccd;
+      border-radius: 40px;
+      padding: 14px 20px;
+      font-size: 15px;
+      outline: none;
+      transition: all 0.2s;
+    }
+    .chat-ai-input:focus {
+      border-color: var(--ai-500);
+      box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.1);
+    }
+
+    .chat-ai-send {
+      background: var(--ai-600);
+      border: none;
+      color: white;
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s;
+    }
+    .chat-ai-send:hover {
+      background: var(--ai-700);
+      transform: scale(1.05);
+    }
+
+    /* Suggestion Chips */
+    .suggestion-chip {
+      background: white;
+      border: 2px solid var(--ai-200);
+      border-radius: 40px;
+      padding: 10px 20px;
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--ai-700);
+      cursor: pointer;
+      transition: all 0.2s;
+      white-space: nowrap;
+    }
+    .suggestion-chip:hover {
+      background: var(--ai-100);
+      border-color: var(--ai-500);
+      transform: translateY(-2px);
+    }
+
+    /* Food Category Card */
+    .food-category-card {
+      background: white;
+      border-radius: 20px;
+      padding: 16px;
+      border: 1px solid rgba(99, 102, 241, 0.2);
+      transition: all 0.3s;
+      cursor: pointer;
+    }
+    .food-category-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-lg);
+      border-color: var(--ai-400);
+    }
+
+    /* Loading Animation */
+    .typing-indicator {
+      display: flex;
+      gap: 4px;
+      padding: 12px 16px;
+      background: white;
+      border-radius: 24px;
+      border-bottom-left-radius: 4px;
+      width: fit-content;
+    }
+    .typing-dot {
+      width: 8px;
+      height: 8px;
+      background: var(--ai-400);
+      border-radius: 50%;
+      animation: typingBounce 1.4s infinite ease-in-out;
+    }
+    .typing-dot:nth-child(1) { animation-delay: -0.32s; }
+    .typing-dot:nth-child(2) { animation-delay: -0.16s; }
+    @keyframes typingBounce {
+      0%, 80%, 100% { transform: scale(0); }
+      40% { transform: scale(1); }
+    }
+
+    /* Mobile */
+    @media (max-width: 640px) {
+      .chat-ai-container {
+        height: 500px;
+      }
+      .message-ai {
+        max-width: 90%;
+      }
+      .suggestion-chip {
+        font-size: 12px;
+        padding: 8px 16px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ===== NAVBAR ===== -->
+  <nav class="glass-nav sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-20">
+        <!-- Logo -->
+        <a href="index.html" class="flex items-center gap-3 group">
+          <img src="https://i.ibb.co.com/QdvhmJc/citarasa-logo.png" 
+               alt="CitaRasa Logo" 
+               class="w-10 h-10 rounded-xl object-cover shadow-md group-hover:scale-105 transition"
+               onerror="this.src='https://via.placeholder.com/40x40/4f46e5/ffffff?text=CR'">
+          <div>
+            <span class="text-xl font-extrabold tracking-tight text-neutral-800">CITA<span class="text-ai-600">RASA</span></span>
+            <p class="text-[10px] text-neutral-500 -mt-1">melestarikan kuliner daerah</p>
+          </div>
+        </a>
+
+        <!-- Desktop Menu -->
+        <div class="hidden md:flex items-center gap-8">
+          <a href="index.html#beranda" class="nav-link">Beranda</a>
+          <a href="kuliner.html" class="nav-link">Kuliner Daerah</a>
+          <a href="index.html#umkm" class="nav-link">UMKM Lokal</a>
+          <a href="ai-sejarah.html" class="nav-link active">AI Sejarah</a>
+          
+          <!-- User Dropdown -->
+          <div class="relative group">
+            <button class="flex items-center gap-1 text-neutral-700 hover:text-ai-600 font-medium py-2">
+              <span>Program</span>
+              <i class="fas fa-chevron-down text-xs"></i>
+            </button>
+            <div class="dropdown-menu">
+              <a href="reward.html">🎁 Reward</a>
+              <a href="index.html#afiliasi">🤝 Afiliasi</a>
+              <a href="leaderboard.html">🏆 Leaderboard</a>
+            </div>
+          </div>
+
+          <!-- Premium -->
+          <a href="premium.html" class="bg-gradient-to-r from-ai-600 to-ai-700 text-white px-5 py-2.5 rounded-full text-sm font-semibold hover:shadow-lg transition shadow-md">
+            <i class="fas fa-crown mr-1"></i> Premium
+          </a>
+
+          <!-- Daftar Dropdown -->
+          <div class="relative group">
+            <button class="flex items-center gap-1 bg-ai-50 text-ai-700 px-4 py-2 rounded-full font-medium hover:bg-ai-100 transition">
+              <span>Bergabung</span>
+              <i class="fas fa-chevron-down text-xs"></i>
+            </button>
+            <div class="dropdown-menu">
+              <a href="#">🔑 Masuk</a>
+              <a href="#">📝 Daftar UMKM</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Mobile menu button -->
+        <button class="md:hidden w-10 h-10 rounded-full bg-ai-50 flex items-center justify-center text-ai-600" id="menu-toggle">
+          <i class="fas fa-bars text-xl"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile menu -->
+    <div class="md:hidden bg-white border-t border-ai-200 hidden px-4 py-4" id="mobile-menu">
+      <div class="flex flex-col space-y-3">
+        <a href="index.html#beranda" class="py-2 text-neutral-700 hover:text-ai-600" onclick="closeMobileMenu()">🏠 Beranda</a>
+        <a href="kuliner.html" class="py-2 text-neutral-700 hover:text-ai-600" onclick="closeMobileMenu()">🍜 Kuliner Daerah</a>
+        <a href="index.html#umkm" class="py-2 text-neutral-700 hover:text-ai-600" onclick="closeMobileMenu()">🏪 UMKM Lokal</a>
+        <a href="ai-sejarah.html" class="py-2 text-ai-600 font-semibold" onclick="closeMobileMenu()">🤖 AI Sejarah</a>
+        
+        <div class="border-t border-ai-200 pt-3">
+          <p class="text-sm font-semibold text-neutral-500 mb-2">PROGRAM</p>
+          <a href="reward.html" class="block py-2 text-neutral-700 hover:text-ai-600">🎁 Reward</a>
+          <a href="index.html#afiliasi" class="block py-2 text-neutral-700 hover:text-ai-600">🤝 Afiliasi</a>
+          <a href="leaderboard.html" class="block py-2 text-neutral-700 hover:text-ai-600">🏆 Leaderboard</a>
+          <a href="premium.html" class="block py-2 text-ai-600 font-semibold">👑 Premium</a>
+        </div>
+        
+        <div class="border-t border-ai-200 pt-3">
+          <a href="#" class="block py-2 text-neutral-700 hover:text-ai-600">🔑 Masuk</a>
+          <a href="#" class="block py-2 text-neutral-700 hover:text-ai-600">📝 Daftar UMKM</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+
+    <!-- ===== HEADER AI SEJARAH ===== -->
+    <div class="text-center mb-10">
+      <span class="inline-block px-4 py-2 bg-ai-100 text-ai-700 rounded-full text-sm font-semibold mb-4">
+        <i class="fas fa-robot mr-2"></i> AI NLP Canggih
+      </span>
+      <h1 class="text-4xl md:text-5xl font-extrabold mb-4">
+        <span class="gradient-text">AI Sejarah</span> Kuliner Nusantara
+      </h1>
+      <p class="text-lg text-neutral-600 max-w-3xl mx-auto">
+        Tanyakan sejarah, asal-usul, filosofi, dan fakta unik tentang makanan khas daerah. 
+        Database 50+ kuliner Nusantara dengan penjelasan mendalam.
+      </p>
+    </div>
+
+    <!-- ===== STATISTIK CEPAT ===== -->
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12 max-w-4xl mx-auto">
+      <div class="bg-white rounded-2xl p-4 text-center shadow-sm border border-ai-200">
+        <div class="text-3xl font-bold text-ai-600">50+</div>
+        <div class="text-sm text-neutral-600">Makanan Daerah</div>
+      </div>
+      <div class="bg-white rounded-2xl p-4 text-center shadow-sm border border-ai-200">
+        <div class="text-3xl font-bold text-ai-600">34</div>
+        <div class="text-sm text-neutral-600">Provinsi</div>
+      </div>
+      <div class="bg-white rounded-2xl p-4 text-center shadow-sm border border-ai-200">
+        <div class="text-3xl font-bold text-ai-600">100+</div>
+        <div class="text-sm text-neutral-600">Fakta Unik</div>
+      </div>
+      <div class="bg-white rounded-2xl p-4 text-center shadow-sm border border-ai-200">
+        <div class="text-3xl font-bold text-ai-600">24/7</div>
+        <div class="text-sm text-neutral-600">Siap Melayani</div>
+      </div>
+    </div>
+
+    <!-- ===== CHAT AI UTAMA ===== -->
+    <div class="chat-ai-container mb-12">
+      <div class="chat-ai-header">
+        <div class="flex items-center gap-3">
+          <div class="w-12 h-12 bg-white/20 rounded-2xl flex items-center justify-center backdrop-blur-sm">
+            <i class="fas fa-robot text-2xl"></i>
+          </div>
+          <div>
+            <h2 class="text-xl font-bold">CitaRasa AI - Sejarah Kuliner</h2>
+            <p class="text-sm opacity-90">Tanya apa saja tentang makanan Nusantara</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="chat-ai-messages" id="chatMessages">
+        <!-- Welcome message -->
+        <div class="message-ai bot">
+          <strong>🌾 Selamat datang di AI Sejarah Kuliner CitaRasa!</strong>
+          <br><br>
+          Saya bisa menceritakan sejarah, asal-usul, filosofi, dan fakta unik tentang makanan khas Nusantara.
+          <br><br>
+          💡 <strong>Coba tanya:</strong>
+          <br>• "Cerita sejarah rendang"
+          <br>• "Asal usul sate madura"
+          <br>• "Filosofi gudeg"
+          <br>• "Fakta unik pempek"
+          <br>• "Makanan khas Bali apa saja?"
+        </div>
+      </div>
+
+      <!-- Suggestion Chips -->
+      <div class="px-6 pb-2 flex gap-2 overflow-x-auto scrollbar-hide">
+        <span class="suggestion-chip" onclick="useSuggestion('Cerita sejarah rendang')">📖 Sejarah Rendang</span>
+        <span class="suggestion-chip" onclick="useSuggestion('Asal usul sate madura')">🍢 Asal Sate Madura</span>
+        <span class="suggestion-chip" onclick="useSuggestion('Filosofi gudeg')">🥘 Filosofi Gudeg</span>
+        <span class="suggestion-chip" onclick="useSuggestion('Fakta unik pempek')">🎣 Fakta Pempek</span>
+        <span class="suggestion-chip" onclick="useSuggestion('Makanan khas Sulawesi')">🏝️ Kuliner Sulawesi</span>
+      </div>
+
+      <div class="chat-ai-input-container">
+        <input type="text" id="aiInput" class="chat-ai-input" placeholder="Tanyakan sejarah kuliner..." autocomplete="off">
+        <button id="aiSendBtn" class="chat-ai-send">
+          <i class="fas fa-paper-plane"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- ===== KATEGORI MAKANAN BERDASARKAN PULAU ===== -->
+    <h2 class="text-2xl font-bold mb-6 text-center">Jelajahi Berdasarkan <span class="gradient-text">Wilayah</span></h2>
+    
+    <div class="grid grid-cols-2 md:grid-cols-5 gap-4 mb-12">
+      <div class="food-category-card text-center" onclick="useSuggestion('Makanan khas Sumatera')">
+        <div class="text-3xl mb-2">🏔️</div>
+        <div class="font-semibold">Sumatera</div>
+        <div class="text-xs text-neutral-500">Rendang, Pempek, dll</div>
+      </div>
+      <div class="food-category-card text-center" onclick="useSuggestion('Makanan khas Jawa')">
+        <div class="text-3xl mb-2">🌾</div>
+        <div class="font-semibold">Jawa</div>
+        <div class="text-xs text-neutral-500">Gudeg, Sate, Rawon</div>
+      </div>
+      <div class="food-category-card text-center" onclick="useSuggestion('Makanan khas Bali')">
+        <div class="text-3xl mb-2">🏝️</div>
+        <div class="font-semibold">Bali</div>
+        <div class="text-xs text-neutral-500">Ayam Betutu, Babi Guling</div>
+      </div>
+      <div class="food-category-card text-center" onclick="useSuggestion('Makanan khas Kalimantan')">
+        <div class="text-3xl mb-2">🌴</div>
+        <div class="font-semibold">Kalimantan</div>
+        <div class="text-xs text-neutral-500">Soto Banjar, Amplang</div>
+      </div>
+      <div class="food-category-card text-center" onclick="useSuggestion('Makanan khas Sulawesi')">
+        <div class="text-3xl mb-2">🐠</div>
+        <div class="font-semibold">Sulawesi</div>
+        <div class="text-xs text-neutral-500">Coto Makassar, Tinutuan</div>
+      </div>
+    </div>
+
+    <!-- ===== BACK TO HOME ===== -->
+    <div class="text-center">
+      <a href="index.html" class="inline-flex items-center gap-2 text-ai-600 hover:text-ai-700 font-semibold">
+        <i class="fas fa-arrow-left"></i> Kembali ke Beranda
+      </a>
+    </div>
+  </main>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="bg-neutral-900 text-neutral-400 py-12 mt-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+        <div>
+          <div class="flex items-center gap-2 mb-4">
+            <img src="https://i.ibb.co.com/QdvhmJc/citarasa-logo.png" 
+                 alt="CitaRasa Logo" 
+                 class="w-8 h-8 rounded-lg object-cover"
+                 onerror="this.src='https://via.placeholder.com/32x32/4f46e5/ffffff?text=CR'">
+            <span class="text-white font-bold text-lg">CitaRasa</span>
+          </div>
+          <p class="text-sm">Melestarikan kuliner daerah melalui teknologi, komunitas, dan kecintaan pada rasa Nusantara.</p>
+        </div>
+        <div>
+          <h4 class="text-white font-semibold mb-4">Jelajahi</h4>
+          <ul class="space-y-2 text-sm">
+            <li><a href="index.html#beranda" class="hover:text-ai-400 transition">Beranda</a></li>
+            <li><a href="kuliner.html" class="hover:text-ai-400 transition">Kuliner Daerah</a></li>
+            <li><a href="index.html#umkm" class="hover:text-ai-400 transition">UMKM Lokal</a></li>
+            <li><a href="ai-sejarah.html" class="hover:text-ai-400 transition">AI Sejarah</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="text-white font-semibold mb-4">Program</h4>
+          <ul class="space-y-2 text-sm">
+            <li><a href="reward.html" class="hover:text-ai-400 transition">Reward</a></li>
+            <li><a href="index.html#afiliasi" class="hover:text-ai-400 transition">Afiliasi</a></li>
+            <li><a href="leaderboard.html" class="hover:text-ai-400 transition">Leaderboard</a></li>
+            <li><a href="premium.html" class="hover:text-ai-400 transition">Premium</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="text-white font-semibold mb-4">Ikuti Kami</h4>
+          <div class="flex gap-4 text-xl">
+            <a href="#" class="hover:text-ai-400 transition"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" class="hover:text-ai-400 transition"><i class="fab fa-instagram"></i></a>
+            <a href="#" class="hover:text-ai-400 transition"><i class="fab fa-twitter"></i></a>
+            <a href="#" class="hover:text-ai-400 transition"><i class="fab fa-tiktok"></i></a>
+          </div>
+        </div>
+      </div>
+      <div class="border-t border-neutral-700 pt-8 text-center text-sm">
+        © 2025 CitaRasa - Melestarikan Kuliner Daerah Nusantara
+      </div>
+    </div>
+  </footer>
+
+  <!-- ===== JAVASCRIPT AI SEJARAH ===== -->
+  <script>
+    // ============================================================
+    // AI SEJARAH KULINER - DATABASE LENGKAP + NLP
+    // ============================================================
+
+    (function() {
+      "use strict";
+
+      // ------------------------------------------------------------
+      // 1. DATABASE PENGETAHUAN KULINER (50+ MAKANAN)
+      // ------------------------------------------------------------
+      const databaseKuliner = [
+        // SUMATERA
+        {
+          nama: "Rendang",
+          daerah: "Sumatera Barat",
+          keyword: ['rendang', 'padang', 'minang'],
+          sejarah: "Rendang berasal dari Minangkabau, Sumatera Barat, dan sudah ada sejak abad ke-16. Awalnya dimasak untuk acara adat dan menjadi simbol kebersamaan. Proses memasaknya yang lama (hingga 7 jam) melambangkan kesabaran dan kebijaksanaan. Rendang terpilih sebagai makanan terenak di dunia versi CNN pada tahun 2017, 2018, dan 2021.",
+          filosofi: "Rendang memiliki filosofi musyawarah dan mufakat dalam masyarakat Minang. Keempat bahan utamanya (daging, santan, cabai, rempah) melambangkan keutuhan dan kebersamaan.",
+          fakta: "Rendang bisa bertahan hingga 4 minggu tanpa pengawet karena dimasak dengan santan kental dan rempah yang bersifat antibakteri."
+        },
+        {
+          nama: "Pempek",
+          daerah: "Palembang, Sumatera Selatan",
+          keyword: ['pempek', 'palembang', 'empek'],
+          sejarah: "Pempek berasal dari Palembang, Sumatera Selatan. Makanan ini terbuat dari ikan dan sagu. Ada legenda bahwa pempek ditemukan oleh seorang penduduk keturunan Tionghoa yang ingin memanfaatkan ikan murah di Sungai Musi. Nama 'pempek' diambil dari nama penjualnya, 'Apek'.",
+          filosofi: "Pempek melambangkan keragaman budaya Palembang yang memadukan pengaruh Melayu, Tionghoa, dan pribumi.",
+          fakta: "Ada 7 jenis pempek: lenjer, keriting, adaan, kulit, tahu, pistel, dan lenggang. Masing-masing memiliki bentuk dan tekstur berbeda."
+        },
+        {
+          nama: "Sate Padang",
+          daerah: "Sumatera Barat",
+          keyword: ['sate padang', 'sate padang'],
+          sejarah: "Sate Padang berasal dari Sumatera Barat. Berbeda dengan sate lainnya, sate Padang disajikan dengan kuah kuning kental yang terbuat dari tepung beras dan rempah. Konon, sate Padang sudah ada sejak abad ke-19.",
+          fakta: "Ada dua jenis sate Padang: sate Padang Panjang (daging sapi) dan sate Pariaman (daging sapi dan jeroan)."
+        },
+        {
+          nama: "Bika Ambon",
+          daerah: "Medan, Sumatera Utara",
+          keyword: ['bika ambon', 'bika', 'medan'],
+          sejarah: "Meski namanya 'Ambon', kue ini justru berasal dari Medan, Sumatera Utara. Bika Ambon mulai populer tahun 1970-an. Teksturnya yang bersarang berasal dari proses fermentasi adonan selama 24 jam.",
+          fakta: "Bika Ambon asli menggunakan sari daun pandan dan santan murni, bukan pewarna buatan."
+        },
+        {
+          nama: "Lemang",
+          daerah: "Sumatera Barat, Riau, Jambi",
+          keyword: ['lemang', 'lemang'],
+          sejarah: "Lemang adalah makanan tradisional yang terbuat dari beras ketan dan santan, dimasak dalam bambu. Biasanya disajikan saat hari raya atau acara adat. Tradisi memasak lemang sudah ada sejak ratusan tahun lalu di Sumatra.",
+          fakta: "Bambu untuk lemang harus dilapisi daun pisang agar beras tidak lengket dan aroma bambu meresap."
+        },
+        {
+          nama: "Gulai Ikan Patin",
+          daerah: "Riau, Jambi",
+          keyword: ['gulai ikan patin', 'gulai patin'],
+          sejarah: "Gulai Ikan Patin adalah hidangan khas Melayu Riau dan Jambi. Ikan patin sungai dimasak dengan kuah kuning berbumbu kunyit, asam kandis, dan daun ruku-ruku.",
+          filosofi: "Gulai melambangkan kemakmuran masyarakat sungai di Sumatra.",
+          fakta: "Ikan patin terbaik untuk gulai adalah patin sungai yang dagingnya lebih kenyal."
+        },
+
+        // JAWA
+        {
+          nama: "Gudeg",
+          daerah: "Yogyakarta",
+          keyword: ['gudeg', 'jogja', 'yogyakarta'],
+          sejarah: "Gudeg adalah makanan khas Yogyakarta yang terbuat dari nangka muda dimasak dengan santan dan gula aren selama berjam-jam. Konon, gudeg sudah ada sejak zaman Mataram Islam dan menjadi simbol perlawanan rakyat terhadap penjajah Belanda karena proses memasaknya yang lama melambangkan kesabaran.",
+          filosofi: "Gudeg melambangkan kebersamaan dan gotong royong. Biasanya disajikan dalam nasi tumpeng dengan lauk pauk yang melimpah.",
+          fakta: "Gudeg memiliki tiga jenis: gudeg basah (berkuah), gudeg kering (tanpa kuah), dan gudeg Solo (lebih manis)."
+        },
+        {
+          nama: "Sate Madura",
+          daerah: "Madura, Jawa Timur",
+          keyword: ['sate madura', 'sate', 'madura'],
+          sejarah: "Sate Madura diperkenalkan oleh pedagang Arab ke Jawa pada abad ke-19. Sate Madura terkenal dengan bumbu kacang yang kental dan manis, serta disajikan dengan lontong. Sate adalah salah satu makanan yang paling populer di Indonesia.",
+          filosofi: "Bumbu kacang yang melimpah melambangkan kemurahan hati masyarakat Madura.",
+          fakta: "Sate Madura asli menggunakan daging ayam kampung dan tusuk dari lidi aren, bukan bambu."
+        },
+        {
+          nama: "Rawon",
+          daerah: "Surabaya, Jawa Timur",
+          keyword: ['rawon', 'surabaya'],
+          sejarah: "Rawon adalah sup daging sapi khas Surabaya, Jawa Timur. Keunikannya adalah warna hitam dari kluwek (buah kepayang) yang memberikan rasa gurih dan sedikit pahit. Rawon sudah ada sejak zaman Majapahit, ditemukan dalam prasasti kuno.",
+          filosofi: "Warna hitam rawon melambangkan kesederhanaan dan keteguhan hati.",
+          fakta: "Kluwek harus difermentasi dulu sebelum dimasak untuk menghilangkan racun sianida alaminya."
+        },
+        {
+          nama: "Nasi Liwet",
+          daerah: "Solo, Jawa Tengah",
+          keyword: ['nasi liwet', 'liwet', 'solo'],
+          sejarah: "Nasi Liwet adalah nasi gurih khas Solo yang dimasak dengan santan, daun salam, dan serai. Biasanya disajikan dengan ayam suwir, telur pindang, dan areh (serundeng basah). Nasi Liwet sering dijual pada malam hari di pinggir jalan.",
+          fakta: "Nasi liwet asli dimasak dengan kastrol (panci tembaga) di atas tungku kayu agar aromanya khas."
+        },
+        {
+          nama: "Pecel",
+          daerah: "Madiun, Jawa Timur",
+          keyword: ['pecel', 'madiun'],
+          sejarah: "Pecel adalah makanan khas Jawa Timur berupa sayuran rebus dengan bumbu kacang. Pecel Madiun terkenal dengan bumbu yang lebih pedas dan gurih. Konon, pecel sudah ada sejak masa Kerajaan Majapahit.",
+          fakta: "Bumbu pecel Madiun menggunakan kencur dan daun jeruk purut untuk aroma khas."
+        },
+        {
+          nama: "Tahu Campur",
+          daerah: "Lamongan, Jawa Timur",
+          keyword: ['tahu campur', 'lamongan'],
+          sejarah: "Tahu Campur Lamongan adalah sup dengan tahu, lontong, daging sapi, dan sayuran, disiram kuah kaldu hitam dari petis. Makanan ini populer tahun 1980-an di Lamongan.",
+          fakta: "Kuah hitam tahu campur berasal dari petis udang dan kecap manis yang dimasak lama."
+        },
+        {
+          nama: "Soto Kudus",
+          daerah: "Kudus, Jawa Tengah",
+          keyword: ['soto kudus', 'kudus'],
+          sejarah: "Soto Kudus berbeda karena menggunakan daging kerbau, bukan sapi, sebagai bentuk toleransi dengan masyarakat Muslim yang tidak makan sapi. Kuahnya bening dengan rasa gurih dari rempah.",
+          filosofi: "Soto Kudus melambangkan toleransi beragama di Kudus sejak abad ke-16."
+        },
+        {
+          nama: "Nasi Tumpeng",
+          daerah: "Jawa",
+          keyword: ['nasi tumpeng', 'tumpeng'],
+          sejarah: "Tumpeng adalah nasi berbentuk kerucut yang disajikan dalam upacara adat Jawa. Bentuk kerucut melambangkan gunung suci, tempat bersemayam para dewa. Tumpeng sudah ada sejak zaman Hindu-Buddha di Jawa.",
+          filosofi: "Lima warna lauk di tumpeng melambangkan lima unsur alam (panca maha bhuta)."
+        },
+
+        // BALI
+        {
+          nama: "Ayam Betutu",
+          daerah: "Bali",
+          keyword: ['ayam betutu', 'betutu', 'bali'],
+          sejarah: "Ayam Betutu adalah makanan khas Bali yang dimasak dengan bumbu base genep (bumbu lengkap) dan dibungkus daun pisang. Proses memasaknya bisa memakan waktu hingga 6-8 jam. Betutu biasanya disajikan dalam upacara adat dan perayaan. Konon, resep betutu sudah ada sejak abad ke-15.",
+          filosofi: "Proses memasak lama melambangkan pengabdian dan kesabaran.",
+          fakta: "Betutu paling enak dimasak dengan cara mengubur bungkusan ayam di dalam bara sekam (ngulung)."
+        },
+        {
+          nama: "Babi Guling",
+          daerah: "Bali",
+          keyword: ['babi guling', 'guling', 'bali'],
+          sejarah: "Babi Guling adalah hidangan babi panggang khas Bali yang diisi dengan bumbu base genep. Biasanya disajikan dalam upacara adat dan perayaan besar. Tradisi ini sudah ada sejak abad ke-16.",
+          fakta: "Bumbu babi guling terdiri dari 15 jenis rempah, termasuk kunyit, jahe, lengkuas, kemiri, dan terasi."
+        },
+        {
+          nama: "Lawar",
+          daerah: "Bali",
+          keyword: ['lawar', 'bali'],
+          sejarah: "Lawar adalah hidangan tradisional Bali berupa campuran sayuran, daging cincang, dan kelapa sangrai dengan bumbu. Lawar selalu ada dalam upacara adat dan keagamaan Hindu Bali.",
+          filosofi: "Lawar melambangkan keseimbangan antara manusia, alam, dan Tuhan.",
+          fakta: "Ada dua jenis lawar: lawar merah (dengan darah) dan lawar putih (tanpa darah)."
+        },
+
+        // KALIMANTAN
+        {
+          nama: "Soto Banjar",
+          daerah: "Banjarmasin, Kalimantan Selatan",
+          keyword: ['soto banjar', 'banjar'],
+          sejarah: "Soto Banjar adalah soto khas Banjarmasin, Kalimantan Selatan. Berbeda dengan soto lain, Soto Banjar menggunakan ayam kampung dan kuah bening dengan tambahan perkedel, telur rebus, dan ketupat. Rasanya gurih dengan aroma rempah yang kuat. Soto Banjar sudah ada sejak zaman Kesultanan Banjar.",
+          fakta: "Keunikan Soto Banjar adalah penggunaan kayu manis dan kapulaga dalam kuahnya."
+        },
+        {
+          nama: "Amplang",
+          daerah: "Kalimantan",
+          keyword: ['amplang', 'kayu'],
+          sejarah: "Amplang adalah kerupuk ikan khas Kalimantan yang terbuat dari ikan tenggiri atau belida. Camilan ini sudah ada sejak tahun 1960-an dan menjadi oleh-oleh khas dari Samarinda dan Banjarmasin.",
+          fakta: "Amplang berkualitas tinggi menggunakan daging ikan hingga 70% dari total adonan."
+        },
+        {
+          nama: "Mie Sapit",
+          daerah: "Kalimantan Tengah",
+          keyword: ['mie sapit', 'sapit'],
+          sejarah: "Mie Sapit adalah mie kering khas Kalimantan Tengah yang disajikan dengan siraman ayam cincang dan sayuran. Nama 'sapit' berarti sumpit dalam bahasa setempat, karena mie ini dimakan dengan sumpit kayu.",
+          fakta: "Mie Sapit menggunakan mie kuning telur yang kenyal dan tidak mudah lembek."
+        },
+
+        // SULAWESI
+        {
+          nama: "Coto Makassar",
+          daerah: "Makassar, Sulawesi Selatan",
+          keyword: ['coto', 'makassar'],
+          sejarah: "Coto Makassar adalah sup daging sapi khas Sulawesi Selatan. Kuahnya terbuat dari kacang tanah goreng dan rempah-rempah seperti serai, lengkuas, dan jahe. Coto sudah ada sejak abad ke-16 dan awalnya hanya disajikan untuk bangsawan Kerajaan Gowa.",
+          filosofi: "Coto melambangkan kebersamaan karena dimakan bersama-sama dari satu wadah besar.",
+          fakta: "Coto Makassar menggunakan jeroan sapi (hati, paru, usus) sebagai campuran daging."
+        },
+        {
+          nama: "Pallubasa",
+          daerah: "Makassar",
+          keyword: ['pallubasa', 'makassar'],
+          sejarah: "Pallubasa mirip dengan coto, tetapi kuahnya lebih kental dan menggunakan santan. Biasanya disajikan dengan telur mentah dan perasan jeruk nipis.",
+          fakta: "Pallubasa dimakan dengan ketupat atau buras (lontong khas Makassar)."
+        },
+        {
+          nama: "Tinutuan (Bubur Manado)",
+          daerah: "Manado, Sulawesi Utara",
+          keyword: ['tinutuan', 'bubur manado', 'manado'],
+          sejarah: "Tinutuan atau Bubur Manado adalah bubur khas Sulawesi Utara yang berisi campuran sayuran seperti bayam, kangkung, jagung, labu kuning, dan kemangi. Makanan ini sudah ada sejak zaman penjajahan Belanda sebagai makanan rakyat yang murah dan bergizi.",
+          filosofi: "Keberagaman sayur dalam tinutuan melambangkan keragaman suku dan budaya di Sulawesi Utara.",
+          fakta: "Tinutuan paling nikmat disantap dengan ikan asin roa dan sambal dabu-dabu."
+        },
+        {
+          nama: "Mie Titi",
+          daerah: "Makassar",
+          keyword: ['mie titi', 'titi'],
+          sejarah: "Mie Titi adalah mie kering khas Makassar yang digoreng hingga renyah, lalu disiram dengan kuah kental dan topping ayam atau seafood. Mie ini populer tahun 1970-an.",
+          fakta: "Mie Titi berbeda dengan mie kering lainnya karena kuahnya dibuat terpisah dan disiram saat akan dimakan."
+        },
+
+        // NUSA TENGGARA
+        {
+          nama: "Ayam Taliwang",
+          daerah: "Lombok, Nusa Tenggara Barat",
+          keyword: ['ayam taliwang', 'taliwang', 'lombok'],
+          sejarah: "Ayam Taliwang berasal dari Lombok, Nusa Tenggara Barat. Makanan ini berupa ayam bakar dengan bumbu pedas khas yang menggunakan banyak cabai. Nama Taliwang diambil dari daerah di Lombok Timur tempat makanan ini berasal. Resepnya sudah turun-temurun sejak abad ke-17.",
+          filosofi: "Pedasnya ayam taliwang melambangkan semangat dan keberanian masyarakat Lombok.",
+          fakta: "Ayam Taliwang asli menggunakan ayam kampung muda yang dibakar dengan arang kayu."
+        },
+        {
+          nama: "Plecing Kangkung",
+          daerah: "Lombok",
+          keyword: ['plecing', 'kangkung'],
+          sejarah: "Plecing Kangkung adalah sayur kangkung rebus dengan sambal tomat pedas khas Lombok. Biasanya disajikan sebagai pelengkap ayam taliwang.",
+          fakta: "Sambal plecing menggunakan terasi lombok yang lebih harum dari terasi biasa."
+        },
+        {
+          nama: "Sei Sapi",
+          daerah: "Kupang, NTT",
+          keyword: ['sei sapi', 'sei', 'kupang'],
+          sejarah: "Sei Sapi adalah daging sapi asap khas Kupang, Nusa Tenggara Timur. Daging diiris tipis lalu diasap dengan kayu kesambi selama beberapa jam. Tradisi mengasap daging sudah dilakukan suku asli Timor sejak ratusan tahun lalu.",
+          fakta: "Kayu kesambi memberikan aroma khas dan bersifat antiseptik alami."
+        },
+
+        // MALUKU & PAPUA
+        {
+          nama: "Papeda",
+          daerah: "Papua, Maluku",
+          keyword: ['papeda', 'papua'],
+          sejarah: "Papeda adalah makanan khas Papua dan Maluku yang terbuat dari sagu. Teksturnya lengket seperti lem dan biasanya disajikan dengan kuah ikan kuning. Papeda menjadi makanan pokok masyarakat di wilayah timur Indonesia sejak ribuan tahun lalu.",
+          filosofi: "Papeda melambangkan kesederhanaan dan ketahanan hidup masyarakat adat.",
+          fakta: "Papeda dimakan dengan cara menggulungnya pada garpu kayu yang disebut 'gata-gata'."
+        },
+        {
+          nama: "Ikan Kuah Kuning",
+          daerah: "Maluku, Papua",
+          keyword: ['ikan kuah kuning'],
+          sejarah: "Ikan Kuah Kuning adalah hidangan ikan laut dengan kuah kuning berbumbu kunyit, jahe, dan daun jeruk. Makanan ini mencerminkan kekayaan laut Indonesia timur.",
+          fakta: "Ikan yang digunakan biasanya ikan kakap, kerapu, atau cakalang segar."
+        },
+        {
+          nama: "Sagu Lempeng",
+          daerah: "Maluku",
+          keyword: ['sagu lempeng'],
+          sejarah: "Sagu Lempeng adalah penganan dari sagu yang dipanggang hingga keras seperti lempengan. Biasanya dimakan dengan ikan asin dan sambal.",
+          fakta: "Sagu lempeng bisa bertahan hingga 6 bulan tanpa pengawet."
+        }
+      ];
+
+      // ------------------------------------------------------------
+      // 2. FUNGSI NLP (NATURAL LANGUAGE PROCESSING)
+      // ------------------------------------------------------------
+      
+      // Tokenizer sederhana
+      function tokenize(text) {
+        return text.toLowerCase()
+          .replace(/[^\w\s]/g, ' ')
+          .split(/\s+/)
+          .filter(word => word.length > 1);
+      }
+
+      // Hitung skor kemiripan
+      function calculateScore(question, keywords) {
+        const tokens = tokenize(question);
+        let score = 0;
+        
+        for (let token of tokens) {
+          for (let keyword of keywords) {
+            if (keyword.includes(token) || token.includes(keyword)) {
+              score += 2;
+            }
+            if (token === keyword) {
+              score += 5;
+            }
+          }
+        }
+        
+        for (let keyword of keywords) {
+          if (question.includes(keyword)) {
+            score += 10;
+          }
+        }
+        
+        return score;
+      }
+
+      // Cari makanan berdasarkan wilayah
+      function cariBerdasarkanWilayah(pertanyaan) {
+        const wilayah = ['sumatera', 'jawa', 'bali', 'kalimantan', 'sulawesi', 'papua', 'maluku', 'ntt', 'ntb', 'lombok'];
+        for (let w of wilayah) {
+          if (pertanyaan.includes(w)) {
+            const hasil = databaseKuliner.filter(m => 
+              m.daerah.toLowerCase().includes(w) || 
+              m.keyword.some(k => k.includes(w))
+            ).map(m => `• ${m.nama} (${m.daerah})`);
+            
+            if (hasil.length > 0) {
+              return `🍽️ **Makanan khas ${w.toUpperCase()}:**\n\n${hasil.join('\n')}\n\nTanyakan lebih detail dengan menyebut nama makanannya!`;
+            }
+          }
+        }
+        return null;
+      }
+
+      // Fungsi utama pencarian jawaban
+      function cariJawabanSejarah(pertanyaan) {
+        if (!pertanyaan || pertanyaan.trim() === '') {
+          return 'Silakan tulis pertanyaan terlebih dahulu.';
+        }
+
+        const lowerQ = pertanyaan.toLowerCase().trim();
+        
+        // Handle sapaan
+        if (lowerQ.match(/^(halo|hai|hey|hi|pagi|siang|sore|malam|assalam)/)) {
+          return '🌾 Halo! Ada yang bisa saya ceritakan tentang sejarah kuliner Nusantara?';
+        }
+
+        if (lowerQ.match(/^(makasih|terima kasih|thanks|thank you)/)) {
+          return 'Sama-sama! Senang bisa berbagi cerita kuliner Nusantara. Ada lagi yang ingin ditanyakan?';
+        }
+
+        // Cek pertanyaan tentang wilayah
+        const wilayahResult = cariBerdasarkanWilayah(lowerQ);
+        if (wilayahResult) return wilayahResult;
+
+        // Cari berdasarkan kata kunci
+        let bestMatch = null;
+        let highestScore = 0;
+
+        for (let makanan of databaseKuliner) {
+          let score = calculateScore(lowerQ, makanan.keyword);
+          
+          // Tambah skor jika pertanyaan mengandung kata sejarah/asal/fakta
+          if (lowerQ.includes('sejarah')) score += 3;
+          if (lowerQ.includes('asal')) score += 3;
+          if (lowerQ.includes('fakta')) score += 3;
+          if (lowerQ.includes('filosofi')) score += 3;
+          if (lowerQ.includes('cerita')) score += 2;
+          
+          if (score > highestScore) {
+            highestScore = score;
+            bestMatch = makanan;
+          }
+        }
+
+        if (highestScore > 10 && bestMatch) {
+          // Tentukan jenis informasi yang diminta
+          let jawaban = `🍽️ **${bestMatch.nama}** - ${bestMatch.daerah}\n\n`;
+          
+          if (lowerQ.includes('sejarah') || lowerQ.includes('asal')) {
+            jawaban += `📖 **Sejarah:**\n${bestMatch.sejarah}`;
+          } else if (lowerQ.includes('filosofi')) {
+            jawaban += `💭 **Filosofi:**\n${bestMatch.filosofi || bestMatch.sejarah.split('.')[0] + '.'}`;
+          } else if (lowerQ.includes('fakta')) {
+            jawaban += `🔍 **Fakta Unik:**\n${bestMatch.fakta || 'Konon, ' + bestMatch.sejarah.split('.')[0].toLowerCase() + '.'}`;
+          } else {
+            // Informasi lengkap
+            jawaban += `📖 **Sejarah:**\n${bestMatch.sejarah}\n\n`;
+            if (bestMatch.filosofi) jawaban += `💭 **Filosofi:**\n${bestMatch.filosofi}\n\n`;
+            if (bestMatch.fakta) jawaban += `🔍 **Fakta Unik:**\n${bestMatch.fakta}`;
+          }
+          
+          return jawaban;
+        }
+
+        // Jika tidak ditemukan
+        return 'Maaf, saya belum menemukan informasi tentang itu. Coba tanyakan:\n\n' +
+               '• "Sejarah rendang"\n' +
+               '• "Asal usul sate madura"\n' +
+               '• "Filosofi gudeg"\n' +
+               '• "Fakta unik pempek"\n' +
+               '• "Makanan khas Sulawesi"';
+      }
+
+      // ------------------------------------------------------------
+      // 3. UI CHAT AI
+      // ------------------------------------------------------------
+      const chatMessages = document.getElementById('chatMessages');
+      const aiInput = document.getElementById('aiInput');
+      const aiSendBtn = document.getElementById('aiSendBtn');
+
+      function addMessage(text, sender) {
+        const msgDiv = document.createElement('div');
+        msgDiv.className = `message-ai ${sender}`;
+        
+        // Format teks
+        let formattedText = text.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+        formattedText = formattedText.replace(/\n/g, '<br>');
+        msgDiv.innerHTML = formattedText;
+        
+        chatMessages.appendChild(msgDiv);
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+      }
+
+      function showTypingIndicator() {
+        const indicator = document.createElement('div');
+        indicator.className = 'typing-indicator';
+        indicator.id = 'typingIndicator';
+        indicator.innerHTML = `
+          <div class="typing-dot"></div>
+          <div class="typing-dot"></div>
+          <div class="typing-dot"></div>
+        `;
+        chatMessages.appendChild(indicator);
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+      }
+
+      function removeTypingIndicator() {
+        const indicator = document.getElementById('typingIndicator');
+        if (indicator) indicator.remove();
+      }
+
+      function sendAIMessage() {
+        const userText = aiInput.value.trim();
+        if (!userText) return;
+
+        addMessage(userText, 'user');
+        aiInput.value = '';
+
+        // Show typing indicator
+        showTypingIndicator();
+
+        // Simulate processing
+        setTimeout(() => {
+          removeTypingIndicator();
+          const jawaban = cariJawabanSejarah(userText);
+          addMessage(jawaban, 'bot');
+        }, 1200);
+      }
+
+      aiSendBtn.addEventListener('click', sendAIMessage);
+      aiInput.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') sendAIMessage();
+      });
+
+      // ------------------------------------------------------------
+      // 4. FUNGSI UNTUK SUGGESTION CHIPS
+      // ------------------------------------------------------------
+      window.useSuggestion = function(text) {
+        aiInput.value = text;
+        sendAIMessage();
+      };
+
+      // ------------------------------------------------------------
+      // 5. MOBILE MENU
+      // ------------------------------------------------------------
+      const menuToggle = document.getElementById('menu-toggle');
+      const mobileMenu = document.getElementById('mobile-menu');
+
+      if (menuToggle && mobileMenu) {
+        menuToggle.addEventListener('click', () => {
+          mobileMenu.classList.toggle('hidden');
+          menuToggle.innerHTML = mobileMenu.classList.contains('hidden') 
+            ? '<i class="fas fa-bars text-xl"></i>' 
+            : '<i class="fas fa-times text-xl"></i>';
+        });
+      }
+
+      window.closeMobileMenu = function() {
+        if (mobileMenu && menuToggle) {
+          mobileMenu.classList.add('hidden');
+          menuToggle.innerHTML = '<i class="fas fa-bars text-xl"></i>';
+        }
+      };
+
+      // ------------------------------------------------------------
+      // 6. DROPDOWN STYLE (tambahan)
+      // ------------------------------------------------------------
+      const style = document.createElement('style');
+      style.textContent = `
+        .dropdown-menu {
+          position: absolute;
+          right: 0;
+          margin-top: 0.5rem;
+          width: 12rem;
+          background: white;
+          border: 1px solid rgba(99, 102, 241, 0.2);
+          border-radius: 1rem;
+          box-shadow: var(--shadow-lg);
+          overflow: hidden;
+          opacity: 0;
+          visibility: hidden;
+          transition: all 0.2s;
+        }
+        .group:hover .dropdown-menu {
+          opacity: 1;
+          visibility: visible;
+        }
+        .dropdown-menu a {
+          display: block;
+          padding: 0.75rem 1rem;
+          font-size: 0.875rem;
+          transition: all 0.2s;
+          color: var(--neutral-700);
+        }
+        .dropdown-menu a:hover {
+          background: var(--ai-50);
+          color: var(--ai-600);
+        }
+      `;
+      document.head.appendChild(style);
+
+    })();
+  </script>
+</body>
+</html>

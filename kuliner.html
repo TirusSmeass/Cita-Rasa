@@ -1,0 +1,750 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Cita rasa| Lokal & Terdekat</title>
+  <!-- Tailwind + Font Awesome -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <!-- Google Font: Inter -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+  <style>
+    * { font-family: 'Inter', sans-serif; }
+    body { background: #f8f5f0; }
+    .card-hover {
+      transition: transform 0.2s ease, box-shadow 0.3s ease;
+    }
+    .card-hover:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 20px 25px -8px rgba(120, 70, 20, 0.15);
+    }
+    .food-image {
+      width: 100%;
+      height: 160px;
+      object-fit: cover;
+      background-color: #e6d5b8;
+    }
+    .whatsapp-float {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background-color: #25D366;
+      color: white;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 30px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+      z-index: 100;
+      transition: transform 0.3s;
+    }
+    .whatsapp-float:hover {
+      transform: scale(1.1);
+    }
+  </style>
+</head>
+<body class="text-stone-800 antialiased flex flex-col min-h-screen">
+
+  <!-- ===== HEADER ===== -->
+  <header class="sticky top-0 z-50 bg-white/95 backdrop-blur-sm border-b border-amber-200 shadow-sm">
+    <div class="container mx-auto px-5 lg:px-8 py-3 flex items-center justify-between">
+      <!-- Logo (link ke halaman utama) -->
+      <a href="index.html" class="flex items-center gap-2 hover:opacity-80 transition">
+        <div class="w-9 h-9 bg-amber-700 rounded-xl flex items-center justify-center text-white shadow">
+          <i class="fas fa-utensil-spoon text-lg"></i>
+        </div>
+        <div>
+          <h1 class="text-lg font-bold tracking-tight">Cita<span class="text-amber-700">Rasa</span></h1>
+          <p class="text-[10px] text-stone-500 -mt-1">terdekat & orisinal</p>
+        </div>
+      </a>
+
+      <!-- Status lokasi & radius -->
+      <div class="hidden md:flex items-center gap-3 text-sm bg-amber-50 px-4 py-1.5 rounded-full border border-amber-200">
+        <i class="fas fa-location-dot text-amber-700"></i>
+        <span id="location-status">Mendeteksi lokasi...</span>
+        <span class="w-1 h-1 bg-amber-300 rounded-full"></span>
+        <i class="far fa-clock"></i>
+        <span id="radius-info" class="font-medium">dalam 10 km</span>
+      </div>
+
+      <!-- Navigasi Desktop - Internal links menggunakan # -->
+      <nav class="hidden md:flex items-center gap-6 text-sm font-medium">
+        <a href="index.html" id="nav-menu" class="nav-link text-stone-700 hover:text-amber-700 transition">Jelajahi</a>
+        <a href="index.html" id="nav-checkout" class="nav-link text-stone-700 hover:text-amber-700 transition">Pesanan Saya</a>
+        <a href="index.html" class="bg-amber-100 text-amber-800 px-4 py-2 rounded-full text-sm hover:bg-amber-200 transition flex items-center gap-1"><i class="fas fa-store"></i> Tentang</a>
+      </nav>
+
+      <button id="mobile-menu-btn" class="md:hidden text-2xl text-stone-600">
+        <i class="fas fa-bars"></i>
+      </button>
+    </div>
+
+    <!-- Mobile menu -->
+    <div id="mobile-menu" class="hidden bg-white border-t border-amber-100 px-5 py-3 md:hidden space-y-2">
+      <a href="#" id="mobile-nav-menu" class="block py-2"><i class="fas fa-compass mr-2"></i>Jelajahi</a>
+      <a href="#" id="mobile-nav-checkout" class="block py-2"><i class="fas fa-bag-shopping mr-2"></i>Pesanan Saya</a>
+      <a href="index.html" class="block py-2 text-amber-700"><i class="fas fa-store mr-2"></i>Tentang</a>
+      <div class="text-xs text-stone-500 border-t pt-2 mt-2">
+        <i class="fas fa-satellite-dish mr-1"></i> Radius 10 km aktif
+      </div>
+    </div>
+  </header>
+
+  <!-- WhatsApp Floating Button -->
+  <a href="#" id="whatsapp-float" class="whatsapp-float" target="_blank" style="display: none;">
+    <i class="fab fa-whatsapp"></i>
+  </a>
+
+  <main class="flex-grow container mx-auto px-4 lg:px-6 py-6">
+
+    <!-- ===== DASHBOARD LOKASI ===== -->
+    <section class="mb-8">
+      <div class="flex flex-wrap items-center justify-between gap-4">
+        <div>
+          <h2 class="text-2xl font-bold flex items-center gap-2"><i class="fas fa-radio text-amber-600"></i> Kuliner di sekitarmu</h2>
+          <p class="text-stone-500 text-sm">Dalam radius <span class="font-semibold">10 km</span> dari lokasimu — untuk mengurangi jejak karbon & mendukung UMKM lokal</p>
+        </div>
+        <button id="refresh-location" class="bg-white border border-amber-300 text-amber-700 px-4 py-2 rounded-full text-sm hover:bg-amber-50 transition flex items-center gap-2"><i class="fas fa-rotate"></i> Perbarui lokasi</button>
+      </div>
+    </section>
+
+    <!-- ===== MENU SECTION ===== -->
+    <section id="menu" class="scroll-mt-20">
+      <div id="menu-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
+        <!-- Konten akan dirender via JS -->
+      </div>
+      <div id="no-menu-within-radius" class="hidden text-center py-16 bg-amber-50/80 rounded-3xl border border-dashed border-amber-300">
+        <i class="fas fa-map-pin text-4xl text-amber-400 mb-3"></i>
+        <p class="text-lg font-medium">Belum ada kuliner dalam radius 10 km</p>
+        <p class="text-stone-500 text-sm mt-1">Coba geser peta atau perluas jangkauan? <br> Kamu tetap bisa hubungi penjual via CP.</p>
+        <button id="show-all-manual" class="mt-4 bg-amber-600 text-white px-6 py-2 rounded-full text-sm">Tampilkan semua (tanpa radius)</button>
+      </div>
+    </section>
+
+    <!-- ===== CHECKOUT ===== -->
+    <section id="checkout" class="scroll-mt-20 bg-white rounded-3xl shadow-xl border border-amber-200 p-6 lg:p-8 mt-8" hidden>
+      <h2 class="text-3xl font-bold text-stone-800 flex items-center gap-2 mb-6"><i class="fas fa-paper-plane text-amber-600"></i>Konfirmasi & Antar</h2>
+      
+      <!-- Tabel pesanan -->
+      <div class="overflow-x-auto rounded-xl border border-amber-100">
+        <table class="w-full text-sm">
+          <thead class="bg-amber-50 text-stone-700">
+            <tr>
+              <th class="px-4 py-3 text-left">Menu</th>
+              <th class="px-4 py-3">Harga</th>
+              <th class="px-4 py-3">Jumlah</th>
+              <th class="px-4 py-3">Subtotal</th>
+              <th class="px-4 py-3"></th>
+            </tr>
+          </thead>
+          <tbody id="cart-items" class="divide-y divide-amber-100 text-center">
+            <tr><td colspan="5" class="py-10 text-stone-400">Pilih menu dulu, yuk!</td></tr>
+          </tbody>
+        </table>
+      </div>
+      
+      <div class="flex justify-between items-center mt-6 text-lg font-semibold">
+        <span>Total</span>
+        <span id="total-price" class="text-3xl font-bold text-amber-700">Rp0</span>
+      </div>
+
+      <!-- Form checkout -->
+      <form id="order-form" class="mt-8 space-y-5">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+          <div>
+            <label class="block text-sm font-medium text-stone-600 mb-1">Nama lengkap</label>
+            <input type="text" name="customerName" id="customerName" required class="w-full border border-stone-300 rounded-xl px-4 py-3 focus:ring-2 focus:ring-amber-300">
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-stone-600 mb-1">No. HP/WA</label>
+            <input type="tel" name="customerPhone" id="customerPhone" required class="w-full border border-stone-300 rounded-xl px-4 py-3 focus:ring-2 focus:ring-amber-300">
+          </div>
+        </div>
+
+        <!-- Metode pembayaran -->
+        <div class="border border-amber-200 rounded-xl p-4">
+          <p class="font-semibold text-stone-700 mb-2 flex items-center gap-1"><i class="fas fa-coins text-amber-600"></i>Pilih pembayaran</p>
+          <div class="flex flex-wrap gap-4">
+            <label class="flex items-center gap-1"><input type="radio" name="payment" value="Transfer Bank" class="accent-amber-600" required> Transfer</label>
+            <label class="flex items-center gap-1"><input type="radio" name="payment" value="E-Wallet" class="accent-amber-600"> E-Wallet</label>
+            <label class="flex items-center gap-1"><input type="radio" name="payment" value="Cash on Delivery" class="accent-amber-600"> COD</label>
+          </div>
+          <div id="upload-bukti-container" class="hidden mt-3">
+            <label class="text-xs">Upload bukti transfer (jika transfer)</label>
+            <input type="file" accept="image/*" class="text-sm border rounded-lg w-full p-2">
+          </div>
+        </div>
+
+        <!-- ALAMAT PENGANTARAN -->
+        <div class="border border-amber-200 rounded-xl p-4">
+          <p class="font-semibold text-stone-700 mb-2 flex items-center gap-1"><i class="fas fa-map-pin text-amber-600"></i>Alamat pengantaran</p>
+          <textarea name="customerAddress" id="customerAddress" placeholder="Jalan, nomor, patokan, kota..." rows="2" required class="w-full border border-stone-300 rounded-xl px-4 py-3"></textarea>
+          <p class="text-xs text-stone-400 mt-1">Kurir akan menghubungi sebelum antar</p>
+        </div>
+
+        <!-- Pilih Penjual (untuk chat setelah checkout) -->
+        <div class="border border-amber-200 rounded-xl p-4">
+          <p class="font-semibold text-stone-700 mb-2 flex items-center gap-1"><i class="fas fa-store text-amber-600"></i>Pesan dari penjual</p>
+          <select id="seller-select" required class="w-full border border-stone-300 rounded-xl px-4 py-3 focus:ring-2 focus:ring-amber-300">
+            <option value="">Pilih penjual tujuan</option>
+          </select>
+          <p class="text-xs text-stone-400 mt-1">Setelah checkout, kamu akan langsung chat dengan penjual via WhatsApp</p>
+        </div>
+
+        <button type="submit" class="w-full bg-amber-700 hover:bg-amber-800 text-white font-bold py-4 rounded-2xl text-lg transition flex items-center justify-center gap-2">
+          <i class="fab fa-whatsapp"></i> Checkout & Chat Penjual
+        </button>
+      </form>
+    </section>
+
+    <!-- ===== MODAL KONTAK PENJUAL ===== -->
+    <div id="contact-modal" class="fixed inset-0 bg-black/50 backdrop-blur-sm hidden items-center justify-center z-[60] p-4">
+      <div class="bg-white rounded-3xl max-w-md w-full p-6">
+        <div class="flex justify-between items-center mb-3">
+          <h3 class="text-xl font-bold"><i class="fab fa-whatsapp text-green-600"></i> Hubungi Penjual</h3>
+          <button id="close-contact-modal" class="text-stone-400 text-2xl">&times;</button>
+        </div>
+        <div id="contact-info" class="text-sm space-y-3">
+          <!-- Diisi JS -->
+        </div>
+        <a id="whatsapp-link" href="#" target="_blank" class="mt-5 block w-full bg-green-600 hover:bg-green-700 text-white text-center py-3 rounded-xl font-semibold transition flex items-center justify-center gap-2">
+          <i class="fab fa-whatsapp"></i> Buka WhatsApp
+        </a>
+      </div>
+    </div>
+  </main>
+
+  <footer class="bg-stone-800 text-stone-300 mt-12 py-6 text-xs text-center">
+    <p>🌾 Melestarikan kuliner lokal dengan merangkul penjual dalam radius 10 km — kurangi emisi, rawat tradisi.</p>
+  </footer>
+
+  <!-- Modal konfirmasi pesanan -->
+  <div id="payment-modal" class="fixed inset-0 bg-black/50 hidden items-center justify-center z-50 p-4">
+    <div class="bg-white rounded-3xl max-w-lg w-full p-6 max-h-[90vh] overflow-auto">
+      <h3 class="text-2xl font-bold mb-3">🧾 Terima kasih!</h3>
+      <div id="payment-content" class="whitespace-pre-wrap bg-amber-50 p-4 rounded-xl"></div>
+      <div class="mt-4 flex gap-3">
+        <button id="close-payment-modal" class="flex-1 bg-stone-200 py-3 rounded-xl">Tutup</button>
+        <a id="whatsapp-after-checkout" href="#" target="_blank" class="flex-1 bg-green-600 hover:bg-green-700 text-white py-3 rounded-xl flex items-center justify-center gap-2">
+          <i class="fab fa-whatsapp"></i> Chat Penjual
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    (function() {
+      // ==================== DATA KULINER DENGAN GAMBAR ====================
+      const culinaryData = [
+        { 
+          id: 1, 
+          name: 'Rendang', 
+          price: 45000, 
+          daerah: 'Sumatera Barat', 
+          lat: -0.939, 
+          lng: 100.353, 
+          penjual: 'Mak Yun', 
+          cp: '628123456001', 
+          alamat: 'Jl. Belimbing No. 10, Padang',
+          image: 'rendang.jpeg' // Ganti dengan URL gambar yang sesuai
+        },
+        { 
+          id: 2, 
+          name: 'Gudeg', 
+          price: 30000, 
+          daerah: 'Yogyakarta', 
+          lat: -7.795, 
+          lng: 110.369, 
+          penjual: 'Bu Gandes', 
+          cp: '628123456002', 
+          alamat: 'Jl. Wijilan 27, Yogyakarta',
+          image: 'gudeg.jpg' // Ganti dengan URL gambar yang sesuai
+        },
+        { 
+          id: 3, 
+          name: 'Pempek', 
+          price: 25000, 
+          daerah: 'Palembang', 
+          lat: -2.990, 
+          lng: 104.756, 
+          penjual: 'Pak Kapal', 
+          cp: '628123456003', 
+          alamat: 'Jl. Merdeka 8, Palembang',
+          image: 'pempek.jpg' // Ganti dengan URL gambar yang sesuai
+        },
+        { 
+          id: 4, 
+          name: 'Ayam Betutu', 
+          price: 50000, 
+          daerah: 'Bali', 
+          lat: -8.650, 
+          lng: 115.216, 
+          penjual: 'Ibu Ketut', 
+          cp: '628123456004', 
+          alamat: 'Jl. Raya Ubud, Gianyar',
+          image: 'ayam betutu.jpg' // Ganti dengan URL gambar yang sesuai
+        },
+        { 
+          id: 5, 
+          name: 'Soto Betawi', 
+          price: 35000, 
+          daerah: 'Jakarta', 
+          lat: -6.214, 
+          lng: 106.845, 
+          penjual: 'Haji Oji', 
+          cp: '628123456005', 
+          alamat: 'Jl. Kramat Raya 45, Jakarta Pusat',
+          image: 'soto.jpg' // Ganti dengan URL gambar yang sesuai
+        },
+        { 
+          id: 6, 
+          name: 'Papeda + Ikan', 
+          price: 28000, 
+          daerah: 'Papua', 
+          lat: -2.531, 
+          lng: 140.716, 
+          penjual: 'Mama Yuliana', 
+          cp: '628123456006', 
+          alamat: 'Dok II Atas, Jayapura',
+          image: 'papeda.jpg' // Ganti dengan URL gambar yang sesuai
+        },
+        { 
+          id: 7, 
+          name: 'Bakso Malang', 
+          price: 32000, 
+          daerah: 'Malang', 
+          lat: -7.980, 
+          lng: 112.630, 
+          penjual: 'Pak Bambang', 
+          cp: '628123456007', 
+          alamat: 'Jl. Semeru 12, Malang',
+          image: 'bakso.jpg' // Ganti dengan URL gambar yang sesuai
+        },
+        { 
+          id: 8, 
+          name: 'Gado-Gado', 
+          price: 27000, 
+          daerah: 'Jakarta', 
+          lat: -6.200, 
+          lng: 106.816, 
+          penjual: 'Bu Sri', 
+          cp: '628123456008', 
+          alamat: 'Jl. Cikini 78, Jakarta',
+          image: 'gado.jpg' // Ganti dengan URL gambar yang sesuai
+        },
+        { 
+          id: 9, 
+          name: 'Rawon', 
+          price: 40000, 
+          daerah: 'Surabaya', 
+          lat: -7.257, 
+          lng: 112.752, 
+          penjual: 'Mbah Karno', 
+          cp: '6282143854418', 
+          alamat: 'Jl. Embong Malang 55, Surabaya',
+          image: 'rawon.jpg' // Ganti dengan URL gambar yang sesuai
+        },
+        { 
+          id: 10, 
+          name: 'Ayam Taliwang', 
+          price: 48000, 
+          daerah: 'Lombok', 
+          lat: -8.583, 
+          lng: 116.117, 
+          penjual: 'Papua Tari', 
+          cp: '628123456010', 
+          alamat: 'Cakranegara, Mataram',
+          image: 'ayam taliwang.jpg' // Ganti dengan URL gambar yang sesuai
+        },
+        { 
+          id: 11, 
+          name: 'Es Cendol', 
+          price: 15000, 
+          daerah: 'Jateng', 
+          lat: -7.566, 
+          lng: 110.828, 
+          penjual: 'Mbok Darmi', 
+          cp: '628123456011', 
+          alamat: 'Pasar Gede, Solo',
+          image: 'cendol.jpg' // Ganti dengan URL gambar yang sesuai
+        },
+        { 
+          id: 12, 
+          name: 'Lontong Sayur Medan', 
+          price: 25000, 
+          daerah: 'Medan', 
+          lat: 3.595, 
+          lng: 98.672, 
+          penjual: 'Uda Heru', 
+          cp: '628123456012', 
+          alamat: 'Jl. HM Joni 66, Medan',
+          image: 'lonton.jpg' // Ganti dengan URL gambar yang sesuai
+        }
+      ];
+
+      // Variabel global
+      let userLat = -6.214;   // default Jakarta
+      let userLng = 106.845;
+      let useRadius = true;
+      let selectedSeller = null; // untuk menyimpan penjual yang dipilih
+
+      const menuGrid = document.getElementById('menu-grid');
+      const noMenuDiv = document.getElementById('no-menu-within-radius');
+      const locationStatus = document.getElementById('location-status');
+      const sellerSelect = document.getElementById('seller-select');
+
+      // ===== GEOLOKASI =====
+      function getUserLocation() {
+        if (navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition(
+            (pos) => {
+              userLat = pos.coords.latitude;
+              userLng = pos.coords.longitude;
+              locationStatus.innerText = 'Lokasi dikenal';
+              renderMenu();
+            },
+            (err) => {
+              console.warn('Gagal ambil lokasi, pakai default Jakarta', err);
+              locationStatus.innerText = 'Pakai lokasi default';
+              renderMenu();
+            }
+          );
+        } else {
+          locationStatus.innerText = 'Lokasi tidak didukung';
+          renderMenu();
+        }
+      }
+
+      // Hitung jarak (km)
+      function getDistance(lat1, lon1, lat2, lon2) {
+        const R = 6371;
+        const dLat = (lat2 - lat1) * Math.PI / 180;
+        const dLon = (lon2 - lon1) * Math.PI / 180;
+        const a = Math.sin(dLat/2) * Math.sin(dLat/2) +
+                  Math.cos(lat1 * Math.PI/180) * Math.cos(lat2 * Math.PI/180) *
+                  Math.sin(dLon/2) * Math.sin(dLon/2);
+        const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+        return R * c;
+      }
+
+      // Render menu
+      function renderMenu() {
+        let filtered = culinaryData;
+        if (useRadius) {
+          filtered = culinaryData.filter(item => {
+            const d = getDistance(userLat, userLng, item.lat, item.lng);
+            return d <= 10;
+          });
+        }
+
+        if (filtered.length === 0) {
+          menuGrid.innerHTML = '';
+          noMenuDiv.classList.remove('hidden');
+        } else {
+          noMenuDiv.classList.add('hidden');
+          let htmlStr = '';
+          filtered.forEach(item => {
+            const distance = getDistance(userLat, userLng, item.lat, item.lng).toFixed(1);
+            htmlStr += `
+              <article class="bg-white rounded-2xl shadow-md overflow-hidden card-hover border border-amber-100 flex flex-col">
+                <div class="relative h-40 overflow-hidden bg-amber-100">
+                  <img src="${item.image}" alt="${item.name}" class="w-full h-full object-cover hover:scale-105 transition duration-300">
+                  <span class="absolute top-2 left-2 bg-white/90 text-amber-800 text-xs font-bold px-3 py-1 rounded-full shadow-sm">${item.daerah}</span>
+                  <span class="absolute top-2 right-2 bg-amber-600 text-white text-xs px-2 py-1 rounded-full flex items-center gap-1"><i class="fas fa-location-arrow"></i> ${distance} km</span>
+                </div>
+                <div class="p-4 flex-1">
+                  <h3 class="text-xl font-bold text-stone-800">${item.name}</h3>
+                  <p class="text-xs text-stone-500 mb-2 flex items-center gap-1"><i class="fas fa-store-alt text-amber-600"></i> ${item.penjual}</p>
+                  <p class="text-xs mb-2 flex items-start gap-1"><i class="fas fa-map-pin text-amber-600 mt-1"></i> <span class="text-stone-600">${item.alamat}</span></p>
+                  <div class="flex items-center justify-between mt-3">
+                    <span class="text-2xl font-black text-amber-700">Rp${(item.price/1000).toFixed(0)}K</span>
+                    <div class="flex gap-2">
+                      <button class="contact-seller w-9 h-9 rounded-full bg-amber-100 text-amber-700 hover:bg-amber-200 transition flex items-center justify-center" data-id="${item.id}" data-name="${item.name}" data-cp="${item.cp}" data-penjual="${item.penjual}" title="Hubungi penjual">
+                        <i class="fab fa-whatsapp"></i>
+                      </button>
+                      <button class="add-to-cart bg-amber-600 hover:bg-amber-700 text-white px-4 py-2 rounded-xl text-sm font-semibold transition flex items-center gap-1" data-name="${item.name}" data-price="${item.price}" data-penjual="${item.penjual}" data-cp="${item.cp}">
+                        <i class="fas fa-plus-circle"></i> Tambah
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </article>
+            `;
+          });
+          menuGrid.innerHTML = htmlStr;
+          attachItemEvents();
+        }
+      }
+
+      // Event listener untuk tombol
+      function attachItemEvents() {
+        document.querySelectorAll('.add-to-cart').forEach(btn => {
+          btn.addEventListener('click', e => {
+            const name = btn.dataset.name;
+            const price = parseInt(btn.dataset.price);
+            const penjual = btn.dataset.penjual;
+            const cp = btn.dataset.cp;
+            
+            if (cart[name]) cart[name].quantity++;
+            else cart[name] = { name, price, quantity: 1, penjual, cp };
+            
+            updateCartUI();
+            updateSellerSelect();
+            
+            document.getElementById('checkout').hidden = false;
+            document.getElementById('checkout').scrollIntoView({ behavior: 'smooth' });
+          });
+        });
+
+        document.querySelectorAll('.contact-seller').forEach(btn => {
+          btn.addEventListener('click', () => {
+            const id = btn.dataset.id;
+            const seller = culinaryData.find(d => d.id == id);
+            if (!seller) return;
+            document.getElementById('contact-info').innerHTML = `
+              <p class="font-medium">${seller.name}</p>
+              <p class="flex items-center gap-2"><i class="fas fa-store text-amber-600"></i> ${seller.penjual}</p>
+              <p class="flex items-start gap-2"><i class="fas fa-map-pin text-amber-600 mt-1"></i> ${seller.alamat}</p>
+              <p class="flex items-center gap-2"><i class="fab fa-whatsapp text-green-600"></i> +${seller.cp}</p>
+            `;
+            document.getElementById('whatsapp-link').href = `https://wa.me/${seller.cp}?text=Halo%20${encodeURIComponent(seller.penjual)}%2C%20saya%20ingin%20tanya%20soal%20${encodeURIComponent(seller.name)}`;
+            document.getElementById('contact-modal').classList.remove('hidden');
+          });
+        });
+      }
+
+      // Update dropdown penjual
+      function updateSellerSelect() {
+        const sellers = new Set();
+        sellerSelect.innerHTML = '<option value="">Pilih penjual tujuan</option>';
+        
+        Object.values(cart).forEach(item => {
+          if (!sellers.has(item.penjual)) {
+            sellers.add(item.penjual);
+            const option = document.createElement('option');
+            option.value = item.cp;
+            option.textContent = `${item.penjual} (${item.name})`;
+            sellerSelect.appendChild(option);
+          }
+        });
+      }
+
+      // ===== CART =====
+      let cart = {};
+      const cartItems = document.getElementById('cart-items');
+      const totalSpan = document.getElementById('total-price');
+      const formatRupiah = num => 'Rp' + num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+
+      function updateCartUI() {
+        const keys = Object.keys(cart);
+        if (!keys.length) {
+          cartItems.innerHTML = '<tr><td colspan="5" class="py-10 text-stone-400">Pilih menu dulu, yuk!</td></tr>';
+          totalSpan.textContent = 'Rp0';
+          sellerSelect.innerHTML = '<option value="">Pilih penjual tujuan</option>';
+          return;
+        }
+        let total = 0;
+        let html = '';
+        keys.forEach(key => {
+          const item = cart[key];
+          const subtotal = item.price * item.quantity;
+          total += subtotal;
+          html += `<tr>
+            <td class="px-4 py-3 text-left font-medium">${item.name}</td>
+            <td class="px-4 py-3">${formatRupiah(item.price)}</td>
+            <td class="px-4 py-3">
+              <input type="number" min="1" value="${item.quantity}" class="qty-update w-16 border border-stone-300 rounded-lg px-2 py-1 text-center" data-key="${key}">
+            </td>
+            <td class="px-4 py-3 font-medium">${formatRupiah(subtotal)}</td>
+            <td class="px-4 py-3">
+              <button class="remove-item text-amber-600 hover:text-amber-800 transition" data-key="${key}">
+                <i class="fas fa-trash-alt"></i>
+              </button>
+            </td>
+          </tr>`;
+        });
+        cartItems.innerHTML = html;
+        totalSpan.textContent = formatRupiah(total);
+        updateSellerSelect();
+
+        document.querySelectorAll('.qty-update').forEach(inp => {
+          inp.addEventListener('change', function() {
+            let val = parseInt(this.value);
+            if (val < 1) val = 1;
+            cart[this.dataset.key].quantity = val;
+            updateCartUI();
+          });
+        });
+        
+        document.querySelectorAll('.remove-item').forEach(btn => {
+          btn.addEventListener('click', function() {
+            delete cart[this.dataset.key];
+            updateCartUI();
+          });
+        });
+      }
+
+      // ===== NAVIGASI =====
+      const menuSec = document.getElementById('menu');
+      const checkoutSec = document.getElementById('checkout');
+      
+      function showSection(sec) {
+        menuSec.hidden = (sec !== 'menu');
+        checkoutSec.hidden = (sec !== 'checkout');
+        document.getElementById('mobile-menu')?.classList.add('hidden');
+      }
+
+      // Navigasi internal (hanya pindah section)
+      document.getElementById('nav-menu')?.addEventListener('click', (e) => { 
+        e.preventDefault(); 
+        showSection('menu'); 
+      });
+      
+      document.getElementById('nav-checkout')?.addEventListener('click', (e) => { 
+        e.preventDefault(); 
+        showSection('checkout'); 
+      });
+      
+      document.getElementById('mobile-nav-menu')?.addEventListener('click', (e) => { 
+        e.preventDefault(); 
+        showSection('menu'); 
+      });
+      
+      document.getElementById('mobile-nav-checkout')?.addEventListener('click', (e) => { 
+        e.preventDefault(); 
+        showSection('checkout'); 
+      });
+
+      // Link dengan href="index.html" akan bekerja normal (redirect ke halaman utama)
+      // karena tidak ada preventDefault()
+
+      // Mobile menu toggle
+      document.getElementById('mobile-menu-btn').addEventListener('click', () => {
+        document.getElementById('mobile-menu').classList.toggle('hidden');
+      });
+
+      // Tombol refresh lokasi
+      document.getElementById('refresh-location').addEventListener('click', () => {
+        useRadius = true;
+        getUserLocation();
+      });
+
+      // Tampilkan semua manual
+      document.getElementById('show-all-manual').addEventListener('click', () => {
+        useRadius = false;
+        renderMenu();
+        noMenuDiv.classList.add('hidden');
+      });
+
+      // Upload container logic
+      document.querySelectorAll('input[name="payment"]').forEach(r => {
+        r.addEventListener('change', function() {
+          const up = document.getElementById('upload-bukti-container');
+          if (this.value === 'Transfer Bank') up.classList.remove('hidden');
+          else up.classList.add('hidden');
+        });
+      });
+
+      // Form submit dengan chat ke WhatsApp penjual
+      const orderForm = document.getElementById('order-form');
+      const modalPayment = document.getElementById('payment-modal');
+      const paymentContent = document.getElementById('payment-content');
+      const whatsappAfterCheckout = document.getElementById('whatsapp-after-checkout');
+      
+      orderForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        if (Object.keys(cart).length === 0) { 
+          alert('Pesanan masih kosong'); 
+          return; 
+        }
+        
+        const name = document.getElementById('customerName').value.trim();
+        const phone = document.getElementById('customerPhone').value.trim();
+        const addr = document.getElementById('customerAddress').value.trim();
+        const sellerCp = sellerSelect.value;
+        const sellerText = sellerSelect.options[sellerSelect.selectedIndex]?.text || '';
+        
+        if (!name || !phone || !addr) { 
+          alert('Lengkapi nama, telepon, dan alamat'); 
+          return; 
+        }
+
+        if (!sellerCp) {
+          alert('Pilih penjual tujuan');
+          return;
+        }
+
+        // Buat pesan WhatsApp
+        let whatsappMessage = `Halo, saya *${name}* ingin memesan:\n\n`;
+        
+        let total = 0;
+        for (let k in cart) {
+          const subtotal = cart[k].price * cart[k].quantity;
+          total += subtotal;
+          whatsappMessage += `• ${cart[k].name} x${cart[k].quantity} = Rp${subtotal.toLocaleString('id-ID')}\n`;
+        }
+        
+        whatsappMessage += `\n💰 *Total: Rp${total.toLocaleString('id-ID')}*`;
+        whatsappMessage += `\n📞 No. HP: ${phone}`;
+        whatsappMessage += `\n📍 Alamat: ${addr}`;
+        
+        const payment = document.querySelector('input[name="payment"]:checked');
+        whatsappMessage += `\n💳 Pembayaran: ${payment ? payment.value : '-'}`;
+        
+        // Encode untuk URL WhatsApp
+        const encodedMessage = encodeURIComponent(whatsappMessage);
+        const waUrl = `https://wa.me/${sellerCp}?text=${encodedMessage}`;
+        
+        // Tampilkan modal konfirmasi
+        let summary = `👤 Nama: ${name}\n📞 Telepon: ${phone}\n🏠 Alamat: ${addr}\n\n📋 PESANAN:\n`;
+        for (let k in cart) {
+          const subtotal = cart[k].price * cart[k].quantity;
+          summary += `• ${cart[k].name} x${cart[k].quantity} = ${formatRupiah(subtotal)}\n`;
+        }
+        summary += `\n💰 Total: ${formatRupiah(total)}`;
+        summary += `\n💳 Pembayaran: ${payment ? payment.value : '-'}`;
+        summary += `\n👨‍🍳 Penjual: ${sellerText}`;
+        
+        paymentContent.textContent = summary;
+        
+        // Set link WhatsApp
+        whatsappAfterCheckout.href = waUrl;
+        
+        modalPayment.classList.remove('hidden');
+
+        // Reset cart
+        cart = {}; 
+        updateCartUI(); 
+        orderForm.reset();
+        document.getElementById('upload-bukti-container').classList.add('hidden');
+      });
+
+      // Tutup modal
+      document.getElementById('close-payment-modal').addEventListener('click', () => {
+        modalPayment.classList.add('hidden');
+      });
+
+      // Modal kontak
+      document.getElementById('close-contact-modal').addEventListener('click', () => {
+        document.getElementById('contact-modal').classList.add('hidden');
+      });
+
+      // Klik di luar modal kontak untuk menutup
+      document.getElementById('contact-modal').addEventListener('click', (e) => {
+        if (e.target === document.getElementById('contact-modal')) {
+          document.getElementById('contact-modal').classList.add('hidden');
+        }
+      });
+
+      // Init
+      getUserLocation();
+      showSection('menu');
+    })();
+  </script>
+</body>
+</html>

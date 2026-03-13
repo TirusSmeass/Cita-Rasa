@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html class="scroll-smooth" lang="id">
+<head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1" name="viewport"/>
+  <title>Selera Nusa | Reward & Apresiasi</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+  <style>
+    * {
+      font-family: 'Inter', sans-serif;
+    }
+    body {
+      background: #fcf8f3; /* warm white like food texture */
+    }
+    /* Prevent horizontal overflow on small devices */
+    html, body {
+      overflow-x: hidden;
+    }
+    .food-pattern {
+      background-color: #f9f1e6;
+      background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23e6d5b8' fill-opacity='0.3'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    }
+    .card-hover {
+      transition: transform 0.2s ease, box-shadow 0.3s ease;
+    }
+    .card-hover:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 20px 25px -8px rgba(156, 98, 28, 0.15);
+    }
+    .gradient-amber {
+      background: linear-gradient(135deg, #fbbf24 0%, #d97706 100%);
+    }
+    .btn-amber {
+      background-color: #b45309;
+      transition: all 0.2s;
+    }
+    .btn-amber:hover {
+      background-color: #92400e;
+      transform: scale(1.02);
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col">
+
+  <!-- ===== HEADER DENGAN TEMA KULINER ===== -->
+  <header class="bg-white/95 backdrop-blur-sm shadow-md sticky top-0 z-30 border-b border-amber-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-16">
+      <!-- Logo dengan tema kuliner -->
+      <a href="index.html" class="flex items-center space-x-3 min-w-0 hover:opacity-80 transition">
+        <div class="w-10 h-10 bg-amber-600 rounded-xl flex items-center justify-center text-white shadow-md">
+          <i class="fas fa-utensils text-lg"></i>
+        </div>
+        <div>
+          <h1 class="text-xl font-bold tracking-tight text-stone-800">Selera<span class="text-amber-600">Nusa</span></h1>
+          <p class="text-[10px] text-stone-500 -mt-1">apresiasi & reward</p>
+        </div>
+      </a>
+
+      <!-- Status Poin (hiasan) -->
+      <div class="hidden md:flex items-center gap-2 bg-amber-50 px-4 py-1.5 rounded-full border border-amber-200">
+        <i class="fas fa-leaf text-amber-600"></i>
+        <span class="text-sm font-medium text-stone-700">Poinmu: <span class="text-amber-700 font-bold">2.450</span></span>
+      </div>
+
+      <!-- Navigasi Desktop -->
+      <nav class="hidden md:flex items-center space-x-6 text-sm font-medium">
+        <a class="text-stone-700 hover:text-amber-700 transition whitespace-nowrap" href="#konsumen">Konsumen</a>
+        <a class="text-stone-700 hover:text-amber-700 transition whitespace-nowrap" href="#umkm">UMKM Lokal</a>
+        <a class="text-stone-700 hover:text-amber-700 transition whitespace-nowrap" href="#rewards">Reward Kuliner</a>
+        <a class="text-stone-700 hover:text-amber-700 transition whitespace-nowrap" href="#cara-kerja">Cara Kerja</a>
+        <a class="bg-amber-100 text-amber-700 px-4 py-2 rounded-full hover:bg-amber-200 transition flex items-center gap-1" href="index.html">
+          <i class="fas fa-store"></i> Dashboard
+        </a>
+      </nav>
+
+      <!-- Mobile menu button -->
+      <button aria-label="Toggle menu" class="md:hidden text-stone-600 focus:outline-none focus:ring-2 focus:ring-amber-500" id="mobile-menu-button">
+        <i class="fas fa-bars fa-lg"></i>
+      </button>
+    </div>
+
+    <!-- Mobile menu -->
+    <nav aria-label="Mobile menu" class="md:hidden bg-white border-t border-amber-100 hidden" id="mobile-menu">
+      <a class="block px-4 py-3 text-stone-700 hover:bg-amber-50" href="#konsumen">Konsumen</a>
+      <a class="block px-4 py-3 text-stone-700 hover:bg-amber-50" href="#umkm">UMKM Lokal</a>
+      <a class="block px-4 py-3 text-stone-700 hover:bg-amber-50" href="#rewards">Reward Kuliner</a>
+      <a class="block px-4 py-3 text-stone-700 hover:bg-amber-50" href="#cara-kerja">Cara Kerja</a>
+      <a class="block px-4 py-3 text-amber-600 font-medium border-t border-amber-100" href="index.html">
+        <i class="fas fa-store mr-2"></i>Dashboard
+      </a>
+    </nav>
+  </header>
+
+  <main class="flex-grow max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 w-full">
+
+    <!-- ===== HERO SECTION ===== -->
+    <section class="mb-16 food-pattern rounded-3xl p-8 sm:p-12 border border-amber-200/50" id="hero">
+      <div class="text-center max-w-3xl mx-auto">
+        <span class="inline-block bg-amber-200/60 text-amber-800 text-xs font-semibold px-4 py-1 rounded-full mb-4">
+          <i class="fas fa-gem mr-1"></i> #APRESIASIKULINERLOKAL
+        </span>
+        <h2 class="text-3xl sm:text-4xl font-extrabold text-stone-800 mb-4 leading-tight">
+          Apresiasi untuk <span class="text-amber-600">Pecinta Kuliner</span> & <span class="text-amber-600">UMKM Lokal</span>
+        </h2>
+        <p class="text-stone-600 text-base sm:text-lg px-2">
+          Setiap pesanan kuliner Nusantara mengumpulkan poin. Tukarkan dengan reward spesial atau fitur premium untuk mengembangkan usaha lokal.
+        </p>
+        
+        <!-- Info Poin Cepat (mobile friendly) -->
+        <div class="flex items-center justify-center gap-4 mt-8">
+          <div class="bg-white shadow-sm rounded-2xl px-6 py-3 border border-amber-100">
+            <div class="flex items-center gap-3">
+              <div class="w-10 h-10 rounded-full bg-amber-100 flex items-center justify-center">
+                <i class="fas fa-piggy-bank text-amber-600"></i>
+              </div>
+              <div class="text-left">
+                <p class="text-xs text-stone-500">Poin Kamu</p>
+                <p class="text-2xl font-bold text-amber-700">2.450</p>
+              </div>
+            </div>
+          </div>
+          <div class="bg-white shadow-sm rounded-2xl px-6 py-3 border border-amber-100">
+            <div class="flex items-center gap-3">
+              <div class="w-10 h-10 rounded-full bg-amber-100 flex items-center justify-center">
+                <i class="fas fa-fire text-amber-600"></i>
+              </div>
+              <div class="text-left">
+                <p class="text-xs text-stone-500">Reward Tersedia</p>
+                <p class="text-2xl font-bold text-amber-700">12</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== REWARD UNTUK KONSUMEN ===== -->
+    <section class="mb-20" id="konsumen">
+      <div class="flex items-center gap-3 mb-8">
+        <div class="w-10 h-10 rounded-xl bg-amber-600 flex items-center justify-center text-white">
+          <i class="fas fa-user-check"></i>
+        </div>
+        <h3 class="text-2xl sm:text-3xl font-bold text-stone-800">Reward untuk <span class="text-amber-600">Konsumen</span></h3>
+      </div>
+      <p class="text-stone-600 max-w-2xl mb-10 ml-0 sm:ml-14">
+        Setiap pembelian kuliner Nusantara mengumpulkan poin yang bisa ditukar dengan voucher makan, merchandise eksklusif, hingga pengalaman kuliner.
+      </p>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <!-- Voucher Makan -->
+        <div class="bg-white rounded-2xl shadow-md overflow-hidden card-hover border border-amber-100">
+          <div class="h-40 bg-amber-200 flex items-center justify-center relative">
+            <img alt="Voucher makan di restoran tradisional" class="w-full h-full object-cover" src="https://images.unsplash.com/photo-1556740738-b6a63e27c4df?w=400&h=300&fit=crop"/>
+            <span class="absolute top-3 right-3 bg-amber-600 text-white text-xs font-bold px-3 py-1 rounded-full">
+              <i class="fas fa-tag mr-1"></i>500 poin
+            </span>
+          </div>
+          <div class="p-5">
+            <h4 class="text-xl font-bold text-stone-800 mb-2">Voucher Makan Rp50K</h4>
+            <p class="text-stone-600 text-sm mb-4">Voucher untuk makan di 50+ mitra kuliner Nusantara.</p>
+            <div class="flex items-center justify-between">
+              <span class="text-sm text-stone-500"><i class="fas fa-clock mr-1"></i>Berlaku 30 hari</span>
+              <button class="redeem-btn bg-amber-600 hover:bg-amber-700 text-white px-5 py-2 rounded-xl text-sm font-semibold transition" data-jenis="Konsumen" data-nama="Voucher Makan Rp50.000" data-poin="500">
+                Tukar
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Merchandise -->
+        <div class="bg-white rounded-2xl shadow-md overflow-hidden card-hover border border-amber-100">
+          <div class="h-40 bg-amber-200 flex items-center justify-center relative">
+            <img alt="Merchandise eksklusif Selera Nusa" class="w-full h-full object-cover" src="https://images.unsplash.com/photo-1556905055-8f358a7a47b2?w=400&h=300&fit=crop"/>
+            <span class="absolute top-3 right-3 bg-amber-600 text-white text-xs font-bold px-3 py-1 rounded-full">
+              1.200 poin
+            </span>
+          </div>
+          <div class="p-5">
+            <h4 class="text-xl font-bold text-stone-800 mb-2">Merchandise Eksklusif</h4>
+            <p class="text-stone-600 text-sm mb-4">Totebag, kaos, dan stiker edisi terbatas Selera Nusa.</p>
+            <div class="flex items-center justify-between">
+              <span class="text-sm text-stone-500"><i class="fas fa-box mr-1"></i>Stok terbatas</span>
+              <button class="redeem-btn bg-amber-600 hover:bg-amber-700 text-white px-5 py-2 rounded-xl text-sm font-semibold transition" data-jenis="Konsumen" data-nama="Merchandise Eksklusif" data-poin="1200">
+                Tukar
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Kelas Masak -->
+        <div class="bg-white rounded-2xl shadow-md overflow-hidden card-hover border border-amber-100">
+          <div class="h-40 bg-amber-200 flex items-center justify-center relative">
+            <img alt="Kelas memasak masakan Nusantara" class="w-full h-full object-cover" src="https://images.unsplash.com/photo-1556910103-1c02745aae4d?w=400&h=300&fit=crop"/>
+            <span class="absolute top-3 right-3 bg-amber-600 text-white text-xs font-bold px-3 py-1 rounded-full">
+              2.000 poin
+            </span>
+          </div>
+          <div class="p-5">
+            <h4 class="text-xl font-bold text-stone-800 mb-2">Kelas Masak Nusantara</h4>
+            <p class="text-stone-600 text-sm mb-4">Belajar masak rendang, gudeg, dan sate bersama chef profesional.</p>
+            <div class="flex items-center justify-between">
+              <span class="text-sm text-stone-500"><i class="fas fa-users mr-1"></i>Online + offline</span>
+              <button class="redeem-btn bg-amber-600 hover:bg-amber-700 text-white px-5 py-2 rounded-xl text-sm font-semibold transition" data-jenis="Konsumen" data-nama="Kelas Masak Nusantara" data-poin="2000">
+                Tukar
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== REWARD & FITUR UNTUK UMKM ===== -->
+    <section class="mb-20 bg-amber-50/70 rounded-3xl p-6 sm:p-8 border border-amber-200/70" id="umkm">
+      <div class="flex items-center gap-3 mb-8">
+        <div class="w-10 h-10 rounded-xl bg-amber-700 flex items-center justify-center text-white">
+          <i class="fas fa-store-alt"></i>
+        </div>
+        <h3 class="text-2xl sm:text-3xl font-bold text-stone-800">Reward & Fitur untuk <span class="text-amber-700">UMKM Lokal</span></h3>
+      </div>
+      <p class="text-stone-600 max-w-2xl mb-10 ml-0 sm:ml-14">
+        UMKM dapat menukarkan poin untuk mengakses fitur premium, pelatihan, dan peralatan usaha yang membantu bisnis kuliner berkembang.
+      </p>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <!-- Dashboard Premium -->
+        <div class="bg-white rounded-2xl shadow-md overflow-hidden card-hover border border-amber-100">
+          <div class="h-40 bg-amber-200 flex items-center justify-center relative">
+            <img alt="Dashboard analitik untuk UMKM" class="w-full h-full object-cover" src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=400&h=300&fit=crop"/>
+            <span class="absolute top-3 right-3 bg-amber-700 text-white text-xs font-bold px-3 py-1 rounded-full">
+              3.000 poin
+            </span>
+          </div>
+          <div class="p-5">
+            <h4 class="text-xl font-bold text-stone-800 mb-2">Dashboard Premium</h4>
+            <p class="text-stone-600 text-sm mb-4">Akses analitik penjualan, laporan pelanggan, dan fitur promosi.</p>
+            <div class="flex items-center justify-between">
+              <span class="text-sm text-stone-500"><i class="fas fa-chart-line mr-1"></i>1 tahun</span>
+              <button class="redeem-btn bg-amber-700 hover:bg-amber-800 text-white px-5 py-2 rounded-xl text-sm font-semibold transition" data-jenis="UMKM" data-nama="Dashboard Premium UMKM" data-poin="3000">
+                Tukar
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Paket Pelatihan -->
+        <div class="bg-white rounded-2xl shadow-md overflow-hidden card-hover border border-amber-100">
+          <div class="h-40 bg-amber-200 flex items-center justify-center relative">
+            <img alt="Pelatihan bisnis untuk UMKM" class="w-full h-full object-cover" src="https://images.unsplash.com/photo-1552581234-26160f608093?w=400&h=300&fit=crop"/>
+            <span class="absolute top-3 right-3 bg-amber-700 text-white text-xs font-bold px-3 py-1 rounded-full">
+              2.000 poin
+            </span>
+          </div>
+          <div class="p-5">
+            <h4 class="text-xl font-bold text-stone-800 mb-2">Paket Pelatihan UMKM</h4>
+            <p class="text-stone-600 text-sm mb-4">Pelatihan manajemen, keuangan, dan pemasaran untuk UMKM kuliner.</p>
+            <div class="flex items-center justify-between">
+              <span class="text-sm text-stone-500"><i class="fas fa-video mr-1"></i>4 sesi</span>
+              <button class="redeem-btn bg-amber-700 hover:bg-amber-800 text-white px-5 py-2 rounded-xl text-sm font-semibold transition" data-jenis="UMKM" data-nama="Paket Pelatihan UMKM" data-poin="2000">
+                Tukar
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Peralatan Usaha -->
+        <div class="bg-white rounded-2xl shadow-md overflow-hidden card-hover border border-amber-100">
+          <div class="h-40 bg-amber-200 flex items-center justify-center relative">
+            <img alt="Peralatan usaha untuk UMKM" class="w-full h-full object-cover" src="https://images.unsplash.com/photo-1584999734482-0361aecad844?w=400&h=300&fit=crop"/>
+            <span class="absolute top-3 right-3 bg-amber-700 text-white text-xs font-bold px-3 py-1 rounded-full">
+              4.000 poin
+            </span>
+          </div>
+          <div class="p-5">
+            <h4 class="text-xl font-bold text-stone-800 mb-2">Paket Peralatan Usaha</h4>
+            <p class="text-stone-600 text-sm mb-4">Wajan, kompor, dan perlengkapan dapur profesional.</p>
+            <div class="flex items-center justify-between">
+              <span class="text-sm text-stone-500"><i class="fas fa-tools mr-1"></i>5 item</span>
+              <button class="redeem-btn bg-amber-700 hover:bg-amber-800 text-white px-5 py-2 rounded-xl text-sm font-semibold transition" data-jenis="UMKM" data-nama="Paket Alat Usaha UMKM" data-poin="4000">
+                Tukar
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== TABEL SEMUA REWARD ===== -->
+    <section class="mb-20" id="rewards">
+      <div class="flex items-center gap-3 mb-8">
+        <div class="w-10 h-10 rounded-xl bg-amber-600 flex items-center justify-center text-white">
+          <i class="fas fa-gift"></i>
+        </div>
+        <h3 class="text-2xl sm:text-3xl font-bold text-stone-800">Semua <span class="text-amber-600">Reward</span></h3>
+      </div>
+
+      <!-- Pilih Pengguna (Konsumen/UMKM) -->
+      <div class="max-w-md bg-white rounded-xl shadow-sm border border-amber-100 p-5 mb-8 ml-0 sm:ml-14">
+        <div class="flex items-center gap-3 mb-4">
+          <div class="w-8 h-8 rounded-full bg-amber-100 flex items-center justify-center">
+            <i class="fas fa-user-circle text-amber-600"></i>
+          </div>
+          <h4 class="font-semibold text-stone-800">Informasi Pengguna</h4>
+        </div>
+        <form autocomplete="off" class="space-y-4" id="user-form">
+          <div>
+            <label class="block text-stone-600 font-medium mb-1 text-sm" for="userSelect">Pilih Pengguna</label>
+            <select class="w-full border border-stone-200 rounded-xl px-4 py-3 focus:ring-2 focus:ring-amber-300 outline-none bg-white" id="userSelect" name="userSelect" required="">
+              <option disabled="" selected="" value="">-- Pilih Konsumen atau UMKM --</option>
+              <option data-jenis="Konsumen" data-poin="2450" value="konsumen1">Andi Pratama - Konsumen (2.450 poin)</option>
+              <option data-jenis="Konsumen" data-poin="850" value="konsumen2">Siti Aminah - Konsumen (850 poin)</option>
+              <option data-jenis="UMKM" data-poin="3500" value="umkm1">Warung Nusantara - UMKM (3.500 poin)</option>
+              <option data-jenis="UMKM" data-poin="2100" value="umkm2">Kuliner Bunda - UMKM (2.100 poin)</option>
+            </select>
+          </div>
+          <div class="grid grid-cols-2 gap-3">
+            <div>
+              <label class="block text-stone-600 font-medium mb-1 text-sm" for="userName">Nama</label>
+              <input class="w-full border border-stone-200 rounded-xl px-4 py-3 bg-stone-50 cursor-not-allowed" id="userName" name="userName" readonly="" type="text" value=""/>
+            </div>
+            <div>
+              <label class="block text-stone-600 font-medium mb-1 text-sm" for="userPoin">Poin</label>
+              <input class="w-full border border-stone-200 rounded-xl px-4 py-3 bg-stone-50 cursor-not-allowed" id="userPoin" name="userPoin" readonly="" type="number" value="0"/>
+            </div>
+          </div>
+        </form>
+      </div>
+
+      <!-- Tabel Reward -->
+      <div class="overflow-x-auto rounded-2xl border border-amber-100 bg-white ml-0 sm:ml-14">
+        <table class="min-w-full">
+          <thead class="bg-amber-50 text-stone-700">
+            <tr>
+              <th class="py-4 px-4 text-left font-semibold">Reward</th>
+              <th class="py-4 px-4 text-left font-semibold">Jenis</th>
+              <th class="py-4 px-4 text-left font-semibold">Poin</th>
+              <th class="py-4 px-4 text-left font-semibold">Deskripsi</th>
+              <th class="py-4 px-4 text-center font-semibold">Aksi</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-amber-100" id="reward-list">
+            <tr class="hover:bg-amber-50/50 transition">
+              <td class="py-4 px-4">
+                <div class="flex items-center gap-3">
+                  <img alt="Voucher" class="w-10 h-10 rounded-lg object-cover" src="https://images.unsplash.com/photo-1556740738-b6a63e27c4df?w=80&h=80&fit=crop"/>
+                  <span class="font-medium">Voucher Rp50.000</span>
+                </div>
+              </td>
+              <td class="py-4 px-4">Konsumen</td>
+              <td class="py-4 px-4 font-semibold text-amber-700">500</td>
+              <td class="py-4 px-4 text-stone-600 text-sm">Voucher makan di 50+ mitra</td>
+              <td class="py-4 px-4 text-center">
+                <button class="redeem-btn bg-amber-600 hover:bg-amber-700 text-white px-4 py-2 rounded-xl text-xs font-semibold transition" data-jenis="Konsumen" data-nama="Voucher Belanja Rp50.000" data-poin="500">
+                  Tukar
+                </button>
+              </td>
+            </tr>
+            <tr class="hover:bg-amber-50/50 transition bg-amber-50/30">
+              <td class="py-4 px-4">
+                <div class="flex items-center gap-3">
+                  <img alt="Headphone" class="w-10 h-10 rounded-lg object-cover" src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=80&h=80&fit=crop"/>
+                  <span class="font-medium">Headphone Wireless</span>
+                </div>
+              </td>
+              <td class="py-4 px-4">Konsumen</td>
+              <td class="py-4 px-4 font-semibold text-amber-700">1.500</td>
+              <td class="py-4 px-4 text-stone-600 text-sm">Headphone kualitas premium</td>
+              <td class="py-4 px-4 text-center">
+                <button class="redeem-btn bg-amber-600 hover:bg-amber-700 text-white px-4 py-2 rounded-xl text-xs font-semibold transition" data-jenis="Konsumen" data-nama="Headphone Wireless" data-poin="1500">
+                  Tukar
+                </button>
+              </td>
+            </tr>
+            <tr class="hover:bg-amber-50/50 transition">
+              <td class="py-4 px-4">
+                <div class="flex items-center gap-3">
+                  <img alt="Pelatihan UMKM" class="w-10 h-10 rounded-lg object-cover" src="https://images.unsplash.com/photo-1552581234-26160f608093?w=80&h=80&fit=crop"/>
+                  <span class="font-medium">Paket Pelatihan UMKM</span>
+                </div>
+              </td>
+              <td class="py-4 px-4">UMKM</td>
+              <td class="py-4 px-4 font-semibold text-amber-700">2.000</td>
+              <td class="py-4 px-4 text-stone-600 text-sm">4 sesi pelatihan bisnis</td>
+              <td class="py-4 px-4 text-center">
+                <button class="redeem-btn bg-amber-700 hover:bg-amber-800 text-white px-4 py-2 rounded-xl text-xs font-semibold transition" data-jenis="UMKM" data-nama="Paket Pelatihan UMKM" data-poin="2000">
+                  Tukar
+                </button>
+              </td>
+            </tr>
+            <tr class="hover:bg-amber-50/50 transition bg-amber-50/30">
+              <td class="py-4 px-4">
+                <div class="flex items-center gap-3">
+                  <img alt="Dashboard" class="w-10 h-10 rounded-lg object-cover" src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=80&h=80&fit=crop"/>
+                  <span class="font-medium">Dashboard Premium</span>
+                </div>
+              </td>
+              <td class="py-4 px-4">UMKM</td>
+              <td class="py-4 px-4 font-semibold text-amber-700">3.000</td>
+              <td class="py-4 px-4 text-stone-600 text-sm">Akses analitik 1 tahun</td>
+              <td class="py-4 px-4 text-center">
+                <button class="redeem-btn bg-amber-700 hover:bg-amber-800 text-white px-4 py-2 rounded-xl text-xs font-semibold transition" data-jenis="UMKM" data-nama="Dashboard Premium UMKM" data-poin="3000">
+                  Tukar
+                </button>
+              </td>
+            </tr>
+            <tr class="hover:bg-amber-50/50 transition">
+              <td class="py-4 px-4">
+                <div class="flex items-center gap-3">
+                  <img alt="Kelas Masak" class="w-10 h-10 rounded-lg object-cover" src="https://images.unsplash.com/photo-1556910103-1c02745aae4d?w=80&h=80&fit=crop"/>
+                  <span class="font-medium">Kelas Masak Nusantara</span>
+                </div>
+              </td>
+              <td class="py-4 px-4">Konsumen</td>
+              <td class="py-4 px-4 font-semibold text-amber-700">2.000</td>
+              <td class="py-4 px-4 text-stone-600 text-sm">Belajar masak bersama chef</td>
+              <td class="py-4 px-4 text-center">
+                <button class="redeem-btn bg-amber-600 hover:bg-amber-700 text-white px-4 py-2 rounded-xl text-xs font-semibold transition" data-jenis="Konsumen" data-nama="Kelas Masak Nusantara" data-poin="2000">
+                  Tukar
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ===== CARA KERJA ===== -->
+    <section class="mb-20 max-w-5xl mx-auto" id="cara-kerja">
+      <div class="text-center mb-12">
+        <span class="inline-block bg-amber-100 text-amber-700 text-sm font-semibold px-5 py-2 rounded-full mb-4">
+          <i class="fas fa-arrow-right mr-1"></i> Bagaimana Cara Kerjanya?
+        </span>
+        <h3 class="text-3xl font-bold text-stone-800">Dapatkan Poin, Tukarkan <span class="text-amber-600">Reward</span></h3>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div class="bg-white rounded-2xl shadow-sm border border-amber-100 p-6 text-center card-hover">
+          <div class="w-16 h-16 rounded-full bg-amber-100 flex items-center justify-center mx-auto mb-4">
+            <i class="fas fa-shopping-bag text-2xl text-amber-600"></i>
+          </div>
+          <h4 class="text-xl font-bold text-stone-800 mb-2">1. Belanja Kuliner</h4>
+          <p class="text-stone-600 text-sm">Pesan menu favorit dari UMKM lokal terdekat, dapatkan poin otomatis.</p>
+        </div>
+        <div class="bg-white rounded-2xl shadow-sm border border-amber-100 p-6 text-center card-hover">
+          <div class="w-16 h-16 rounded-full bg-amber-100 flex items-center justify-center mx-auto mb-4">
+            <i class="fas fa-coins text-2xl text-amber-600"></i>
+          </div>
+          <h4 class="text-xl font-bold text-stone-800 mb-2">2. Kumpulkan Poin</h4>
+          <p class="text-stone-600 text-sm">Setiap transaksi memberikan poin yang bisa dilihat di dashboard.</p>
+        </div>
+        <div class="bg-white rounded-2xl shadow-sm border border-amber-100 p-6 text-center card-hover">
+          <div class="w-16 h-16 rounded-full bg-amber-100 flex items-center justify-center mx-auto mb-4">
+            <i class="fas fa-gift text-2xl text-amber-600"></i>
+          </div>
+          <h4 class="text-xl font-bold text-stone-800 mb-2">3. Tukar Reward</h4>
+          <p class="text-stone-600 text-sm">Pilih reward favorit dan tukarkan poinmu dengan mudah.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="bg-stone-800 text-stone-300 py-8 mt-12">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-sm">
+      <div class="flex items-center justify-center gap-2 mb-3">
+        <i class="fas fa-utensils text-amber-400"></i>
+        <span class="text-white font-semibold">Selera Nusa</span>
+      </div>
+      <p>© 2025 Selera Nusa - Melestarikan kuliner lokal melalui apresiasi dan reward.</p>
+    </div>
+  </footer>
+
+  <!-- ===== MODAL KONFIRMASI ===== -->
+  <div aria-hidden="true" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden" id="modal">
+    <div class="bg-white rounded-3xl shadow-xl max-w-md w-full p-6 relative mx-4">
+      <button aria-label="Close modal" class="absolute top-4 right-4 text-stone-400 hover:text-stone-600 focus:outline-none" id="modal-close">
+        <i class="fas fa-times fa-lg"></i>
+      </button>
+      <div class="w-14 h-14 rounded-full bg-amber-100 flex items-center justify-center mx-auto mb-4">
+        <i class="fas fa-gift text-2xl text-amber-600"></i>
+      </div>
+      <h3 class="text-2xl font-bold text-stone-800 mb-2 text-center" id="modal-title">Konfirmasi Penukaran</h3>
+      <p class="mb-6 text-stone-600 text-center" id="modal-message">Apakah Anda yakin ingin menukarkan poin?</p>
+      <div class="flex justify-center space-x-4">
+        <button class="px-6 py-2 rounded-xl border border-stone-300 text-stone-700 hover:bg-stone-50 transition font-medium" id="modal-cancel">Batal</button>
+        <button class="px-6 py-2 rounded-xl bg-amber-600 text-white hover:bg-amber-700 transition font-medium" id="modal-confirm">Ya, Tukar</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Mobile menu toggle
+    const btn = document.getElementById('mobile-menu-button');
+    const menu = document.getElementById('mobile-menu');
+
+    btn.addEventListener('click', () => {
+      menu.classList.toggle('hidden');
+    });
+
+    // User data
+    const users = {
+      konsumen1: { name: "Andi Pratama", poin: 2450, jenis: "Konsumen" },
+      konsumen2: { name: "Siti Aminah", poin: 850, jenis: "Konsumen" },
+      umkm1: { name: "Warung Nusantara", poin: 3500, jenis: "UMKM" },
+      umkm2: { name: "Kuliner Bunda", poin: 2100, jenis: "UMKM" }
+    };
+
+    const userSelect = document.getElementById('userSelect');
+    const userNameInput = document.getElementById('userName');
+    const userPoinInput = document.getElementById('userPoin');
+
+    // Modal elements
+    const modal = document.getElementById('modal');
+    const modalTitle = document.getElementById('modal-title');
+    const modalMessage = document.getElementById('modal-message');
+    const modalCancel = document.getElementById('modal-cancel');
+    const modalConfirm = document.getElementById('modal-confirm');
+    const modalCloseBtn = document.getElementById('modal-close');
+
+    let currentRedeem = null;
+    let currentUserKey = null;
+
+    // Update user info
+    userSelect.addEventListener('change', () => {
+      const selectedKey = userSelect.value;
+      if (selectedKey && users[selectedKey]) {
+        currentUserKey = selectedKey;
+        userNameInput.value = users[selectedKey].name;
+        userPoinInput.value = users[selectedKey].poin;
+      } else {
+        currentUserKey = null;
+        userNameInput.value = "";
+        userPoinInput.value = 0;
+      }
+    });
+
+    // Open modal
+    function openModal(rewardName, rewardPoin, rewardJenis) {
+      if (!currentUserKey) {
+        alert('Silakan pilih pengguna terlebih dahulu.');
+        userSelect.focus();
+        return;
+      }
+      const user = users[currentUserKey];
+      if (user.jenis !== rewardJenis) {
+        alert(`Reward ini khusus untuk ${rewardJenis}. Pengguna Anda adalah ${user.jenis}.`);
+        return;
+      }
+      if (user.poin < rewardPoin) {
+        alert(`Poin Anda tidak cukup. Poin Anda: ${user.poin}, dibutuhkan: ${rewardPoin}`);
+        return;
+      }
+      currentRedeem = { rewardName, rewardPoin };
+      modalTitle.textContent = `Tukar ${rewardName}`;
+      modalMessage.textContent = `Halo ${user.name}, Anda akan menukarkan ${rewardPoin} poin untuk mendapatkan reward ini. Lanjutkan?`;
+      modal.classList.remove('hidden');
+    }
+
+    // Close modal
+    function closeModal() {
+      modal.classList.add('hidden');
+      currentRedeem = null;
+    }
+
+    modalCancel.addEventListener('click', closeModal);
+    modalCloseBtn.addEventListener('click', closeModal);
+
+    // Confirm redeem
+    modalConfirm.addEventListener('click', () => {
+      if (!currentRedeem || !currentUserKey) return;
+      const user = users[currentUserKey];
+      user.poin -= currentRedeem.rewardPoin;
+      if (user.poin < 0) user.poin = 0;
+      userPoinInput.value = user.poin;
+      alert(`✅ Selamat! Anda berhasil menukarkan "${currentRedeem.rewardName}". Sisa poin Anda: ${user.poin}.`);
+      closeModal();
+    });
+
+    // Attach events to redeem buttons
+    document.querySelectorAll('.redeem-btn').forEach(button => {
+      button.addEventListener('click', () => {
+        const rewardName = button.getAttribute('data-nama');
+        const rewardPoin = parseInt(button.getAttribute('data-poin'), 10);
+        const rewardJenis = button.getAttribute('data-jenis');
+        openModal(rewardName, rewardPoin, rewardJenis);
+      });
+    });
+
+    // Close modal when clicking outside (optional)
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) closeModal();
+    });
+  </script>
+</body>
+</html>

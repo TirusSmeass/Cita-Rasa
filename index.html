@@ -1,0 +1,1626 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1" name="viewport" />
+  <title>CitaRasa - Melestarikan Kuliner Daerah Nusantara</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet" />
+  
+  <!-- ===== CSS Citarasa ===== -->
+  <style>
+    /* -----------------------------------------------
+       CITARASA - MELESTARIKAN KULINER DAERAH
+    ----------------------------------------------- */
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --primary-50: #fef3e2;
+      --primary-100: #fde6c5;
+      --primary-200: #fbce9c;
+      --primary-300: #f9b573;
+      --primary-400: #f79d4a;
+      --primary-500: #f58421;
+      --primary-600: #d96a0c;
+      --primary-700: #b45309;
+      --primary-800: #8f3f07;
+      --primary-900: #6a2e05;
+      
+      --quiz-50: #f0f9ff;
+      --quiz-100: #e0f2fe;
+      --quiz-200: #bae6fd;
+      --quiz-300: #7dd3fc;
+      --quiz-400: #38bdf8;
+      --quiz-500: #0ea5e9;
+      --quiz-600: #0284c7;
+      --quiz-700: #0369a1;
+      --quiz-800: #075985;
+      --quiz-900: #0c4a6e;
+      
+      --neutral-50: #faf7f2;
+      --neutral-100: #f5efe6;
+      --neutral-200: #e9dfd2;
+      --neutral-300: #ddd0be;
+      --neutral-400: #d1c0aa;
+      --neutral-500: #b8a48c;
+      --neutral-600: #9c8870;
+      --neutral-700: #7f6c54;
+      --neutral-800: #625038;
+      --neutral-900: #45341f;
+      
+      --font-primary: 'Plus Jakarta Sans', sans-serif;
+      --shadow-sm: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+      --shadow-md: 0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -2px rgba(0, 0, 0, 0.025);
+      --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.05), 0 10px 10px -5px rgba(0, 0, 0, 0.02);
+      --shadow-xl: 0 25px 50px -12px rgba(0, 0, 0, 0.15);
+    }
+
+    body {
+      font-family: var(--font-primary);
+      background-color: var(--neutral-50);
+      color: var(--neutral-800);
+      line-height: 1.6;
+    }
+
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+      height: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: var(--neutral-200);
+    }
+    ::-webkit-scrollbar-thumb {
+      background: var(--primary-500);
+      border-radius: 20px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: var(--primary-600);
+    }
+
+    .gradient-text {
+      background: linear-gradient(135deg, var(--primary-700) 0%, var(--primary-500) 70%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .card-modern {
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .card-modern:hover {
+      transform: translateY(-6px);
+      box-shadow: var(--shadow-xl);
+    }
+
+    /* Navbar */
+    .glass-nav {
+      background: rgba(255, 255, 255, 0.9);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(201, 167, 107, 0.2);
+    }
+
+    .nav-link {
+      position: relative;
+      font-weight: 500;
+      transition: color 0.2s;
+      color: var(--neutral-700);
+    }
+    .nav-link:hover {
+      color: var(--primary-600);
+    }
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--primary-600);
+      transition: width 0.2s ease;
+    }
+    .nav-link:hover::after {
+      width: 100%;
+    }
+
+    /* Dropdown */
+    .dropdown-menu {
+      position: absolute;
+      right: 0;
+      margin-top: 0.5rem;
+      width: 12rem;
+      background: white;
+      border: 1px solid rgba(201, 167, 107, 0.2);
+      border-radius: 1rem;
+      box-shadow: var(--shadow-lg);
+      overflow: hidden;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.2s;
+    }
+    .group:hover .dropdown-menu {
+      opacity: 1;
+      visibility: visible;
+    }
+    .dropdown-menu a {
+      display: block;
+      padding: 0.75rem 1rem;
+      font-size: 0.875rem;
+      transition: all 0.2s;
+      color: var(--neutral-700);
+    }
+    .dropdown-menu a:hover {
+      background: var(--neutral-100);
+      color: var(--primary-600);
+    }
+
+    /* Product Card */
+    .product-card {
+      background: white;
+      border-radius: 1.5rem;
+      overflow: hidden;
+      border: 1px solid rgba(201, 167, 107, 0.2);
+    }
+    .product-image {
+      height: 200px;
+      width: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+    .product-card:hover .product-image {
+      transform: scale(1.05);
+    }
+
+    .section-title {
+      font-size: 2rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+    }
+    @media (max-width: 640px) {
+      .section-title {
+        font-size: 1.75rem;
+      }
+    }
+
+    /* Chatbot CitaRasa */
+    #chatbot-citarasa {
+      position: fixed;
+      bottom: 90px;
+      right: 20px;
+      width: 380px;
+      max-height: 550px;
+      background: #ffffff;
+      border-radius: 24px;
+      box-shadow: var(--shadow-xl);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      z-index: 1000;
+      display: none;
+      border: 1px solid rgba(201, 167, 107, 0.3);
+      backdrop-filter: blur(10px);
+    }
+    #chatbot-header {
+      background: linear-gradient(135deg, #b45309 0%, #d97706 100%);
+      color: white;
+      padding: 16px 20px;
+      font-weight: 700;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    #chatbot-messages {
+      flex-grow: 1;
+      padding: 16px;
+      overflow-y: auto;
+      background: #fefcf7;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      max-height: 350px;
+    }
+    .chatbot-message {
+      max-width: 85%;
+      padding: 10px 14px;
+      border-radius: 18px;
+      line-height: 1.5;
+      font-size: 14px;
+      animation: fadeIn 0.3s ease;
+      white-space: pre-line;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .chatbot-message.user {
+      background: #f3e9d2;
+      color: var(--neutral-800);
+      align-self: flex-end;
+      border-bottom-right-radius: 4px;
+    }
+    .chatbot-message.bot {
+      background: white;
+      color: var(--neutral-800);
+      align-self: flex-start;
+      border-bottom-left-radius: 4px;
+      border: 1px solid #e9dccd;
+    }
+    #chatbot-input-container {
+      display: flex;
+      padding: 12px 16px;
+      gap: 8px;
+      background: white;
+      border-top: 1px solid #f0e5d6;
+    }
+    #chatbot-input {
+      flex-grow: 1;
+      border: 1px solid #e9dccd;
+      border-radius: 40px;
+      padding: 10px 16px;
+      font-size: 14px;
+      outline: none;
+    }
+    #chatbot-input:focus {
+      border-color: var(--primary-600);
+      box-shadow: 0 0 0 3px rgba(180, 83, 9, 0.1);
+    }
+    #chatbot-send {
+      background: var(--primary-600);
+      border: none;
+      color: white;
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    #chatbot-send:hover {
+      background: var(--primary-700);
+    }
+    #chatbot-toggle {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: linear-gradient(135deg, #b45309 0%, #d97706 100%);
+      color: white;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      box-shadow: 0 10px 25px -5px rgba(180, 83, 9, 0.4);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      z-index: 1001;
+      font-size: 24px;
+    }
+    #chatbot-toggle:hover {
+      transform: scale(1.1);
+    }
+
+    /* Guide Card */
+    .guide-card {
+      background: linear-gradient(135deg, #fef3e2 0%, #fff 100%);
+      border: 2px dashed var(--primary-300);
+    }
+
+    /* Quiz Styles */
+    .quiz-card {
+      background: linear-gradient(135deg, var(--quiz-50) 0%, #ffffff 100%);
+      border: 2px solid var(--quiz-200);
+      border-radius: 32px;
+      overflow: hidden;
+    }
+    .quiz-option {
+      background: white;
+      border: 2px solid var(--quiz-200);
+      border-radius: 40px;
+      padding: 16px 20px;
+      font-size: 16px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s;
+      width: 100%;
+      text-align: left;
+    }
+    .quiz-option:hover:not(.disabled) {
+      background: var(--quiz-100);
+      border-color: var(--quiz-500);
+      transform: translateX(8px);
+    }
+    .quiz-option.correct {
+      background: #d1fae5;
+      border-color: #10b981;
+      color: #065f46;
+    }
+    .quiz-option.wrong {
+      background: #fee2e2;
+      border-color: #ef4444;
+      color: #991b1b;
+    }
+    .quiz-option.disabled {
+      opacity: 0.7;
+      cursor: not-allowed;
+    }
+    .quiz-option.selected {
+      border-width: 3px;
+      border-color: var(--quiz-600);
+      background: var(--quiz-50);
+    }
+    .badge-points {
+      background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+      color: white;
+      padding: 4px 12px;
+      border-radius: 40px;
+      font-weight: 600;
+      font-size: 14px;
+    }
+    .timer-bar {
+      height: 8px;
+      background: var(--quiz-200);
+      border-radius: 40px;
+      overflow: hidden;
+    }
+    .timer-progress {
+      height: 100%;
+      background: var(--quiz-600);
+      transition: width 1s linear;
+    }
+    .confetti {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 9999;
+    }
+
+    /* Mobile */
+    @media (max-width: 640px) {
+      #chatbot-citarasa {
+        width: 300px;
+        right: 10px;
+      }
+      .quiz-option {
+        padding: 12px 16px;
+        font-size: 14px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ===== NAVBAR ===== -->
+  <nav class="glass-nav sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-20">
+        <!-- Logo -->
+        <a href="index.html" class="flex items-center gap-3 group">
+          <img src="logo cita rasa.png" 
+               alt="CitaRasa Logo" 
+               class="w-10 h-10 rounded-xl object-cover shadow-md group-hover:scale-105 transition"
+               onerror="this.src='https://via.placeholder.com/40x40/f58421/ffffff?text=CR'">
+          <div>
+            <span class="text-xl font-extrabold tracking-tight text-neutral-800">CITA<span class="text-amber-600">RASA</span></span>
+            <p class="text-[10px] text-neutral-500 -mt-1">melestarikan kuliner daerah</p>
+          </div>
+        </a>
+
+        <!-- Desktop Menu -->
+        <div class="hidden md:flex items-center gap-8">
+          <a href="#beranda" class="nav-link">Beranda</a>
+          <a href="kuliner.html" class="nav-link">Kuliner Daerah</a>
+          <a href="#umkm" class="nav-link">UMKM Lokal</a>
+          <a href="AI sejarah.html" class="nav-link">AI Sejarah</a>
+          
+          <!-- User Dropdown -->
+          <div class="relative group">
+            <button class="flex items-center gap-1 text-neutral-700 hover:text-amber-600 font-medium py-2">
+              <span>Program</span>
+              <i class="fas fa-chevron-down text-xs"></i>
+            </button>
+            <div class="dropdown-menu">
+              <a href="reward.html">🎁 Reward</a>
+              <a href="#afiliasi">🤝 Afiliasi</a>
+              <a href="leaderboard.html">🏆 Leaderboard</a>
+            </div>
+          </div>
+
+          <!-- Premium -->
+          <a href="premium.html" class="bg-gradient-to-r from-amber-600 to-amber-700 text-white px-5 py-2.5 rounded-full text-sm font-semibold hover:shadow-lg transition shadow-md">
+            <i class="fas fa-crown mr-1"></i> Premium
+          </a>
+
+          <!-- Daftar Dropdown -->
+          <div class="relative group">
+            <button class="flex items-center gap-1 bg-amber-50 text-amber-700 px-4 py-2 rounded-full font-medium hover:bg-amber-100 transition">
+              <span>Bergabung</span>
+              <i class="fas fa-chevron-down text-xs"></i>
+            </button>
+            <div class="dropdown-menu">
+              <a href="#">🔑 Masuk</a>
+              <a href="#">📝 Daftar UMKM</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Mobile menu button -->
+        <button class="md:hidden w-10 h-10 rounded-full bg-amber-50 flex items-center justify-center text-amber-700" id="menu-toggle">
+          <i class="fas fa-bars text-xl"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile menu -->
+    <div class="md:hidden bg-white border-t border-amber-100 hidden px-4 py-4" id="mobile-menu">
+      <div class="flex flex-col space-y-3">
+        <a href="#beranda" class="py-2 text-neutral-700 hover:text-amber-600" onclick="closeMobileMenu()">🏠 Beranda</a>
+        <a href="kuliner.html" class="py-2 text-neutral-700 hover:text-amber-600" onclick="closeMobileMenu()">🍜 Kuliner Daerah</a>
+        <a href="#umkm" class="py-2 text-neutral-700 hover:text-amber-600" onclick="closeMobileMenu()">🏪 UMKM Lokal</a>
+        <a href="ai-sejarah.html" class="py-2 text-indigo-600 font-semibold" onclick="closeMobileMenu()">🤖 AI Sejarah</a>
+        
+        <div class="border-t border-amber-100 pt-3">
+          <p class="text-sm font-semibold text-neutral-500 mb-2">PROGRAM</p>
+          <a href="reward.html" class="block py-2 text-neutral-700 hover:text-amber-600">🎁 Reward</a>
+          <a href="#afiliasi" class="block py-2 text-neutral-700 hover:text-amber-600">🤝 Afiliasi</a>
+          <a href="leaderboard.html" class="block py-2 text-neutral-700 hover:text-amber-600">🏆 Leaderboard</a>
+          <a href="premium.html" class="block py-2 text-amber-600 font-semibold">👑 Premium</a>
+        </div>
+        
+        <div class="border-t border-amber-100 pt-3">
+          <a href="#" class="block py-2 text-neutral-700 hover:text-amber-600">🔑 Masuk</a>
+          <a href="#" class="block py-2 text-neutral-700 hover:text-amber-600">📝 Daftar UMKM</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+
+    <!-- ===== HERO SECTION ===== -->
+    <section id="beranda" class="relative rounded-3xl overflow-hidden mb-20 bg-gradient-to-br from-amber-50 to-white border border-amber-200/30">
+      <div class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1604329760661-e71dc83f8f26?q=80&w=2070&auto=format&fit=crop')] bg-cover bg-center opacity-5"></div>
+      <div class="relative z-10 px-8 py-16 md:py-20 md:px-12 flex flex-col md:flex-row items-center gap-12">
+        <div class="md:w-1/2">
+          <span class="inline-block px-4 py-2 bg-amber-100 text-amber-700 rounded-full text-sm font-semibold mb-6">
+            <i class="fas fa-leaf mr-1"></i> Melestarikan Kuliner Daerah
+          </span>
+          <h1 class="text-4xl md:text-5xl lg:text-6xl font-extrabold leading-tight mb-6">
+            <span class="gradient-text">Jelajahi & Dukung</span><br />
+            <span class="text-neutral-800">Warisan Rasa Nusantara</span>
+          </h1>
+          <p class="text-lg text-neutral-600 mb-8 max-w-lg">
+            Setiap pembelian adalah bentuk pelestarian. Dukung UMKM lokal, nikmati keaslian rasa, ikuti kuis kuliner, dan dapatkan poin reward.
+          </p>
+          <div class="flex flex-wrap gap-4">
+            <a href="kuliner.html" class="bg-gradient-to-r from-amber-600 to-amber-700 text-white px-8 py-4 rounded-full font-semibold hover:shadow-xl transition shadow-lg flex items-center gap-2">
+              <i class="fas fa-compass"></i> Jelajahi Kuliner
+            </a>
+            <a href="#cara-beli" class="bg-white border-2 border-amber-600 text-amber-700 px-8 py-4 rounded-full font-semibold hover:bg-amber-50 transition flex items-center gap-2">
+              <i class="fas fa-shopping-cart"></i> Cara Beli
+            </a>
+          </div>
+        </div>
+        <div class="md:w-1/2">
+          <div class="grid grid-cols-2 gap-4">
+            <img src="rendang.jpeg" 
+                 alt="Rendang Padang" 
+                 class="rounded-2xl shadow-xl h-48 w-full object-cover card-modern"
+                 onerror="this.src='https://via.placeholder.com/400x400/f58421/ffffff?text=Rendang'">
+            <img src="gudeg.jpg" 
+                 alt="Gudeg Jogja" 
+                 class="rounded-2xl shadow-xl h-48 w-full object-cover card-modern mt-8"
+                 onerror="this.src='https://via.placeholder.com/400x400/f58421/ffffff?text=Gudeg'">
+            <img src="sate.jpg" 
+                 alt="Sate Madura" 
+                 class="rounded-2xl shadow-xl h-48 w-full object-cover card-modern -mt-4"
+                 onerror="this.src='https://via.placeholder.com/400x400/f58421/ffffff?text=Sate'">
+            <img src="pempek.jpg" 
+                 alt="Pempek Palembang" 
+                 class="rounded-2xl shadow-xl h-48 w-full object-cover card-modern"
+                 onerror="this.src='https://via.placeholder.com/400x400/f58421/ffffff?text=Pempek'">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== NUSAQUIZ - GAMIFIED CULINARY QUIZ ===== -->
+    <section class="mb-20 scroll-mt-20" id="nusaquiz">
+      <div class="text-center mb-8">
+        <span class="inline-block px-4 py-2 bg-quiz-100 text-quiz-700 rounded-full text-sm font-semibold mb-3">
+          <i class="fas fa-gamepad mr-1"></i> GAMIFIED QUIZ
+        </span>
+        <h2 class="section-title"><span class="gradient-text">NusaQuiz</span> - Uji Pengetahuan Kulinermu!</h2>
+        <p class="text-neutral-600 max-w-2xl mx-auto mt-4">
+          Jawab pertanyaan seputar kuliner Nusantara, dapatkan poin, dan buka reward spesial!
+        </p>
+      </div>
+
+      <!-- Quiz Container -->
+      <div class="quiz-card max-w-4xl mx-auto p-6 md:p-8">
+        <!-- Header Quiz -->
+        <div class="flex flex-col md:flex-row items-center justify-between gap-4 mb-6">
+          <div class="flex items-center gap-3">
+            <div class="w-12 h-12 rounded-2xl bg-quiz-500 flex items-center justify-center text-white">
+              <i class="fas fa-question text-2xl"></i>
+            </div>
+            <div>
+              <h3 class="font-bold text-xl">Kuis Kuliner Nusantara</h3>
+              <p class="text-sm text-neutral-500">Soal <span id="current-question">1</span>/<span id="total-questions">10</span></p>
+            </div>
+          </div>
+          <div class="flex items-center gap-4">
+            <div class="badge-points flex items-center gap-1">
+              <i class="fas fa-star"></i>
+              <span id="quiz-points">0</span> Poin
+            </div>
+            <div class="badge-points bg-amber-500 flex items-center gap-1">
+              <i class="fas fa-fire"></i>
+              <span id="quiz-streak">0</span> Streak
+            </div>
+          </div>
+        </div>
+
+        <!-- Timer Bar -->
+        <div class="timer-bar mb-6">
+          <div class="timer-progress" id="quiz-timer" style="width: 100%;"></div>
+        </div>
+
+        <!-- Question -->
+        <div class="mb-8">
+          <h4 class="text-xl md:text-2xl font-bold mb-4" id="question-text">Loading pertanyaan...</h4>
+          
+          <!-- Options -->
+          <div class="space-y-3" id="quiz-options">
+            <!-- Options akan diisi JavaScript -->
+          </div>
+        </div>
+
+        <!-- Feedback & Next Button -->
+        <div class="flex flex-col md:flex-row items-center justify-between gap-4">
+          <div id="quiz-feedback" class="text-sm font-medium"></div>
+          <div class="flex gap-3">
+            <button id="quiz-next" class="bg-quiz-600 hover:bg-quiz-700 text-white px-8 py-3 rounded-full font-semibold transition disabled:opacity-50 disabled:cursor-not-allowed">
+              Soal Selanjutnya <i class="fas fa-arrow-right ml-2"></i>
+            </button>
+            <button id="quiz-restart" class="border-2 border-quiz-600 text-quiz-700 px-6 py-3 rounded-full font-semibold hover:bg-quiz-50 transition">
+              <i class="fas fa-redo-alt"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- Hasil Akhir (hidden by default) -->
+        <div id="quiz-result" class="hidden mt-8 p-6 bg-gradient-to-r from-quiz-100 to-quiz-50 rounded-2xl text-center">
+          <div class="text-5xl mb-4">🏆</div>
+          <h4 class="text-2xl font-bold mb-2">Quiz Selesai!</h4>
+          <p class="text-lg mb-4">Kamu mendapatkan <span id="final-points" class="font-bold text-quiz-700">0</span> poin!</p>
+          <p class="text-sm text-neutral-600 mb-6">Jawaban benar: <span id="correct-count">0</span>/<span id="total-count">10</span></p>
+          <div class="flex gap-3 justify-center">
+            <button id="quiz-play-again" class="bg-quiz-600 hover:bg-quiz-700 text-white px-8 py-3 rounded-full font-semibold transition">
+              Main Lagi <i class="fas fa-play ml-2"></i>
+            </button>
+            <a href="reward.html" class="border-2 border-quiz-600 text-quiz-700 px-8 py-3 rounded-full font-semibold hover:bg-quiz-50 transition">
+              Tukar Poin
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Leaderboard Mini -->
+      <div class="max-w-4xl mx-auto mt-6 flex justify-end">
+        <a href="leaderboard.html" class="text-quiz-600 hover:text-quiz-700 font-medium flex items-center gap-1">
+          Lihat Peringkat <i class="fas fa-arrow-right"></i>
+        </a>
+      </div>
+    </section>
+
+    <!-- ===== CARA BELI SECTION ===== -->
+    <section id="cara-beli" class="mb-20 scroll-mt-20">
+      <div class="text-center mb-12">
+        <span class="inline-block px-4 py-2 bg-green-100 text-green-600 rounded-full text-sm font-semibold mb-3">
+          <i class="fas fa-shopping-bag mr-1"></i> Mudah & Cepat
+        </span>
+        <h2 class="section-title">Cara <span class="gradient-text">Beli Kuliner</span> di CitaRasa</h2>
+        <p class="text-neutral-600 max-w-2xl mx-auto mt-4">Dukung pelestarian kuliner daerah hanya dalam 4 langkah mudah</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-5xl mx-auto">
+        <div class="guide-card bg-white rounded-2xl p-6 text-center card-modern">
+          <div class="w-16 h-16 rounded-full bg-amber-100 flex items-center justify-center mx-auto mb-4 text-2xl font-bold text-amber-600">1</div>
+          <h3 class="font-bold text-lg mb-2">Pilih Produk</h3>
+          <p class="text-neutral-600 text-sm">Jelajahi ribuan kuliner daerah dari UMKM lokal terpercaya</p>
+        </div>
+        <div class="guide-card bg-white rounded-2xl p-6 text-center card-modern">
+          <div class="w-16 h-16 rounded-full bg-amber-100 flex items-center justify-center mx-auto mb-4 text-2xl font-bold text-amber-600">2</div>
+          <h3 class="font-bold text-lg mb-2">Tambah ke Keranjang</h3>
+          <p class="text-neutral-600 text-sm">Klik tombol "Tambah ke Keranjang" pada produk yang dipilih</p>
+        </div>
+        <div class="guide-card bg-white rounded-2xl p-6 text-center card-modern">
+          <div class="w-16 h-16 rounded-full bg-amber-100 flex items-center justify-center mx-auto mb-4 text-2xl font-bold text-amber-600">3</div>
+          <h3 class="font-bold text-lg mb-2">Isi Data Pengiriman</h3>
+          <p class="text-neutral-600 text-sm">Masukkan alamat lengkap dan pilih metode pengiriman</p>
+        </div>
+        <div class="guide-card bg-white rounded-2xl p-6 text-center card-modern">
+          <div class="w-16 h-16 rounded-full bg-amber-100 flex items-center justify-center mx-auto mb-4 text-2xl font-bold text-amber-600">4</div>
+          <h3 class="font-bold text-lg mb-2">Bayar & Terima</h3>
+          <p class="text-neutral-600 text-sm">Lakukan pembayaran dan tunggu makanan tiba di rumah</p>
+        </div>
+      </div>
+
+      <div class="mt-10 text-center">
+        <a href="kuliner.html" class="inline-flex items-center gap-2 bg-gradient-to-r from-amber-600 to-amber-700 text-white px-8 py-4 rounded-full font-semibold hover:shadow-xl transition shadow-lg">
+          <i class="fas fa-store"></i> Mulai Belanja Sekarang
+        </a>
+      </div>
+    </section>
+
+    <!-- ===== AI SEJARAH CARD ===== -->
+    <section class="mb-20">
+      <a href="ai-sejarah.html" class="block bg-gradient-to-r from-indigo-600 to-purple-600 rounded-3xl p-8 md:p-12 text-white hover:shadow-2xl transition transform hover:scale-[1.02]">
+        <div class="flex flex-col md:flex-row items-center justify-between gap-8">
+          <div>
+            <span class="inline-block px-4 py-2 bg-white/20 rounded-full text-sm font-semibold mb-4 backdrop-blur-sm">
+              <i class="fas fa-robot mr-2"></i> FITUR BARU!
+            </span>
+            <h2 class="text-3xl md:text-4xl font-bold mb-4">AI Sejarah Kuliner</h2>
+            <p class="text-lg opacity-90 mb-6 max-w-xl">
+              Tanyakan sejarah, asal-usul, dan fakta unik tentang makanan Nusantara. 
+              Dapatkan jawaban instan dari database kuliner kami!
+            </p>
+            <div class="flex items-center gap-4">
+              <span class="bg-white text-indigo-600 px-6 py-3 rounded-full font-semibold">
+                Coba Sekarang <i class="fas fa-arrow-right ml-2"></i>
+              </span>
+              <span class="text-white/80 text-sm">Gratis • NLP Canggih</span>
+            </div>
+          </div>
+          <div class="flex gap-3">
+            <div class="w-16 h-16 bg-white/20 rounded-2xl flex items-center justify-center backdrop-blur-sm">
+              <i class="fas fa-history text-3xl"></i>
+            </div>
+            <div class="w-16 h-16 bg-white/20 rounded-2xl flex items-center justify-center backdrop-blur-sm">
+              <i class="fas fa-utensils text-3xl"></i>
+            </div>
+            <div class="w-16 h-16 bg-white/20 rounded-2xl flex items-center justify-center backdrop-blur-sm">
+              <i class="fas fa-book-open text-3xl"></i>
+            </div>
+          </div>
+        </div>
+      </a>
+    </section>
+
+    <!-- ===== UMKM MARKETPLACE ===== -->
+    <section class="mb-20" id="umkm">
+      <div class="text-center mb-12">
+        <span class="inline-block px-4 py-2 bg-amber-100 text-amber-700 rounded-full text-sm font-semibold mb-3">
+          <i class="fas fa-store mr-1"></i> Dukung UMKM Lokal
+        </span>
+        <h2 class="section-title">Marketplace <span class="gradient-text">Kuliner Daerah</span></h2>
+        <p class="text-neutral-600 max-w-2xl mx-auto mt-4">Beli langsung dari pelaku UMKM, kualitas terjamin, dan dukung pelestarian kuliner daerah.</p>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <!-- Card 1 - Rendang -->
+        <div class="product-card card-modern">
+          <div class="overflow-hidden">
+            <img src="rendang.jpeg" 
+                 alt="Rendang Padang" 
+                 class="product-image"
+                 onerror="this.src='https://via.placeholder.com/400x300/f58421/ffffff?text=Rendang'">
+          </div>
+          <div class="p-5">
+            <h3 class="font-bold text-lg mb-1">Rendang Padang</h3>
+            <p class="text-sm text-neutral-500 mb-3">UMKM: Mak Yun • Sumatera Barat</p>
+            <div class="flex items-center justify-between">
+              <span class="text-xl font-bold text-amber-700">Rp45K</span>
+              <button class="bg-amber-600 hover:bg-amber-700 text-white w-10 h-10 rounded-full flex items-center justify-center transition add-to-cart" data-name="Rendang Padang" data-price="45000">
+                <i class="fas fa-plus"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 2 - Gudeg -->
+        <div class="product-card card-modern">
+          <div class="overflow-hidden">
+            <img src="gudeg.jpg" 
+                 alt="Gudeg Jogja" 
+                 class="product-image"
+                 onerror="this.src='https://via.placeholder.com/400x300/f58421/ffffff?text=Gudeg'">
+          </div>
+          <div class="p-5">
+            <h3 class="font-bold text-lg mb-1">Gudeg Jogja</h3>
+            <p class="text-sm text-neutral-500 mb-3">UMKM: Bu Gandes • Yogyakarta</p>
+            <div class="flex items-center justify-between">
+              <span class="text-xl font-bold text-amber-700">Rp30K</span>
+              <button class="bg-amber-600 hover:bg-amber-700 text-white w-10 h-10 rounded-full flex items-center justify-center transition add-to-cart" data-name="Gudeg Jogja" data-price="30000">
+                <i class="fas fa-plus"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 3 - Sate Madura -->
+        <div class="product-card card-modern">
+          <div class="overflow-hidden">
+            <img src="sate.jpg" 
+                 alt="Sate Madura" 
+                 class="product-image"
+                 onerror="this.src='https://via.placeholder.com/400x300/f58421/ffffff?text=Sate'">
+          </div>
+          <div class="p-5">
+            <h3 class="font-bold text-lg mb-1">Sate Madura</h3>
+            <p class="text-sm text-neutral-500 mb-3">UMKM: Pak Samin • Jawa Timur</p>
+            <div class="flex items-center justify-between">
+              <span class="text-xl font-bold text-amber-700">Rp25K</span>
+              <button class="bg-amber-600 hover:bg-amber-700 text-white w-10 h-10 rounded-full flex items-center justify-center transition add-to-cart" data-name="Sate Madura" data-price="25000">
+                <i class="fas fa-plus"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 4 - Pempek -->
+        <div class="product-card card-modern">
+          <div class="overflow-hidden">
+            <img src="pempek.jpg" 
+                 alt="Pempek Palembang" 
+                 class="product-image"
+                 onerror="this.src='https://via.placeholder.com/400x300/f58421/ffffff?text=Pempek'">
+          </div>
+          <div class="p-5">
+            <h3 class="font-bold text-lg mb-1">Pempek Palembang</h3>
+            <p class="text-sm text-neutral-500 mb-3">UMKM: Kapal Saga • Sumsel</p>
+            <div class="flex items-center justify-between">
+              <span class="text-xl font-bold text-amber-700">Rp35K</span>
+              <button class="bg-amber-600 hover:bg-amber-700 text-white w-10 h-10 rounded-full flex items-center justify-center transition add-to-cart" data-name="Pempek Palembang" data-price="35000">
+                <i class="fas fa-plus"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== AFILIASI SECTION ===== -->
+    <section class="mb-20 bg-gradient-to-r from-amber-50 to-white rounded-3xl p-8 md:p-12 border border-amber-200/50" id="afiliasi">
+      <div class="flex flex-col md:flex-row items-center gap-10">
+        <div class="md:w-1/2">
+          <span class="inline-block px-4 py-2 bg-green-100 text-green-600 rounded-full text-sm font-semibold mb-4">
+            <i class="fas fa-hand-holding-usd mr-1"></i> Program Afiliasi
+          </span>
+          <h2 class="section-title mb-4">
+            Dapatkan <span class="gradient-text">Komisi</span> dengan Mempromosikan
+          </h2>
+          <p class="text-neutral-600 text-lg mb-6">
+            Daftar gratis, dapatkan link afiliasi unik, dan raih komisi dari setiap penjualan yang kamu referensikan.
+          </p>
+          <ul class="space-y-3 mb-8">
+            <li class="flex items-center gap-3">
+              <div class="w-6 h-6 rounded-full bg-green-100 flex items-center justify-center text-green-600">
+                <i class="fas fa-check text-xs"></i>
+              </div>
+              <span>Link afiliasi untuk setiap produk</span>
+            </li>
+            <li class="flex items-center gap-3">
+              <div class="w-6 h-6 rounded-full bg-green-100 flex items-center justify-center text-green-600">
+                <i class="fas fa-check text-xs"></i>
+              </div>
+              <span>Pantau klik & penjualan real-time</span>
+            </li>
+            <li class="flex items-center gap-3">
+              <div class="w-6 h-6 rounded-full bg-green-100 flex items-center justify-center text-green-600">
+                <i class="fas fa-check text-xs"></i>
+              </div>
+              <span>Komisi dibayar otomatis</span>
+            </li>
+          </ul>
+          <button class="bg-gradient-to-r from-green-600 to-green-700 text-white px-8 py-4 rounded-full font-semibold hover:shadow-lg transition shadow-md">
+            Daftar Afiliasi Sekarang
+          </button>
+        </div>
+        <div class="md:w-1/2">
+          <img src="https://images.unsplash.com/photo-1556740738-b6a63e27c4df?w=600&h=400&fit=crop" 
+               class="rounded-2xl shadow-xl w-full h-auto object-cover" 
+               alt="Afiliasi"
+               onerror="this.src='https://via.placeholder.com/600x400/f58421/ffffff?text=Afiliasi'">
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="bg-neutral-900 text-neutral-400 py-12">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+        <div>
+          <div class="flex items-center gap-2 mb-4">
+            <img src="https://i.ibb.co.com/QdvhmJc/citarasa-logo.png" 
+                 alt="CitaRasa Logo" 
+                 class="w-8 h-8 rounded-lg object-cover"
+                 onerror="this.src='https://via.placeholder.com/32x32/f58421/ffffff?text=CR'">
+            <span class="text-white font-bold text-lg">CitaRasa</span>
+          </div>
+          <p class="text-sm">Melestarikan kuliner daerah melalui teknologi, komunitas, dan kecintaan pada rasa Nusantara.</p>
+        </div>
+        <div>
+          <h4 class="text-white font-semibold mb-4">Jelajahi</h4>
+          <ul class="space-y-2 text-sm">
+            <li><a href="#beranda" class="hover:text-amber-400 transition">Beranda</a></li>
+            <li><a href="kuliner.html" class="hover:text-amber-400 transition">Kuliner Daerah</a></li>
+            <li><a href="#umkm" class="hover:text-amber-400 transition">UMKM Lokal</a></li>
+            <li><a href="ai-sejarah.html" class="hover:text-amber-400 transition">AI Sejarah</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="text-white font-semibold mb-4">Program</h4>
+          <ul class="space-y-2 text-sm">
+            <li><a href="reward.html" class="hover:text-amber-400 transition">Reward</a></li>
+            <li><a href="#afiliasi" class="hover:text-amber-400 transition">Afiliasi</a></li>
+            <li><a href="leaderboard.html" class="hover:text-amber-400 transition">Leaderboard</a></li>
+            <li><a href="premium.html" class="hover:text-amber-400 transition">Premium</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="text-white font-semibold mb-4">Ikuti Kami</h4>
+          <div class="flex gap-4 text-xl">
+            <a href="#" class="hover:text-amber-400 transition"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" class="hover:text-amber-400 transition"><i class="fab fa-instagram"></i></a>
+            <a href="#" class="hover:text-amber-400 transition"><i class="fab fa-twitter"></i></a>
+            <a href="#" class="hover:text-amber-400 transition"><i class="fab fa-tiktok"></i></a>
+          </div>
+        </div>
+      </div>
+      <div class="border-t border-neutral-700 pt-8 text-center text-sm">
+        © 2025 CitaRasa - Melestarikan Kuliner Daerah Nusantara
+      </div>
+    </div>
+  </footer>
+
+  <!-- ===== CHATBOT CITARASA ===== -->
+  <div id="chatbot-toggle" title="Tanya CitaRasa">
+    <i class="fas fa-comment-alt"></i>
+  </div>
+
+  <div id="chatbot-citarasa">
+    <div id="chatbot-header">
+      <span><i class="fas fa-robot mr-2"></i> CitaRasa - Pelestarian Kuliner</span>
+      <button id="chatbot-close" class="text-white text-2xl leading-5">&times;</button>
+    </div>
+    <div id="chatbot-messages">
+      <div class="chatbot-message bot">
+        🌾 Halo! Saya asisten CitaRasa. 
+        <br><br>
+        Saya siap membantu kamu:
+        • Melestarikan kuliner daerah
+        • Cara beli makanan khas
+        • Informasi UMKM lokal
+        • Program reward & afiliasi
+        <br><br>
+        💡 Coba tanya: "gimana cara beli rendang?"
+      </div>
+    </div>
+    <div id="chatbot-input-container">
+      <input type="text" id="chatbot-input" placeholder="Tanya tentang kuliner daerah...">
+      <button id="chatbot-send">
+        <i class="fas fa-paper-plane"></i>
+      </button>
+    </div>
+  </div>
+
+  <!-- ===== JAVASCRIPT ===== -->
+  <script>
+    // ============================================================
+    // CITARASA - MELESTARIKAN KULINER DAERAH
+    // Chatbot dengan panduan beli + NusaQuiz Interaktif
+    // ============================================================
+
+    (function() {
+      "use strict";
+
+      // ------------------------------------------------------------
+      // 1. DATABASE KULINER DAERAH (UNTUK PELESTARIAN)
+      // ------------------------------------------------------------
+      const kulinerDaerah = [
+        {
+          nama: "Rendang",
+          daerah: "Sumatera Barat",
+          umkm: "Mak Yun",
+          harga: 45000,
+          caraBeli: "Rendang Mak Yun bisa dibeli langsung di halaman Kuliner Daerah. Klik produk, tambah ke keranjang, lalu checkout."
+        },
+        {
+          nama: "Gudeg",
+          daerah: "Yogyakarta",
+          umkm: "Bu Gandes",
+          harga: 30000,
+          caraBeli: "Gudeg Bu Gandes tersedia di marketplace. Cari di kategori 'Kuliner Jawa', tambahkan ke keranjang, dan selesaikan pembayaran."
+        },
+        {
+          nama: "Sate Madura",
+          daerah: "Jawa Timur",
+          umkm: "Pak Samin",
+          harga: 25000,
+          caraBeli: "Sate Madura Pak Samin bisa dipesan via marketplace. Pastikan alamat pengiriman terisi dengan benar."
+        },
+        {
+          nama: "Pempek",
+          daerah: "Palembang",
+          umkm: "Kapal Saga",
+          harga: 35000,
+          caraBeli: "Pempek Kapal Saga tersedia dengan kuah cuko asli. Beli di halaman produk dan pilih metode pengiriman."
+        }
+      ];
+
+      // ------------------------------------------------------------
+      // 2. NUSAQUIZ - DATABASE PERTANYAAN
+      // ------------------------------------------------------------
+      const quizQuestions = [
+        {
+          question: "Dari daerah manakah rendang berasal?",
+          options: ["Sumatera Utara", "Sumatera Barat", "Riau", "Jambi"],
+          correct: 1,
+          explanation: "Rendang adalah masakan khas Minangkabau yang berasal dari Sumatera Barat.",
+          points: 10
+        },
+        {
+          question: "Apa bahan utama pembuatan gudeg?",
+          options: ["Nangka muda", "Pepaya muda", "Kelapa", "Singkong"],
+          correct: 0,
+          explanation: "Gudeg terbuat dari nangka muda yang dimasak dengan santan dan gula aren.",
+          points: 10
+        },
+        {
+          question: "Sate Madura terkenal dengan bumbu apa?",
+          options: ["Bumbu kacang", "Bumbu kecap", "Bumbu kuning", "Bumbu merah"],
+          correct: 0,
+          explanation: "Sate Madura disajikan dengan bumbu kacang yang kental dan manis.",
+          points: 10
+        },
+        {
+          question: "Pempek berasal dari kota mana?",
+          options: ["Palembang", "Padang", "Medan", "Bengkulu"],
+          correct: 0,
+          explanation: "Pempek adalah makanan khas Palembang, Sumatera Selatan.",
+          points: 10
+        },
+        {
+          question: "Apa warna khas dari rawon?",
+          options: ["Merah", "Kuning", "Hitam", "Putih"],
+          correct: 2,
+          explanation: "Rawon memiliki kuah hitam yang berasal dari kluwek.",
+          points: 10
+        },
+        {
+          question: "Makanan khas Bali yang dimasak dengan bumbu base genep adalah?",
+          options: ["Ayam betutu", "Babi guling", "Lawar", "Sate lilit"],
+          correct: 0,
+          explanation: "Ayam betutu dimasak dengan bumbu base genep yang kaya rempah.",
+          points: 10
+        },
+        {
+          question: "Coto Makassar adalah makanan khas dari provinsi?",
+          options: ["Sulawesi Selatan", "Sulawesi Utara", "Sulawesi Tengah", "Sulawesi Tenggara"],
+          correct: 0,
+          explanation: "Coto Makassar berasal dari Sulawesi Selatan.",
+          points: 10
+        },
+        {
+          question: "Papeda terbuat dari bahan dasar?",
+          options: ["Sagu", "Jagung", "Beras", "Singkong"],
+          correct: 0,
+          explanation: "Papeda adalah makanan khas Papua dan Maluku yang terbuat dari sagu.",
+          points: 10
+        },
+        {
+          question: "Apa nama bubur khas Manado yang berisi campuran sayuran?",
+          options: ["Tinutuan", "Bubur ayam", "Bubur sumsum", "Bubur kacang ijo"],
+          correct: 0,
+          explanation: "Tinutuan atau bubur manado berisi bayam, kangkung, jagung, dan labu kuning.",
+          points: 10
+        },
+        {
+          question: "Soto Banjar berasal dari provinsi?",
+          options: ["Kalimantan Selatan", "Kalimantan Timur", "Kalimantan Barat", "Kalimantan Tengah"],
+          correct: 0,
+          explanation: "Soto Banjar adalah soto khas Banjarmasin, Kalimantan Selatan.",
+          points: 10
+        }
+      ];
+
+      // ------------------------------------------------------------
+      // 3. NUSAQUIZ - STATE MANAGEMENT
+      // ------------------------------------------------------------
+      let currentQuizState = {
+        currentIndex: 0,
+        score: 0,
+        streak: 0,
+        answers: [],
+        quizCompleted: false,
+        timerInterval: null,
+        timeLeft: 15
+      };
+
+      const quizElements = {
+        question: document.getElementById('question-text'),
+        options: document.getElementById('quiz-options'),
+        currentQ: document.getElementById('current-question'),
+        totalQ: document.getElementById('total-questions'),
+        quizPoints: document.getElementById('quiz-points'),
+        quizStreak: document.getElementById('quiz-streak'),
+        timer: document.getElementById('quiz-timer'),
+        feedback: document.getElementById('quiz-feedback'),
+        nextBtn: document.getElementById('quiz-next'),
+        restartBtn: document.getElementById('quiz-restart'),
+        result: document.getElementById('quiz-result'),
+        finalPoints: document.getElementById('final-points'),
+        correctCount: document.getElementById('correct-count'),
+        totalCount: document.getElementById('total-count'),
+        playAgain: document.getElementById('quiz-play-again')
+      };
+
+      // Set total questions
+      if (quizElements.totalQ) {
+        quizElements.totalQ.textContent = quizQuestions.length;
+      }
+
+      // Timer functions
+      function startTimer() {
+        if (currentQuizState.timerInterval) {
+          clearInterval(currentQuizState.timerInterval);
+        }
+        
+        currentQuizState.timeLeft = 15;
+        updateTimerBar();
+        
+        currentQuizState.timerInterval = setInterval(() => {
+          currentQuizState.timeLeft--;
+          updateTimerBar();
+          
+          if (currentQuizState.timeLeft <= 0) {
+            clearInterval(currentQuizState.timerInterval);
+            handleTimeout();
+          }
+        }, 1000);
+      }
+
+      function updateTimerBar() {
+        if (quizElements.timer) {
+          const percentage = (currentQuizState.timeLeft / 15) * 100;
+          quizElements.timer.style.width = `${percentage}%`;
+          
+          // Change color based on time
+          if (percentage < 30) {
+            quizElements.timer.style.background = '#ef4444';
+          } else if (percentage < 60) {
+            quizElements.timer.style.background = '#f59e0b';
+          } else {
+            quizElements.timer.style.background = '#0ea5e9';
+          }
+        }
+      }
+
+      function handleTimeout() {
+        disableOptions();
+        showFeedback('Waktu habis!', 'error');
+        if (quizElements.nextBtn) {
+          quizElements.nextBtn.disabled = false;
+        }
+        currentQuizState.streak = 0;
+        updateStreak();
+      }
+
+      // Load question
+      function loadQuestion(index) {
+        if (index >= quizQuestions.length) {
+          finishQuiz();
+          return;
+        }
+
+        const q = quizQuestions[index];
+        if (quizElements.question) {
+          quizElements.question.textContent = q.question;
+        }
+        if (quizElements.currentQ) {
+          quizElements.currentQ.textContent = index + 1;
+        }
+
+        // Render options
+        if (quizElements.options) {
+          let optionsHtml = '';
+          q.options.forEach((opt, i) => {
+            const isSelected = currentQuizState.answers[index] === i;
+            const isAnswered = currentQuizState.answers[index] !== undefined;
+            const isCorrect = isAnswered && i === q.correct;
+            const isWrong = isAnswered && i === currentQuizState.answers[index] && i !== q.correct;
+            
+            let optionClass = 'quiz-option';
+            if (isAnswered) optionClass += ' disabled';
+            if (isSelected) optionClass += ' selected';
+            if (isCorrect) optionClass += ' correct';
+            if (isWrong) optionClass += ' wrong';
+            
+            optionsHtml += `
+              <button class="${optionClass}" data-option-index="${i}" ${isAnswered ? 'disabled' : ''}>
+                <span class="font-bold mr-3">${String.fromCharCode(65 + i)}.</span> ${opt}
+              </button>
+            `;
+          });
+          quizElements.options.innerHTML = optionsHtml;
+
+          // Add event listeners to options
+          if (!currentQuizState.answers[index]) {
+            document.querySelectorAll('.quiz-option:not(.disabled)').forEach(btn => {
+              btn.addEventListener('click', (e) => handleOptionClick(e, index));
+            });
+          }
+        }
+
+        // Clear feedback
+        if (quizElements.feedback) {
+          quizElements.feedback.innerHTML = '';
+        }
+
+        // Disable next button until answer
+        if (quizElements.nextBtn) {
+          quizElements.nextBtn.disabled = currentQuizState.answers[index] === undefined;
+        }
+
+        // Start timer
+        startTimer();
+      }
+
+      function handleOptionClick(event, questionIndex) {
+        const optionIndex = parseInt(event.currentTarget.dataset.optionIndex);
+        const isCorrect = optionIndex === quizQuestions[questionIndex].correct;
+        
+        // Clear timer
+        if (currentQuizState.timerInterval) {
+          clearInterval(currentQuizState.timerInterval);
+        }
+
+        // Save answer
+        currentQuizState.answers[questionIndex] = optionIndex;
+        
+        // Update score and streak
+        if (isCorrect) {
+          currentQuizState.score += quizQuestions[questionIndex].points;
+          currentQuizState.streak++;
+          
+          // Bonus for streak
+          if (currentQuizState.streak >= 3) {
+            currentQuizState.score += 5;
+            showFeedback(`Streak ${currentQuizState.streak}! +5 bonus poin! 🎉`, 'success');
+          } else {
+            showFeedback('✅ Benar! +10 poin', 'success');
+          }
+        } else {
+          currentQuizState.streak = 0;
+          showFeedback(`❌ Salah. ${quizQuestions[questionIndex].explanation}`, 'error');
+        }
+
+        // Update UI
+        updateScore();
+        updateStreak();
+        
+        // Disable all options
+        disableOptions();
+        
+        // Enable next button
+        if (quizElements.nextBtn) {
+          quizElements.nextBtn.disabled = false;
+        }
+
+        // Highlight correct answer
+        highlightCorrectAnswer(questionIndex);
+      }
+
+      function highlightCorrectAnswer(questionIndex) {
+        const correctIndex = quizQuestions[questionIndex].correct;
+        document.querySelectorAll('.quiz-option').forEach((btn, idx) => {
+          if (idx === correctIndex) {
+            btn.classList.add('correct');
+          }
+        });
+      }
+
+      function disableOptions() {
+        document.querySelectorAll('.quiz-option').forEach(btn => {
+          btn.classList.add('disabled');
+          btn.disabled = true;
+        });
+      }
+
+      function showFeedback(message, type) {
+        if (quizElements.feedback) {
+          const color = type === 'success' ? 'text-green-600' : 'text-red-600';
+          quizElements.feedback.innerHTML = `<span class="${color}">${message}</span>`;
+        }
+      }
+
+      function updateScore() {
+        if (quizElements.quizPoints) {
+          quizElements.quizPoints.textContent = currentQuizState.score;
+        }
+      }
+
+      function updateStreak() {
+        if (quizElements.quizStreak) {
+          quizElements.quizStreak.textContent = currentQuizState.streak;
+        }
+      }
+
+      function finishQuiz() {
+        // Clear timer
+        if (currentQuizState.timerInterval) {
+          clearInterval(currentQuizState.timerInterval);
+        }
+
+        // Hide quiz interface
+        if (quizElements.question) quizElements.question.style.display = 'none';
+        if (quizElements.options) quizElements.options.style.display = 'none';
+        if (quizElements.nextBtn) quizElements.nextBtn.style.display = 'none';
+        if (quizElements.restartBtn) quizElements.restartBtn.style.display = 'none';
+        if (quizElements.feedback) quizElements.feedback.style.display = 'none';
+        
+        // Show result
+        if (quizElements.result) {
+          quizElements.result.classList.remove('hidden');
+          const correctAnswers = currentQuizState.answers.filter(a => a !== undefined).length;
+          if (quizElements.finalPoints) {
+            quizElements.finalPoints.textContent = currentQuizState.score;
+          }
+          if (quizElements.correctCount) {
+            quizElements.correctCount.textContent = currentQuizState.answers.filter((ans, idx) => ans === quizQuestions[idx].correct).length;
+          }
+          if (quizElements.totalCount) {
+            quizElements.totalCount.textContent = quizQuestions.length;
+          }
+        }
+
+        // Save to localStorage (for reward)
+        localStorage.setItem('nusaquiz_last_score', currentQuizState.score);
+        localStorage.setItem('nusaquiz_last_date', new Date().toISOString());
+      }
+
+      function resetQuiz() {
+        // Reset state
+        currentQuizState = {
+          currentIndex: 0,
+          score: 0,
+          streak: 0,
+          answers: [],
+          quizCompleted: false,
+          timerInterval: null,
+          timeLeft: 15
+        };
+
+        // Show quiz interface
+        if (quizElements.question) quizElements.question.style.display = 'block';
+        if (quizElements.options) quizElements.options.style.display = 'block';
+        if (quizElements.nextBtn) quizElements.nextBtn.style.display = 'block';
+        if (quizElements.restartBtn) quizElements.restartBtn.style.display = 'block';
+        if (quizElements.feedback) quizElements.feedback.style.display = 'block';
+        
+        // Hide result
+        if (quizElements.result) {
+          quizElements.result.classList.add('hidden');
+        }
+
+        // Update UI
+        updateScore();
+        updateStreak();
+        
+        // Load first question
+        loadQuestion(0);
+      }
+
+      // Event listeners for quiz
+      if (quizElements.nextBtn) {
+        quizElements.nextBtn.addEventListener('click', () => {
+          currentQuizState.currentIndex++;
+          if (currentQuizState.currentIndex < quizQuestions.length) {
+            loadQuestion(currentQuizState.currentIndex);
+          } else {
+            finishQuiz();
+          }
+        });
+      }
+
+      if (quizElements.restartBtn) {
+        quizElements.restartBtn.addEventListener('click', resetQuiz);
+      }
+
+      if (quizElements.playAgain) {
+        quizElements.playAgain.addEventListener('click', resetQuiz);
+      }
+
+      // Initialize quiz
+      resetQuiz();
+
+      // ------------------------------------------------------------
+      // 4. CHATBOT KNOWLEDGE BASE
+      // ------------------------------------------------------------
+      const chatbotKnowledge = [
+        {
+          keywords: ['beli', 'cara beli', 'order', 'pesan', 'transaksi', 'checkout'],
+          jawaban: `🛒 **Cara Membeli Kuliner Daerah di CitaRasa:**\n\n` +
+                   `1️⃣ **Pilih Produk** - Jelajahi halaman Kuliner Daerah atau marketplace\n` +
+                   `2️⃣ **Klik "Tambah ke Keranjang"** - Produk akan masuk ke keranjang belanja\n` +
+                   `3️⃣ **Isi Data Pengiriman** - Masukkan alamat lengkap dan pilih kurir\n` +
+                   `4️⃣ **Pilih Pembayaran** - Transfer Bank, E-Wallet, atau COD\n` +
+                   `5️⃣ **Konfirmasi** - Pesanan diproses, makanan sampai ke rumah!\n\n` +
+                   `💡 Setiap pembelian juga mengumpulkan poin reward yang bisa ditukar hadiah!`
+        },
+        {
+          keywords: ['rendang', 'padang', 'minang'],
+          jawaban: `🍛 **Rendang Padang**\n` +
+                   `Asal: Sumatera Barat\n` +
+                   `UMKM: Mak Yun\n` +
+                   `Harga: Rp45.000\n` +
+                   `Deskripsi: Rendang asli Minang dengan rempah tradisional, dimasak 7 jam.\n\n` +
+                   `🛒 **Cara beli**: Kunjungi halaman Kuliner Daerah, cari "Rendang Mak Yun", tambah ke keranjang, lalu checkout.`
+        },
+        {
+          keywords: ['gudeg', 'jogja', 'yogyakarta'],
+          jawaban: `🥘 **Gudeg Jogja**\n` +
+                   `Asal: Yogyakarta\n` +
+                   `UMKM: Bu Gandes\n` +
+                   `Harga: Rp30.000\n` +
+                   `Deskripsi: Gudeg manis legit dengan nasi, ayam, telur, dan sambal krecek.\n\n` +
+                   `🛒 **Cara beli**: Tersedia di kategori "Kuliner Jawa". Tambah ke keranjang dan checkout.`
+        },
+        {
+          keywords: ['sate', 'madura'],
+          jawaban: `🍢 **Sate Madura**\n` +
+                   `Asal: Jawa Timur\n` +
+                   `UMKM: Pak Samin\n` +
+                   `Harga: Rp25.000\n` +
+                   `Deskripsi: Sate ayam dengan bumbu kacang kental dan lontong.\n\n` +
+                   `🛒 **Cara beli**: Pesan sekarang di halaman produk Sate Madura.`
+        },
+        {
+          keywords: ['pempek', 'palembang'],
+          jawaban: `🍲 **Pempek Palembang**\n` +
+                   `Asal: Sumatera Selatan\n` +
+                   `UMKM: Kapal Saga\n` +
+                   `Harga: Rp35.000\n` +
+                   `Deskripsi: Pempek ikan dengan kuah cuko asam pedas manis.\n\n` +
+                   `🛒 **Cara beli**: Tersedia di marketplace. Jangan lupa tambahkan ekstra cuko!`
+        },
+        {
+          keywords: ['umkm', 'penjual', 'daftar umkm', 'jualan'],
+          jawaban: `🏪 **Daftar sebagai UMKM**\n` +
+                   `Ingin produk kuliner daerahmu dikenal luas? Daftar UMKM sekarang!\n\n` +
+                   `1️⃣ Klik menu "Bergabung" > "Daftar UMKM"\n` +
+                   `2️⃣ Isi formulir lengkap dengan data usaha\n` +
+                   `3️⃣ Upload foto produk dan dokumen pendukung\n` +
+                   `4️⃣ Tim kami akan verifikasi dalam 1x24 jam\n\n` +
+                   `Dapatkan fitur gratis untuk memulai!`
+        },
+        {
+          keywords: ['reward', 'poin', 'tukar poin', 'hadiah'],
+          jawaban: `🎁 **Program Reward**\n` +
+                   `Setiap pembelian di CitaRasa akan mendapatkan poin:\n` +
+                   `• Setiap Rp10.000 = 10 poin\n` +
+                   `• Poin bisa ditukar dengan voucher belanja\n` +
+                   `• Reward spesial: merchandise, kelas masak, peralatan UMKM\n\n` +
+                   `🔍 Cek halaman Reward untuk melihat katalog lengkap!`
+        },
+        {
+          keywords: ['afiliasi', 'komisi', 'promosi'],
+          jawaban: `🤝 **Program Afiliasi**\n` +
+                   `Dapatkan komisi dengan mempromosikan produk kuliner daerah:\n` +
+                   `• Daftar gratis, dapatkan link unik\n` +
+                   `• Komisi 5-15% dari setiap penjualan\n` +
+                   `• Pantau performa di dashboard afiliasi\n\n` +
+                   `💰 Mulai dapatkan penghasilan pasif sekarang!`
+        },
+        {
+          keywords: ['premium', 'fitur premium', 'berbayar'],
+          jawaban: `👑 **Fitur Premium untuk Penjual**\n` +
+                   `Tingkatkan penjualan dengan fitur eksklusif:\n` +
+                   `• Dashboard analitik real-time\n` +
+                   `• Promosi prioritas di halaman utama\n` +
+                   `• Pelatihan digital marketing\n` +
+                   `• Dukungan prioritas\n\n` +
+                   `Biaya mulai Rp50.000/bulan. Klik menu Premium untuk info lengkap.`
+        },
+        {
+          keywords: ['sejarah', 'ai sejarah', 'tanya makanan'],
+          jawaban: `🤖 **AI Sejarah Kuliner**\n` +
+                   `Ingin tahu asal-usul makanan favoritmu? Gunakan fitur AI Sejarah!\n\n` +
+                   `• Tanyakan sejarah rendang, sate, gudeg, dll\n` +
+                   `• Fakta unik dan filosofi di balik makanan\n` +
+                   `• Database 30+ makanan Nusantara\n\n` +
+                   `🔍 Klik card "AI Sejarah" di halaman utama atau menu AI Sejarah.`
+        },
+        {
+          keywords: ['kuis', 'quiz', 'nusaquiz', 'game', 'permainan'],
+          jawaban: `🎮 **NusaQuiz - Gamified Culinary Quiz**\n\n` +
+                   `Uji pengetahuan kulinermu dan dapatkan poin!\n\n` +
+                   `• 10 pertanyaan seputar kuliner Nusantara\n` +
+                   `• Setiap jawaban benar = 10 poin\n` +
+                   `• Streak 3x berturut-turut = bonus 5 poin\n` +
+                   `• Poin bisa ditukar dengan reward di halaman Reward\n\n` +
+                   `👉 Coba sekarang di bagian "NusaQuiz" di halaman utama!`
+        }
+      ];
+
+      // Fungsi NLP untuk chatbot
+      function cariJawaban(pertanyaan) {
+        if (!pertanyaan || pertanyaan.trim() === '') {
+          return 'Silakan tulis pertanyaan terlebih dahulu.';
+        }
+
+        const lowerQ = pertanyaan.toLowerCase().trim();
+        
+        // Handle sapaan
+        if (lowerQ.match(/^(halo|hai|hey|hi|pagi|siang|sore|malam)/)) {
+          return '🌾 Halo! Ada yang bisa saya bantu tentang pelestarian kuliner daerah?';
+        }
+
+        if (lowerQ.match(/^(makasih|terima kasih|thanks)/)) {
+          return 'Sama-sama! Senang bisa membantu melestarikan kuliner daerah bersama kamu. Ada lagi yang ingin ditanyakan?';
+        }
+
+        // Cari berdasarkan kata kunci
+        let bestMatch = null;
+        let highestScore = 0;
+
+        for (let item of chatbotKnowledge) {
+          let score = 0;
+          for (let keyword of item.keywords) {
+            if (lowerQ.includes(keyword)) {
+              score += 15;
+            }
+            const words = lowerQ.split(/\s+/);
+            for (let word of words) {
+              if (word.length > 3 && keyword.includes(word)) {
+                score += 5;
+              }
+            }
+          }
+          if (score > highestScore) {
+            highestScore = score;
+            bestMatch = item;
+          }
+        }
+
+        if (highestScore > 10 && bestMatch) {
+          return bestMatch.jawaban;
+        }
+
+        // Cek apakah bertanya tentang makanan tertentu
+        for (let makanan of kulinerDaerah) {
+          if (lowerQ.includes(makanan.nama.toLowerCase())) {
+            return `🍽️ **${makanan.nama}**\n` +
+                   `Daerah: ${makanan.daerah}\n` +
+                   `UMKM: ${makanan.umkm}\n` +
+                   `Harga: Rp${makanan.harga.toLocaleString()}\n\n` +
+                   `🛒 **Cara beli**: ${makanan.caraBeli}`;
+          }
+        }
+
+        return 'Maaf, saya belum paham. Coba tanyakan tentang:\n\n' +
+               '• Cara beli kuliner daerah\n' +
+               '• Informasi rendang/gudeg/sate/pempek\n' +
+               '• Daftar UMKM\n' +
+               '• Program reward\n' +
+               '• Afiliasi\n' +
+               '• Fitur premium\n' +
+               '• NusaQuiz (kuis kuliner)\n' +
+               '• AI Sejarah';
+      }
+
+      // ------------------------------------------------------------
+      // 5. CHATBOT UI
+      // ------------------------------------------------------------
+      const chatbotToggle = document.getElementById('chatbot-toggle');
+      const chatbot = document.getElementById('chatbot-citarasa');
+      const chatbotClose = document.getElementById('chatbot-close');
+      const chatbotMessages = document.getElementById('chatbot-messages');
+      const chatbotInput = document.getElementById('chatbot-input');
+      const chatbotSend = document.getElementById('chatbot-send');
+
+      function addMessage(text, sender) {
+        const msgDiv = document.createElement('div');
+        msgDiv.className = `chatbot-message ${sender}`;
+        
+        let formattedText = text.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+        formattedText = formattedText.replace(/\n/g, '<br>');
+        msgDiv.innerHTML = formattedText;
+        
+        chatbotMessages.appendChild(msgDiv);
+        chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
+      }
+
+      function sendMessage() {
+        const userText = chatbotInput.value.trim();
+        if (!userText) return;
+
+        addMessage(userText, 'user');
+        chatbotInput.value = '';
+
+        setTimeout(() => {
+          const jawaban = cariJawaban(userText);
+          addMessage(jawaban, 'bot');
+        }, 800);
+      }
+
+      if (chatbotSend) {
+        chatbotSend.addEventListener('click', sendMessage);
+      }
+      
+      if (chatbotInput) {
+        chatbotInput.addEventListener('keypress', (e) => {
+          if (e.key === 'Enter') sendMessage();
+        });
+      }
+
+      if (chatbotToggle) {
+        chatbotToggle.addEventListener('click', () => {
+          chatbot.style.display = 'flex';
+          chatbotInput.focus();
+        });
+      }
+
+      if (chatbotClose) {
+        chatbotClose.addEventListener('click', () => {
+          chatbot.style.display = 'none';
+        });
+      }
+
+      document.addEventListener('click', (e) => {
+        if (chatbot && chatbotToggle) {
+          if (!chatbot.contains(e.target) && !chatbotToggle.contains(e.target) && chatbot.style.display === 'flex') {
+            chatbot.style.display = 'none';
+          }
+        }
+      });
+
+      // ------------------------------------------------------------
+      // 6. MOBILE MENU
+      // ------------------------------------------------------------
+      const menuToggle = document.getElementById('menu-toggle');
+      const mobileMenu = document.getElementById('mobile-menu');
+
+      if (menuToggle && mobileMenu) {
+        menuToggle.addEventListener('click', () => {
+          mobileMenu.classList.toggle('hidden');
+          menuToggle.innerHTML = mobileMenu.classList.contains('hidden') 
+            ? '<i class="fas fa-bars text-xl"></i>' 
+            : '<i class="fas fa-times text-xl"></i>';
+        });
+      }
+
+      window.closeMobileMenu = function() {
+        if (mobileMenu && menuToggle) {
+          mobileMenu.classList.add('hidden');
+          menuToggle.innerHTML = '<i class="fas fa-bars text-xl"></i>';
+        }
+      };
+
+      // ------------------------------------------------------------
+      // 7. ADD TO CART
+      // ------------------------------------------------------------
+      document.querySelectorAll('.add-to-cart').forEach(btn => {
+        btn.addEventListener('click', function() {
+          const name = this.dataset.name;
+          alert(`✅ "${name}" ditambahkan ke keranjang!\n\nLanjutkan ke halaman checkout untuk menyelesaikan pembelian.`);
+        });
+      });
+
+    })();
+  </script>
+</body>
+</html>
