@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MojokertoTransparan | UMKM & Penjualan</title>
+  <!-- Tailwind + Fonts & Icons -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+  <style>
+    * { font-family: 'Inter', sans-serif; }
+    body { background: #FEF9E6; }
+    .cream-card {
+      background: #FFFDF5;
+      border: 1px solid #F7E9C3;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.02), 0 2px 6px rgba(0,0,0,0.05);
+      transition: all 0.2s ease;
+    }
+    .cream-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 20px 25px -12px rgba(224, 179, 94, 0.2);
+      border-color: #F5D98F;
+    }
+    .gold-gradient {
+      background: linear-gradient(135deg, #F7D97E 0%, #F3C550 100%);
+    }
+    .soft-cream-bg {
+      background: #FFFBF0;
+    }
+    .stat-number {
+      font-feature-settings: "tnum";
+      font-variant-numeric: tabular-nums;
+    }
+    .dashboard-header {
+      background: #FFF9E8;
+      border-bottom: 2px solid #FCE9B4;
+    }
+    .btn-cream {
+      background: #FEF1CF;
+      transition: all 0.2s;
+    }
+    .btn-cream:hover {
+      background: #FDE8B3;
+    }
+    .badge-soft-gold {
+      background: #FEF0CE;
+      color: #B87C2E;
+    }
+    .table-header-bg {
+      background: #FEF7E2;
+    }
+    ::-webkit-scrollbar {
+      width: 6px;
+    }
+    ::-webkit-scrollbar-track { background: #F7E9C3; border-radius: 10px; }
+    ::-webkit-scrollbar-thumb { background: #E5B83C; border-radius: 10px; }
+  </style>
+</head>
+<body class="bg-[#FEF9E6]">
+
+  <!-- NAVBAR cream & kuning -->
+  <header class="dashboard-header sticky top-0 z-30 shadow-sm">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex flex-wrap items-center justify-between gap-3">
+      <div class="flex items-center space-x-3">
+        <div class="w-10 h-10 rounded-full gold-gradient flex items-center justify-center text-white shadow-sm">
+          <i class="fas fa-chart-line text-lg"></i>
+        </div>
+        <div>
+          <h1 class="text-xl font-extrabold tracking-tight text-amber-800">Mojokerto<span class="text-yellow-700">Transparan</span></h1>
+          <p class="text-xs text-amber-600/80 -mt-0.5">Dashboard UMKM & Penjualan</p>
+        </div>
+      </div>
+      <div class="flex items-center gap-3 text-sm">
+        <div class="hidden sm:flex items-center gap-2 bg-[#FFF2DF] px-3 py-1.5 rounded-full border border-[#F7E3B5]">
+          <i class="fas fa-calendar-alt text-amber-600 text-xs"></i>
+          <span class="text-amber-800 font-medium">Periode: April 2025</span>
+        </div>
+        <div class="flex items-center gap-2 bg-[#FEF1CF] px-3 py-1.5 rounded-full border border-[#F7E3B5]">
+          <i class="fas fa-store text-amber-700"></i>
+          <span class="font-semibold text-amber-800">UMKM Aktif: <span id="total-umkm-count">3</span></span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    
+    <!-- Banner Transparansi -->
+    <div class="mb-9 bg-[#FFF7E8] border-l-8 border-amber-400 rounded-2xl p-5 shadow-sm cream-card">
+      <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+        <div>
+          <div class="flex items-center gap-2 text-amber-700 font-semibold text-sm">
+            <i class="fas fa-eye"></i> <span>Data real-time & terbuka untuk publik</span>
+          </div>
+          <h2 class="text-2xl md:text-3xl font-bold text-amber-900 mt-1">📊 Transparansi Penjualan & UMKM Mojokerto</h2>
+          <p class="text-amber-700/80 max-w-2xl mt-2 text-sm">Memantau omzet bulanan, loyalitas pembeli & pertumbuhan UMKM (Warung Nanik Yacin, Warung Mak Tun, Warung Camelia) secara transparan.</p>
+        </div>
+        <div class="bg-[#FFF9E8] rounded-xl px-5 py-2 shadow-sm text-center border border-[#F7E3B5]">
+          <span class="text-xs uppercase tracking-wider text-amber-600">Update terakhir</span>
+          <p class="font-mono text-sm font-semibold text-amber-800" id="last-update"></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- METRIK UTAMA: DAU, GMV, RETENTION + KPI UMKM -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
+      <!-- DAU (Daily Active Users) -->
+      <div class="cream-card rounded-2xl p-5">
+        <div class="flex items-center justify-between">
+          <div>
+            <p class="text-amber-700 text-sm font-medium">📱 DAU (Pengguna Aktif Harian)</p>
+            <p class="text-3xl font-extrabold text-amber-800 stat-number mt-1"><span id="metric-dau">2.420</span></p>
+            <p class="text-xs text-green-700 mt-1"><i class="fas fa-arrow-up"></i> +8,2% vs minggu lalu</p>
+          </div>
+          <div class="w-12 h-12 bg-[#FEF0CE] rounded-2xl flex items-center justify-center text-amber-600">
+            <i class="fas fa-users text-2xl"></i>
+          </div>
+        </div>
+      </div>
+      <!-- GMV (Gross Merchandise Value) -->
+      <div class="cream-card rounded-2xl p-5">
+        <div class="flex items-center justify-between">
+          <div>
+            <p class="text-amber-700 text-sm font-medium">💰 GMV (Total Penjualan)</p>
+            <p class="text-3xl font-extrabold text-amber-800 stat-number mt-1"><span id="metric-gmv">187,4</span> Jt</p>
+            <p class="text-xs text-emerald-700 mt-1"><i class="fas fa-chart-line"></i> +12% dari bulan lalu</p>
+          </div>
+          <div class="w-12 h-12 bg-[#FEF0CE] rounded-2xl flex items-center justify-center text-amber-600">
+            <i class="fas fa-chart-simple text-2xl"></i>
+          </div>
+        </div>
+      </div>
+      <!-- Retention (Retensi Pelanggan) -->
+      <div class="cream-card rounded-2xl p-5">
+        <div class="flex items-center justify-between">
+          <div>
+            <p class="text-amber-700 text-sm font-medium">🔄 Retensi Pelanggan (Bulanan)</p>
+            <p class="text-3xl font-extrabold text-amber-800 stat-number mt-1"><span id="metric-retention">73</span>%</p>
+            <p class="text-xs text-amber-600 mt-1">pembelian berulang dalam 30 hari</p>
+          </div>
+          <div class="w-12 h-12 bg-[#FEF0CE] rounded-2xl flex items-center justify-center text-amber-600">
+            <i class="fas fa-heart text-2xl"></i>
+          </div>
+        </div>
+      </div>
+      <!-- Total UMKM + Rata-rata Order -->
+      <div class="cream-card rounded-2xl p-5">
+        <div class="flex items-center justify-between">
+          <div>
+            <p class="text-amber-700 text-sm font-medium">🏪 UMKM Mitra Aktif</p>
+            <p class="text-3xl font-extrabold text-amber-800 stat-number mt-1">3</p>
+            <p class="text-xs text-amber-600 mt-1">Warung Nanik · Mak Tun · Camelia</p>
+          </div>
+          <div class="w-12 h-12 bg-[#FEF0CE] rounded-2xl flex items-center justify-center text-amber-600">
+            <i class="fas fa-store-alt text-2xl"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- GRAFIK PENJUALAN + DAU TREND (LINE CHART) -->
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-12">
+      <div class="lg:col-span-2 cream-card rounded-2xl p-5">
+        <div class="flex justify-between items-center mb-4 flex-wrap gap-2">
+          <div>
+            <h3 class="font-bold text-amber-800 text-lg"><i class="fas fa-chart-line text-amber-500 mr-2"></i> Tren GMV & DAU (April 2025)</h3>
+            <p class="text-xs text-amber-600/70">Omzet harian (Rp Juta) & jumlah pengguna aktif</p>
+          </div>
+          <div class="flex items-center gap-1 text-xs bg-[#FEF6E3] px-3 py-1.5 rounded-full">
+            <i class="fas fa-chart-simple text-amber-600"></i>
+            <span class="font-medium text-amber-700">data transparan</span>
+          </div>
+        </div>
+        <canvas id="trendChart" height="240" style="max-height: 260px; width: 100%;"></canvas>
+      </div>
+      <!-- TOP PRODUK / UMKM RINGKASAN -->
+      <div class="cream-card rounded-2xl p-5">
+        <h3 class="font-bold text-amber-800 text-lg mb-3"><i class="fas fa-trophy text-amber-400 mr-2"></i> Peringkat UMKM (GMV April)</h3>
+        <p class="text-xs text-amber-600 mb-4">Berdasarkan kontribusi omzet bulan ini</p>
+        <div id="umkm-ranking-list" class="space-y-4">
+          <!-- dinamis -->
+        </div>
+        <div class="mt-5 pt-3 border-t border-amber-100">
+          <div class="flex justify-between text-sm text-amber-700">
+            <span><i class="fas fa-chart-pie"></i> Kontribusi Top UMKM:</span>
+            <span class="font-bold text-amber-800" id="top-umkm-contribution">-</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TABEL LENGKAP UMKM (Warung Nanik Yacin, Warung Mak Tun, Warung Camelia) -->
+    <div class="cream-card rounded-2xl overflow-hidden mb-10">
+      <div class="px-6 py-4 bg-[#FFF9E8] border-b border-[#F7E3B5] flex flex-wrap justify-between items-center gap-3">
+        <div>
+          <h3 class="font-bold text-amber-800"><i class="fas fa-list-ul text-amber-500 mr-2"></i> Daftar UMKM Binaan & Transparansi Penjualan</h3>
+          <p class="text-xs text-amber-600 mt-0.5">Data real omzet, jumlah pesanan & retensi per UMKM</p>
+        </div>
+        <div class="relative">
+          <i class="fas fa-search absolute left-3 top-1/2 -translate-y-1/2 text-amber-400 text-sm"></i>
+          <input type="text" id="search-umkm" placeholder="Cari UMKM..." class="pl-9 pr-4 py-2 border border-[#F5D98F] rounded-xl text-sm w-64 focus:outline-none focus:ring-2 focus:ring-amber-300 bg-white">
+        </div>
+      </div>
+      <div class="overflow-x-auto">
+        <table class="min-w-full divide-y divide-[#F7E3B5]">
+          <thead class="table-header-bg text-xs font-semibold text-amber-800 uppercase tracking-wider">
+            <tr>
+              <th class="px-6 py-4 text-left">No</th>
+              <th class="px-6 py-4 text-left">Nama UMKM</th>
+              <th class="px-6 py-4 text-left">Kategori</th>
+              <th class="px-6 py-4 text-left">Produk Unggulan</th>
+              <th class="px-6 py-4 text-right">GMV April (Rp)</th>
+              <th class="px-6 py-4 text-right">Jumlah Order</th>
+              <th class="px-6 py-4 text-center">Retensi Pelanggan</th>
+            </tr>
+          </thead>
+          <tbody id="umkm-table-body" class="bg-white divide-y divide-[#FDF1DC] text-sm">
+            <!-- data dari JS -->
+          </tbody>
+        </table>
+      </div>
+      <div class="px-6 py-3 text-xs text-amber-600 border-t border-[#F7E3B5] flex justify-between items-center bg-[#FFFCF5]">
+        <span><i class="fas fa-chart-simple"></i> Data diperbaharui secara berkala untuk mendukung ekosistem terbuka</span>
+        <span id="row-counter" class="font-medium"></span>
+      </div>
+    </div>
+
+    <!-- DETAIL METRIK TAMBAHAN: RETENTION & GMV PER UMKM -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+      <div class="cream-card rounded-2xl p-5">
+        <div class="flex items-center gap-3 mb-3">
+          <i class="fas fa-chart-line text-amber-500 text-xl"></i>
+          <h3 class="font-bold text-amber-800">📈 Rata-rata Retensi per UMKM</h3>
+        </div>
+        <div class="space-y-3" id="retention-bars">
+          <!-- retention bars -->
+        </div>
+        <p class="text-xs text-amber-600 mt-3">Persentase pelanggan yang melakukan pembelian ulang dalam 30 hari terakhir.</p>
+      </div>
+      <div class="cream-card rounded-2xl p-5">
+        <div class="flex items-center gap-3 mb-4">
+          <i class="fas fa-chart-pie text-amber-500 text-xl"></i>
+          <h3 class="font-bold text-amber-800">🥧 Komposisi GMV Berdasarkan UMKM</h3>
+        </div>
+        <canvas id="gmvPieChart" height="180" style="max-height: 200px;"></canvas>
+        <div class="mt-4 text-center text-amber-700 text-xs">Total GMV April: <span id="total-gmv-label" class="font-bold text-amber-800">0</span> Juta Rupiah</div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="bg-[#FFF5E2] border-t border-[#F7E3B5] mt-8 py-6 text-center text-amber-600/80 text-xs">
+    <p>© 2025 MojokertoTransparan — Dashboard UMKM & penjualan. Data bersumber dari sistem pelaporan UMKM dan transaksi riil. Mendukung ekonomi lokal yang inklusif.</p>
+  </footer>
+
+  <script>
+    // =========================================================================
+    // DASHBOARD UMKM MOJOKERTO: WARUNG NANIK YACIN, WARUNG MAK TUN, WARUNG CAMELIA
+    // Dilengkapi metrik DAU, GMV, Retention (transparan)
+    // Warna tema: cream & kuning
+    // =========================================================================
+    
+    // Data 3 UMKM sesuai permintaan
+    const umkmData = [
+      { id: 1, nama: "Warung Nanik Yacin", kategori: "Kuliner Nusantara", produkUnggulan: "Peyek Kacang & Nasi Gandul", gmvApril: 82500000, orderApril: 1780, retentionRate: 78, warna: "#E6B422" },
+      { id: 2, nama: "Warung Mak Tun", kategori: "Makanan Tradisional", produkUnggulan: "Sate Klathak & Gurami", gmvApril: 67400000, orderApril: 1350, retentionRate: 69, warna: "#F7C35C" },
+      { id: 3, nama: "Warung Camelia", kategori: "Jajanan Pasar", produkUnggulan: "Lupis, Mendut & Cenil", gmvApril: 37900000, orderApril: 980, retentionRate: 72, warna: "#F6D27A" }
+    ];
+    
+    // Metrik DAU (Daily Active Users) dan GMV bulanan serta Retention system
+    // Data untuk grafik tren (Harian simulasi minggu ke-1 sampai 30 April)
+    const daysApril = Array.from({length: 30}, (_, i) => i+1);
+    // Simulasi GMV harian (dalam Juta Rp) dan DAU harian berdasarkan kontribusi 3 UMKM
+    const dailyGMV = daysApril.map(day => {
+      let base = 5.2 + (day * 0.09);
+      if(day > 15) base += 0.8;
+      if(day > 22) base += 1.2;
+      return parseFloat((base + Math.sin(day/3)*0.6).toFixed(1));
+    });
+    const dailyDAU = daysApril.map(day => {
+      let base = 2100 + day * 7;
+      if(day > 10) base += 180;
+      if(day > 20) base += 250;
+      return Math.floor(base + Math.cos(day/4)*80);
+    });
+    
+    const totalGMVApril = umkmData.reduce((sum, u) => sum + u.gmvApril, 0); // 187,8 jt
+    const avgRetention = (umkmData.reduce((s,u)=>s+u.retentionRate,0)/umkmData.length).toFixed(1);
+    
+    // update element metrics
+    document.getElementById('metric-dau').innerText = dailyDAU[dailyDAU.length-1].toLocaleString();
+    document.getElementById('metric-gmv').innerText = (totalGMVApril / 1e6).toFixed(1) + " Jt";
+    document.getElementById('metric-retention').innerText = avgRetention;
+    document.getElementById('total-umkm-count').innerText = umkmData.length;
+    
+    // Chart Trend (GMV + DAU line dual axis)
+    let dualChart = null;
+    function renderTrendChart() {
+      const ctx = document.getElementById('trendChart').getContext('2d');
+      if (dualChart) dualChart.destroy();
+      dualChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+          labels: daysApril.map(d => `${d} Apr`),
+          datasets: [
+            {
+              label: 'GMV Harian (Juta Rp)',
+              data: dailyGMV,
+              borderColor: '#E5A823',
+              backgroundColor: 'rgba(245, 196, 73, 0.05)',
+              borderWidth: 3,
+              pointRadius: 1,
+              pointBackgroundColor: '#F6C358',
+              tension: 0.3,
+              yAxisID: 'y',
+              fill: false,
+            },
+            {
+              label: 'DAU (Pengguna Aktif)',
+              data: dailyDAU,
+              borderColor: '#C7852E',
+              backgroundColor: 'rgba(199, 133, 46, 0.05)',
+              borderWidth: 2.5,
+              borderDash: [5, 5],
+              pointRadius: 0,
+              tension: 0.2,
+              yAxisID: 'y1',
+              fill: false,
+            }
+          ]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: true,
+          plugins: {
+            tooltip: { mode: 'index', intersect: false },
+            legend: { position: 'top', labels: { boxWidth: 12, font: { size: 11 } } }
+          },
+          scales: {
+            y: { title: { display: true, text: 'GMV (Juta Rp)', color: '#B57C1C' }, beginAtZero: true, grid: { color: '#F7E3B5' } },
+            y1: { position: 'right', title: { display: true, text: 'DAU', color: '#C7852E' }, beginAtZero: true, grid: { drawOnChartArea: false } }
+          }
+        }
+      });
+    }
+    
+    // PIE CHART komposisi GMV
+    let pieChart;
+    function renderPieChart() {
+      const ctx = document.getElementById('gmvPieChart').getContext('2d');
+      if(pieChart) pieChart.destroy();
+      pieChart = new Chart(ctx, {
+        type: 'pie',
+        data: {
+          labels: umkmData.map(u => u.nama),
+          datasets: [{
+            data: umkmData.map(u => u.gmvApril),
+            backgroundColor: ['#F3BC4A', '#EAA82B', '#F7D277'],
+            borderWidth: 0,
+          }]
+        },
+        options: {
+          responsive: true,
+          plugins: { legend: { position: 'bottom', labels: { font: { size: 11 }, color: '#7C5E2A' } } }
+        }
+      });
+      document.getElementById('total-gmv-label').innerText = (totalGMVApril/1e6).toFixed(1);
+    }
+    
+    // RENDER TABEL UMKM
+    let filterText = '';
+    function renderUmkmTable() {
+      const tbody = document.getElementById('umkm-table-body');
+      const filtered = umkmData.filter(u => u.nama.toLowerCase().includes(filterText.toLowerCase()));
+      tbody.innerHTML = '';
+      if(filtered.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="7" class="text-center py-8 text-amber-500">Tidak ditemukan</td></tr>';
+        document.getElementById('row-counter').innerHTML = '0 data';
+        return;
+      }
+      filtered.forEach((umkm, idx) => {
+        const row = document.createElement('tr');
+        row.className = 'hover:bg-amber-50/40 transition';
+        row.innerHTML = `
+          <td class="px-6 py-4 whitespace-nowrap text-amber-700 font-mono text-xs">${idx+1}</td>
+          <td class="px-6 py-4 font-semibold text-amber-800">${umkm.nama}</td>
+          <td class="px-6 py-4 text-amber-700">${umkm.kategori}</td>
+          <td class="px-6 py-4 text-amber-700">${umkm.produkUnggulan}</td>
+          <td class="px-6 py-4 text-right font-bold text-amber-800">Rp ${umkm.gmvApril.toLocaleString('id-ID')}</td>
+          <td class="px-6 py-4 text-right text-amber-700">${umkm.orderApril.toLocaleString()}</td>
+          <td class="px-6 py-4 text-center"><span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-[#FEF0CE] text-amber-800">${umkm.retentionRate}% retention</span></td>
+        `;
+        tbody.appendChild(row);
+      });
+      document.getElementById('row-counter').innerHTML = `Menampilkan ${filtered.length} dari ${umkmData.length} UMKM`;
+    }
+    
+    // RANKING UMKM (berdasarkan GMV)
+    function renderRanking() {
+      const sorted = [...umkmData].sort((a,b) => b.gmvApril - a.gmvApril);
+      const container = document.getElementById('umkm-ranking-list');
+      container.innerHTML = '';
+      sorted.forEach((umkm, i) => {
+        const percentTotal = ((umkm.gmvApril / totalGMVApril) * 100).toFixed(1);
+        container.innerHTML += `
+          <div class="flex items-center justify-between border-b border-[#F7E3B5] pb-3 last:border-0">
+            <div class="flex items-center gap-3">
+              <span class="w-7 h-7 rounded-full gold-gradient text-white text-xs font-bold flex items-center justify-center shadow-sm">${i+1}</span>
+              <div>
+                <p class="font-semibold text-amber-800 text-sm">${umkm.nama}</p>
+                <p class="text-xs text-amber-600">${umkm.produkUnggulan}</p>
+              </div>
+            </div>
+            <div class="text-right">
+              <p class="font-bold text-amber-800">${(umkm.gmvApril/1e6).toFixed(1)} Jt</p>
+              <p class="text-[11px] text-amber-600">${percentTotal}% total GMV</p>
+            </div>
+          </div>
+        `;
+      });
+      const topContribution = (sorted[0].gmvApril / totalGMVApril * 100).toFixed(1);
+      document.getElementById('top-umkm-contribution').innerHTML = `${topContribution}% (${sorted[0].nama})`;
+    }
+    
+    // RETENTION BARS per UMKM
+    function renderRetentionBars() {
+      const container = document.getElementById('retention-bars');
+      container.innerHTML = '';
+      umkmData.forEach(umkm => {
+        const widthBar = umkm.retentionRate;
+        container.innerHTML += `
+          <div>
+            <div class="flex justify-between text-xs text-amber-700 mb-1">
+              <span class="font-medium">${umkm.nama}</span>
+              <span>${umkm.retentionRate}%</span>
+            </div>
+            <div class="w-full bg-[#F7E3B5] rounded-full h-2.5 overflow-hidden">
+              <div class="bg-amber-500 h-2.5 rounded-full" style="width: ${widthBar}%"></div>
+            </div>
+          </div>
+        `;
+      });
+    }
+    
+    // Last update time
+    function updateLastUpdate() {
+      const now = new Date();
+      document.getElementById('last-update').innerHTML = `${now.toLocaleDateString('id-ID')} ${now.toLocaleTimeString('id-ID', {hour:'2-digit', minute:'2-digit'})}`;
+    }
+    
+    // search event
+    const searchInput = document.getElementById('search-umkm');
+    if(searchInput) {
+      searchInput.addEventListener('input', (e) => {
+        filterText = e.target.value;
+        renderUmkmTable();
+      });
+    }
+    
+    // jalankan semua inisialisasi
+    function initDashboard() {
+      renderTrendChart();
+      renderPieChart();
+      renderUmkmTable();
+      renderRanking();
+      renderRetentionBars();
+      updateLastUpdate();
+      // set refresh tiap 30 detik (update time)
+      setInterval(() => updateLastUpdate(), 30000);
+      // juga menampilkan tooltip info tambahan
+    }
+    
+    initDashboard();
+  </script>
+</body>
+</html>
