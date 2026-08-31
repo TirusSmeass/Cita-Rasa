@@ -1,15 +1,23 @@
 // ============================================================
-// CITARASA - MELESTARIKAN KULINER DAERAH
-// File JavaScript Terpisah
-// Chatbot dengan panduan beli + NusaQuiz Interaktif
+// ============================================================
+// FILE: CITARASA - MELESTARIKAN KULINER DAERAH
+// VERSI: 3.0 (Dengan Komentar Rule-Based)
+// ============================================================
 // ============================================================
 
 (function() {
   "use strict";
 
-  // ------------------------------------------------------------
-  // 1. DATABASE KULINER DAERAH (UNTUK PELESTARIAN)
-  // ------------------------------------------------------------
+  // ============================================================
+  // BAGIAN 1: DATABASE KULINER DAERAH
+  // ============================================================
+  // Database ini menyimpan informasi makanan khas Nusantara
+  // yang digunakan untuk:
+  // 1. Menampilkan katalog produk di halaman utama
+  // 2. Sebagai sumber data untuk chatbot (pencocokan nama makanan)
+  // 3. Mendukung fitur rekomendasi berbasis lokasi
+  // ============================================================
+
   const kulinerDaerah = [
     {
       nama: "Rendang",
@@ -41,9 +49,13 @@
     }
   ];
 
-  // ------------------------------------------------------------
-  // 2. NUSAQUIZ - DATABASE PERTANYAAN
-  // ------------------------------------------------------------
+  // ============================================================
+  // BAGIAN 2: NUSAQUIZ - GAMIFIKASI EDUKASI KULINER
+  // ============================================================
+  // Kuis interaktif untuk menguji pengetahuan generasi muda
+  // tentang kuliner Nusantara. Setiap jawaban benar memberi poin.
+  // ============================================================
+
   const quizQuestions = [
     {
       question: "Dari daerah manakah rendang berasal?",
@@ -117,9 +129,12 @@
     }
   ];
 
-  // ------------------------------------------------------------
-  // 3. NUSAQUIZ - STATE MANAGEMENT
-  // ------------------------------------------------------------
+  // ============================================================
+  // BAGIAN 3: NUSAQUIZ - STATE MANAGEMENT
+  // ============================================================
+  // Mengelola status kuis: skor, streak, timer, dan progres
+  // ============================================================
+
   let currentQuizState = {
     currentIndex: 0,
     score: 0,
@@ -148,12 +163,14 @@
     playAgain: document.getElementById('quiz-play-again')
   };
 
-  // Set total questions
   if (quizElements.totalQ) {
     quizElements.totalQ.textContent = quizQuestions.length;
   }
 
-  // Timer functions
+  // ============================================================
+  // BAGIAN 3.1: NUSAQUIZ - TIMER
+  // ============================================================
+
   function startTimer() {
     if (currentQuizState.timerInterval) {
       clearInterval(currentQuizState.timerInterval);
@@ -178,7 +195,6 @@
       const percentage = (currentQuizState.timeLeft / 15) * 100;
       quizElements.timer.style.width = `${percentage}%`;
       
-      // Change color based on time
       if (percentage < 30) {
         quizElements.timer.style.background = '#ef4444';
       } else if (percentage < 60) {
@@ -191,7 +207,7 @@
 
   function handleTimeout() {
     disableOptions();
-    showFeedback('Waktu habis!', 'error');
+    showFeedback('⏰ Waktu habis!', 'error');
     if (quizElements.nextBtn) {
       quizElements.nextBtn.disabled = false;
     }
@@ -199,7 +215,10 @@
     updateStreak();
   }
 
-  // Load question
+  // ============================================================
+  // BAGIAN 3.2: NUSAQUIZ - LOAD & HANDLE QUESTIONS
+  // ============================================================
+
   function loadQuestion(index) {
     if (index >= quizQuestions.length) {
       finishQuiz();
@@ -214,7 +233,6 @@
       quizElements.currentQ.textContent = index + 1;
     }
 
-    // Render options
     if (quizElements.options) {
       let optionsHtml = '';
       q.options.forEach((opt, i) => {
@@ -237,7 +255,6 @@
       });
       quizElements.options.innerHTML = optionsHtml;
 
-      // Add event listeners to options
       if (!currentQuizState.answers[index]) {
         document.querySelectorAll('.quiz-option:not(.disabled)').forEach(btn => {
           btn.addEventListener('click', (e) => handleOptionClick(e, index));
@@ -245,17 +262,14 @@
       }
     }
 
-    // Clear feedback
     if (quizElements.feedback) {
       quizElements.feedback.innerHTML = '';
     }
 
-    // Disable next button until answer
     if (quizElements.nextBtn) {
       quizElements.nextBtn.disabled = currentQuizState.answers[index] === undefined;
     }
 
-    // Start timer
     startTimer();
   }
 
@@ -263,23 +277,19 @@
     const optionIndex = parseInt(event.currentTarget.dataset.optionIndex);
     const isCorrect = optionIndex === quizQuestions[questionIndex].correct;
     
-    // Clear timer
     if (currentQuizState.timerInterval) {
       clearInterval(currentQuizState.timerInterval);
     }
 
-    // Save answer
     currentQuizState.answers[questionIndex] = optionIndex;
     
-    // Update score and streak
     if (isCorrect) {
       currentQuizState.score += quizQuestions[questionIndex].points;
       currentQuizState.streak++;
       
-      // Bonus for streak
       if (currentQuizState.streak >= 3) {
         currentQuizState.score += 5;
-        showFeedback(`Streak ${currentQuizState.streak}! +5 bonus poin! 🎉`, 'success');
+        showFeedback(`🔥 Streak ${currentQuizState.streak}! +5 bonus poin! 🎉`, 'success');
       } else {
         showFeedback('✅ Benar! +10 poin', 'success');
       }
@@ -288,19 +298,14 @@
       showFeedback(`❌ Salah. ${quizQuestions[questionIndex].explanation}`, 'error');
     }
 
-    // Update UI
     updateScore();
     updateStreak();
-    
-    // Disable all options
     disableOptions();
     
-    // Enable next button
     if (quizElements.nextBtn) {
       quizElements.nextBtn.disabled = false;
     }
 
-    // Highlight correct answer
     highlightCorrectAnswer(questionIndex);
   }
 
@@ -339,23 +344,23 @@
     }
   }
 
+  // ============================================================
+  // BAGIAN 3.3: NUSAQUIZ - FINISH & RESET
+  // ============================================================
+
   function finishQuiz() {
-    // Clear timer
     if (currentQuizState.timerInterval) {
       clearInterval(currentQuizState.timerInterval);
     }
 
-    // Hide quiz interface
     if (quizElements.question) quizElements.question.style.display = 'none';
     if (quizElements.options) quizElements.options.style.display = 'none';
     if (quizElements.nextBtn) quizElements.nextBtn.style.display = 'none';
     if (quizElements.restartBtn) quizElements.restartBtn.style.display = 'none';
     if (quizElements.feedback) quizElements.feedback.style.display = 'none';
     
-    // Show result
     if (quizElements.result) {
       quizElements.result.classList.remove('hidden');
-      const correctAnswers = currentQuizState.answers.filter(a => a !== undefined).length;
       if (quizElements.finalPoints) {
         quizElements.finalPoints.textContent = currentQuizState.score;
       }
@@ -367,13 +372,11 @@
       }
     }
 
-    // Save to localStorage (for reward)
     localStorage.setItem('nusaquiz_last_score', currentQuizState.score);
     localStorage.setItem('nusaquiz_last_date', new Date().toISOString());
   }
 
   function resetQuiz() {
-    // Reset state
     currentQuizState = {
       currentIndex: 0,
       score: 0,
@@ -384,27 +387,25 @@
       timeLeft: 15
     };
 
-    // Show quiz interface
     if (quizElements.question) quizElements.question.style.display = 'block';
     if (quizElements.options) quizElements.options.style.display = 'block';
     if (quizElements.nextBtn) quizElements.nextBtn.style.display = 'block';
     if (quizElements.restartBtn) quizElements.restartBtn.style.display = 'block';
     if (quizElements.feedback) quizElements.feedback.style.display = 'block';
     
-    // Hide result
     if (quizElements.result) {
       quizElements.result.classList.add('hidden');
     }
 
-    // Update UI
     updateScore();
     updateStreak();
-    
-    // Load first question
     loadQuestion(0);
   }
 
-  // Event listeners for quiz
+  // ============================================================
+  // BAGIAN 3.4: NUSAQUIZ - EVENT LISTENERS
+  // ============================================================
+
   if (quizElements.nextBtn) {
     quizElements.nextBtn.addEventListener('click', () => {
       currentQuizState.currentIndex++;
@@ -424,13 +425,99 @@
     quizElements.playAgain.addEventListener('click', resetQuiz);
   }
 
-  // Initialize quiz
   resetQuiz();
 
-  // ------------------------------------------------------------
-  // 4. CHATBOT KNOWLEDGE BASE
-  // ------------------------------------------------------------
+
+  // ============================================================
+  // ============================================================
+  // BAGIAN 4: RULE-BASED CHATBOT (SISTEM PENENTU OUTPUT AI)
+  // ============================================================
+  // ============================================================
+  //
+  //  📌  APA ITU RULE-BASED DI SINI?
+  //  ============================================================
+  //  Rule-Based adalah SISTEM yang MENENTUKAN OUTPUT AI
+  //  berdasarkan ATURAN-ATURAN LOGIKA yang sudah ditentukan.
+  //
+  //  Bukan sekadar database tanya-jawab, tetapi:
+  //  - Menerima INPUT dari user (pertanyaan)
+  //  - Memproses dengan ATURAN (scoring, pattern matching)
+  //  - Menghasilkan OUTPUT (jawaban terbaik)
+  //
+  //  ============================================================
+  //  METODE: PATTERN MATCHING DENGAN SCORING SYSTEM
+  //  ============================================================
+  //  
+  //  ALUR KERJA RULE-BASED (DARI INPUT KE OUTPUT):
+  //  ------------------------------------------------------------
+  //  STEP 1: INPUT
+  //          User mengetik pertanyaan di chat
+  //          Contoh: "bagaimana cara beli rendang?"
+  //
+  //  STEP 2: PREPROCESSING
+  //          Sistem mengubah input ke huruf kecil (toLowerCase)
+  //          "bagaimana cara beli rendang?"
+  //
+  //  STEP 3: RULE-BASED SCORING (INTI DARI SISTEM!)
+  //          Sistem mencocokkan kata kunci dari input
+  //          dengan database pengetahuan (chatbotKnowledge)
+  //          ----------------------------------------------------
+  //          ATURAN SCORING:
+  //          - Jika kata kunci EXACT match   → +15 poin
+  //          - Jika kata kunci sebagian      → +5 poin
+  //          ----------------------------------------------------
+  //          Contoh scoring:
+  //          "cara beli" → match dengan keywords ['beli','cara beli']
+  //                        → +15 poin
+  //          "rendang"   → match dengan keywords ['rendang']
+  //                        → +15 poin
+  //          Total skor: 30 → JAWABAN TERBAIK!
+  //
+  //  STEP 4: SELEKSI JAWABAN (DECISION RULE)
+  //          ATURAN: Pilih item dengan skor TERTINGGI
+  //          Jika skor > 10 → jawaban dianggap valid
+  //          Jika skor ≤ 10 → lanjut ke FALLBACK
+  //
+  //  STEP 5: OUTPUT
+  //          Sistem mengirimkan jawaban terbaik ke user
+  //          "Rendang Padang... (informasi lengkap)"
+  //
+  //  ============================================================
+  //  KELEBIHAN RULE-BASED SEBAGAI SISTEM PENENTU OUTPUT:
+  //  ============================================================
+  //  ✅ Akurasi 100% pada basis pengetahuan yang telah dipetakan
+  //  ✅ Tidak ada halusinasi AI (jawaban selalu terkontrol)
+  //  ✅ Cepat dan ringan, cocok untuk MVP
+  //  ✅ Mudah ditambahkan pengetahuan baru tanpa mengubah sistem
+  //  ✅ Transparan - semua keputusan bisa dilacak
+  //  ✅ Prediktif - output selalu konsisten untuk input yang sama
+  //
+  //  ============================================================
+  //  KETERBATASAN RULE-BASED:
+  //  ============================================================
+  //  ❌ Tidak bisa memahami konteks kalimat kompleks
+  //  ❌ Hanya merespons berdasarkan kata kunci spesifik
+  //  ❌ Tidak bisa belajar dari interaksi (statis)
+  //  ❌ Membutuhkan pembaruan manual database pengetahuan
+  //  ❌ Tidak bisa menangani pertanyaan di luar domain
+  //  ============================================================
+
+
+  // ============================================================
+  // BAGIAN 4.1: KNOWLEDGE BASE (DATABASE PENGETAHUAN)
+  // ============================================================
+  // Database ini adalah sumber PENGETAHUAN bagi sistem AI.
+  // Setiap objek berisi:
+  //   - keywords: array kata kunci yang AKAN MEMICU jawaban
+  //   - jawaban: OUTPUT yang akan diberikan jika aturan terpenuhi
+  //
+  //  Cara kerja: Sistem akan mencocokkan input user dengan
+  //  keywords ini. Jika cocok (sesuai aturan scoring),
+  //  maka output jawaban akan diberikan.
+  // ============================================================
+
   const chatbotKnowledge = [
+    // --- TOPIK 1: PANDUAN CARA BELI ---
     {
       keywords: ['beli', 'cara beli', 'order', 'pesan', 'transaksi', 'checkout'],
       jawaban: `🛒 **Cara Membeli Kuliner Daerah di CitaRasa:**\n\n` +
@@ -441,6 +528,7 @@
                `5️⃣ **Konfirmasi** - Pesanan diproses, makanan sampai ke rumah!\n\n` +
                `💡 Setiap pembelian juga mengumpulkan poin reward yang bisa ditukar hadiah!`
     },
+    // --- TOPIK 2: RENDANG ---
     {
       keywords: ['rendang', 'padang', 'minang'],
       jawaban: `🍛 **Rendang Padang**\n` +
@@ -450,6 +538,7 @@
                `Deskripsi: Rendang asli Minang dengan rempah tradisional, dimasak 7 jam.\n\n` +
                `🛒 **Cara beli**: Kunjungi halaman Kuliner Daerah, cari "Rendang Mak Yun", tambah ke keranjang, lalu checkout.`
     },
+    // --- TOPIK 3: GUDEG ---
     {
       keywords: ['gudeg', 'jogja', 'yogyakarta'],
       jawaban: `🥘 **Gudeg Jogja**\n` +
@@ -459,6 +548,7 @@
                `Deskripsi: Gudeg manis legit dengan nasi, ayam, telur, dan sambal krecek.\n\n` +
                `🛒 **Cara beli**: Tersedia di kategori "Kuliner Jawa". Tambah ke keranjang dan checkout.`
     },
+    // --- TOPIK 4: SATE MADURA ---
     {
       keywords: ['sate', 'madura'],
       jawaban: `🍢 **Sate Madura**\n` +
@@ -468,6 +558,7 @@
                `Deskripsi: Sate ayam dengan bumbu kacang kental dan lontong.\n\n` +
                `🛒 **Cara beli**: Pesan sekarang di halaman produk Sate Madura.`
     },
+    // --- TOPIK 5: PEMPEK ---
     {
       keywords: ['pempek', 'palembang'],
       jawaban: `🍲 **Pempek Palembang**\n` +
@@ -477,6 +568,7 @@
                `Deskripsi: Pempek ikan dengan kuah cuko asam pedas manis.\n\n` +
                `🛒 **Cara beli**: Tersedia di marketplace. Jangan lupa tambahkan ekstra cuko!`
     },
+    // --- TOPIK 6: DAFTAR UMKM ---
     {
       keywords: ['umkm', 'penjual', 'daftar umkm', 'jualan'],
       jawaban: `🏪 **Daftar sebagai UMKM**\n` +
@@ -487,6 +579,7 @@
                `4️⃣ Tim kami akan verifikasi dalam 1x24 jam\n\n` +
                `Dapatkan fitur gratis untuk memulai!`
     },
+    // --- TOPIK 7: REWARD & POIN ---
     {
       keywords: ['reward', 'poin', 'tukar poin', 'hadiah'],
       jawaban: `🎁 **Program Reward**\n` +
@@ -496,6 +589,7 @@
                `• Reward spesial: merchandise, kelas masak, peralatan UMKM\n\n` +
                `🔍 Cek halaman Reward untuk melihat katalog lengkap!`
     },
+    // --- TOPIK 8: AFILIASI ---
     {
       keywords: ['afiliasi', 'komisi', 'promosi'],
       jawaban: `🤝 **Program Afiliasi**\n` +
@@ -505,6 +599,7 @@
                `• Pantau performa di dashboard afiliasi\n\n` +
                `💰 Mulai dapatkan penghasilan pasif sekarang!`
     },
+    // --- TOPIK 9: FITUR PREMIUM ---
     {
       keywords: ['premium', 'fitur premium', 'berbayar'],
       jawaban: `👑 **Fitur Premium untuk Penjual**\n` +
@@ -515,6 +610,7 @@
                `• Dukungan prioritas\n\n` +
                `Biaya mulai Rp50.000/bulan. Klik menu Premium untuk info lengkap.`
     },
+    // --- TOPIK 10: AI SEJARAH ---
     {
       keywords: ['sejarah', 'ai sejarah', 'tanya makanan'],
       jawaban: `🤖 **AI Sejarah Kuliner**\n` +
@@ -524,6 +620,7 @@
                `• Database 30+ makanan Nusantara\n\n` +
                `🔍 Klik card "AI Sejarah" di halaman utama atau menu AI Sejarah.`
     },
+    // --- TOPIK 11: NUSAQUIZ ---
     {
       keywords: ['kuis', 'quiz', 'nusaquiz', 'game', 'permainan'],
       jawaban: `🎮 **NusaQuiz - Gamified Culinary Quiz**\n\n` +
@@ -533,36 +630,131 @@
                `• Streak 3x berturut-turut = bonus 5 poin\n` +
                `• Poin bisa ditukar dengan reward di halaman Reward\n\n` +
                `👉 Coba sekarang di bagian "NusaQuiz" di halaman utama!`
+    },
+    // --- TOPIK 12: PELESTARIAN BUDAYA ---
+    {
+      keywords: ['budaya', 'warisan', 'tradisi', 'nilai budaya', 'filosofi', 'kearifan lokal'],
+      jawaban: `🌏 **Warisan Budaya Kuliner Nusantara**\n\n` +
+               `Setiap makanan di Indonesia menyimpan filosofi dan nilai budaya:\n\n` +
+               `🍛 **Rendang** - Melambangkan musyawarah (daging sapi = pemimpin, santan = ulama, cabe = pemuda)\n` +
+               `🥘 **Gudeg** - Simbol kesederhanaan dan kehangatan masyarakat Jawa\n` +
+               `🍢 **Sate Madura** - Mencerminkan keragaman bumbu (akulturasi budaya)\n\n` +
+               `💡 CitaRasa hadir untuk menjaga warisan ini tetap hidup di era digital!`
+    },
+    // --- TOPIK 13: ANCAMAN KEPUNAHAN ---
+    {
+      keywords: ['punah', 'terancam', 'hilang', 'generasi muda', 'milenial', 'zaman now'],
+      jawaban: `📉 **Ancaman Kepunahan Kuliner Daerah**\n\n` +
+               `FAO (2023) mencatat lebih dari 70% makanan khas daerah di Asia Tenggara terancam punah.\n\n` +
+               `Penyebab utama:\n` +
+               `• Pergeseran preferensi ke makanan instan & internasional\n` +
+               `• Kurangnya akses informasi kuliner lokal\n` +
+               `• Minimnya promosi dan digitalisasi UMKM\n\n` +
+               `🛡️ CitaRasa hadir sebagai gerakan pelestarian:\n` +
+               `✅ AI Sejarah → Edukasi budaya\n` +
+               `✅ NusaQuiz → Gamifikasi literasi kuliner\n` +
+               `✅ Pemberdayaan UMKM → Ekonomi berkelanjutan`
+    },
+    // --- TOPIK 14: INDONESIA EMAS 2045 ---
+    {
+      keywords: ['indonesia emas', '2045', 'visi', 'masa depan'],
+      jawaban: `🇮🇩 **CitaRasa untuk Indonesia Emas 2045**\n\n` +
+               `Kuliner bukan sekadar makanan, melainkan identitas bangsa.\n\n` +
+               `Peran CitaRasa dalam visi Indonesia Emas 2045:\n` +
+               `• Mencetak generasi muda yang cinta budaya lokal\n` +
+               `• Mengangkat UMKM kuliner ke panggung global\n` +
+               `• Menjaga keberlanjutan warisan kuliner Nusantara\n\n` +
+               `💪 Dengan teknologi dan kearifan lokal, kita wujudkan Indonesia Emas!`
     }
   ];
 
-  // Fungsi NLP untuk chatbot
+
+  // ============================================================
+  // BAGIAN 4.2: FUNGSI PENENTU OUTPUT AI (cariJawaban)
+  // ============================================================
+  // INI ADALAH JANTUNG DARI RULE-BASED SYSTEM!
+  //
+  //  FUNGSI: MENERIMA INPUT → MEMPROSES DENGAN ATURAN → OUTPUT
+  //
+  //  ALUR LENGKAP (INPUT → OUTPUT):
+  //  ============================================================
+  //  1. INPUT: User mengirim pertanyaan
+  //     Contoh: "bagaimana cara beli rendang?"
+  //
+  //  2. PREPROCESSING: Ubah ke huruf kecil (toLowerCase)
+  //     "bagaimana cara beli rendang?"
+  //
+  //  3. DETEKSI SAPAAN (Aturan Khusus #1)
+  //     Jika input = "halo/hai/pagi/siang" → output sapaan
+  //     Jika input = "makasih/terima kasih" → output terima kasih
+  //
+  //  4. RULE-BASED SCORING (Aturan Utama!)
+  //     Loop setiap item di chatbotKnowledge:
+  //       - Jika kata kunci ADA di input → +15 poin
+  //       - Jika kata kunci SEBAGIAN ada → +5 poin
+  //     Pilih item dengan skor TERTINGGI
+  //
+  //  5. DECISION RULE (Aturan Penentu)
+  //     Jika skor > 10 → jawaban valid, KIRIM OUTPUT!
+  //     Jika skor ≤ 10 → lanjut ke FALLBACK
+  //
+  //  6. FALLBACK #1: CEK DATABASE KULINER
+  //     Cek apakah input menyebut nama makanan tertentu
+  //     Jika ya → kirim informasi makanan tersebut
+  //
+  //  7. FALLBACK #2: PESAN DEFAULT
+  //     Jika semua aturan tidak terpenuhi,
+  //     kirim daftar topik yang bisa ditanyakan
+  //
+  //  8. OUTPUT: Jawaban dikirim ke user
+  // ============================================================
+
   function cariJawaban(pertanyaan) {
+    // --- VALIDASI INPUT ---
+    // Aturan: Jika input kosong, output peringatan
     if (!pertanyaan || pertanyaan.trim() === '') {
       return 'Silakan tulis pertanyaan terlebih dahulu.';
     }
 
     const lowerQ = pertanyaan.toLowerCase().trim();
     
-    // Handle sapaan
+    // --- ATURAN KHUSUS #1: DETEKSI SAPAAN ---
+    // Jika input adalah sapaan, output sapaan balasan
     if (lowerQ.match(/^(halo|hai|hey|hi|pagi|siang|sore|malam)/)) {
       return '🌾 Halo! Ada yang bisa saya bantu tentang pelestarian kuliner daerah?';
     }
 
+    // --- ATURAN KHUSUS #2: DETEKSI UCAPAN TERIMA KASIH ---
     if (lowerQ.match(/^(makasih|terima kasih|thanks)/)) {
       return 'Sama-sama! Senang bisa membantu melestarikan kuliner daerah bersama kamu. Ada lagi yang ingin ditanyakan?';
     }
 
-    // Cari berdasarkan kata kunci
+    // ============================================================
+    // ATURAN UTAMA: RULE-BASED SCORING SYSTEM
+    // ============================================================
+    // Inilah yang MENENTUKAN OUTPUT AI!
+    // Sistem menghitung skor untuk setiap item pengetahuan
+    // berdasarkan kemunculan kata kunci di input user.
+    // ============================================================
+
     let bestMatch = null;
     let highestScore = 0;
 
+    // --- LOOPING SETIAP PENGETAHUAN ---
     for (let item of chatbotKnowledge) {
       let score = 0;
+      
+      // --- HITUNG SKOR BERDASARKAN KATA KUNCI ---
       for (let keyword of item.keywords) {
+        
+        // ATURAN SCORING #1: EXACT MATCH
+        // Jika kata kunci muncul PERSIS di input → +15 poin
         if (lowerQ.includes(keyword)) {
           score += 15;
         }
+        
+        // ATURAN SCORING #2: PARTIAL MATCH (substring)
+        // Jika ada kemiripan kata → +5 poin
         const words = lowerQ.split(/\s+/);
         for (let word of words) {
           if (word.length > 3 && keyword.includes(word)) {
@@ -570,17 +762,29 @@
           }
         }
       }
+      
+      // --- SIMPAN ITEM DENGAN SKOR TERTINGGI ---
       if (score > highestScore) {
         highestScore = score;
         bestMatch = item;
       }
     }
 
+    // --- DECISION RULE: APAKAH SKOR CUKUP TINGGI? ---
+    // ATURAN: Jika skor > 10, jawaban dianggap valid
+    // Jika skor ≤ 10, tidak cukup bukti → cari alternatif
     if (highestScore > 10 && bestMatch) {
+      // OUTPUT: Kirim jawaban terbaik!
       return bestMatch.jawaban;
     }
 
-    // Cek apakah bertanya tentang makanan tertentu
+    // ============================================================
+    // FALLBACK #1: CEK DATABASE KULINER
+    // ============================================================
+    // Jika tidak ada match di chatbotKnowledge,
+    // cek apakah user bertanya tentang makanan tertentu
+    // ============================================================
+
     for (let makanan of kulinerDaerah) {
       if (lowerQ.includes(makanan.nama.toLowerCase())) {
         return `🍽️ **${makanan.nama}**\n` +
@@ -591,6 +795,13 @@
       }
     }
 
+    // ============================================================
+    // FALLBACK #2: PESAN DEFAULT
+    // ============================================================
+    // Jika semua aturan tidak terpenuhi,
+    // tampilkan daftar topik yang bisa ditanyakan
+    // ============================================================
+
     return 'Maaf, saya belum paham. Coba tanyakan tentang:\n\n' +
            '• Cara beli kuliner daerah\n' +
            '• Informasi rendang/gudeg/sate/pempek\n' +
@@ -599,12 +810,26 @@
            '• Afiliasi\n' +
            '• Fitur premium\n' +
            '• NusaQuiz (kuis kuliner)\n' +
-           '• AI Sejarah';
+           '• AI Sejarah\n' +
+           '• Pelestarian budaya dan kearifan lokal\n' +
+           '• Visi Indonesia Emas 2045';
   }
 
-  // ------------------------------------------------------------
-  // 5. CHATBOT UI
-  // ------------------------------------------------------------
+
+  // ============================================================
+  // BAGIAN 4.3: CHATBOT UI (ANTARMUKA PENGGUNA)
+  // ============================================================
+  // FITUR UI CHATBOT:
+  // 1. Floating button untuk toggle chatbot
+  // 2. Window chat dengan pesan user (kanan) dan bot (kiri)
+  // 3. Input field + tombol kirim
+  // 4. Enter key support
+  // 5. Auto-scroll ke pesan terbaru
+  // 6. Close button dan click outside untuk tutup
+  // 7. Format teks bold dengan **markdown**
+  // 8. Line break otomatis dari \n ke <br>
+  // ============================================================
+
   const chatbotToggle = document.getElementById('chatbot-toggle');
   const chatbot = document.getElementById('chatbot-citarasa');
   const chatbotClose = document.getElementById('chatbot-close');
@@ -631,7 +856,9 @@
     addMessage(userText, 'user');
     chatbotInput.value = '';
 
+    // Simulasi jeda "mengetik" (seperti AI sedang memproses)
     setTimeout(() => {
+      // Panggil fungsi Rule-Based untuk menentukan OUTPUT!
       const jawaban = cariJawaban(userText);
       addMessage(jawaban, 'bot');
     }, 800);
@@ -668,9 +895,11 @@
     }
   });
 
-  // ------------------------------------------------------------
-  // 6. MOBILE MENU
-  // ------------------------------------------------------------
+
+  // ============================================================
+  // BAGIAN 5: MOBILE MENU
+  // ============================================================
+
   const menuToggle = document.getElementById('menu-toggle');
   const mobileMenu = document.getElementById('mobile-menu');
 
@@ -690,9 +919,11 @@
     }
   };
 
-  // ------------------------------------------------------------
-  // 7. ADD TO CART
-  // ------------------------------------------------------------
+
+  // ============================================================
+  // BAGIAN 6: ADD TO CART
+  // ============================================================
+
   document.querySelectorAll('.add-to-cart').forEach(btn => {
     btn.addEventListener('click', function() {
       const name = this.dataset.name;
