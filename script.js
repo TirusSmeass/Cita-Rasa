@@ -1,8 +1,23 @@
 // ============================================================
 // ============================================================
 // FILE: CITARASA - MELESTARIKAN KULINER DAERAH
-// VERSI: 3.0 (Dengan Komentar Rule-Based)
+// VERSI: 4.0 (Dengan Penamaan AI Sejarah)
 // ============================================================
+// ============================================================
+//
+//  📌  FITUR UTAMA:
+//  ------------------------------------------------------------
+//  1.  AI SEJARAH - Sistem Rule-Based untuk edukasi budaya kuliner
+//  2.  NUSAQUIZ - Gamifikasi edukasi kuliner interaktif
+//  3.  EKSPLORASI - Rekomendasi kuliner berbasis lokasi
+//  4.  PEMBELIAN - Integrasi pemesanan langsung ke UMKM
+//
+//  📌  SESUAI DENGAN SUBTEMA:
+//  ------------------------------------------------------------
+//  "Pelestarian Budaya melalui Inovasi Teknologi"
+//  - SDG 8: Pekerjaan Layak & Pertumbuhan Ekonomi
+//  - SDG 12: Konsumsi & Produksi Bertanggung Jawab
+//  - Asta Cita: Penguatan Ekonomi Kerakyatan & Pelestarian Budaya
 // ============================================================
 
 (function() {
@@ -14,7 +29,7 @@
   // Database ini menyimpan informasi makanan khas Nusantara
   // yang digunakan untuk:
   // 1. Menampilkan katalog produk di halaman utama
-  // 2. Sebagai sumber data untuk chatbot (pencocokan nama makanan)
+  // 2. Sebagai sumber data untuk AI Sejarah (pencocokan nama makanan)
   // 3. Mendukung fitur rekomendasi berbasis lokasi
   // ============================================================
 
@@ -430,48 +445,47 @@
 
   // ============================================================
   // ============================================================
-  // BAGIAN 4: RULE-BASED CHATBOT (SISTEM PENENTU OUTPUT AI)
+  // BAGIAN 4: AI SEJARAH (RULE-BASED SYSTEM)
   // ============================================================
   // ============================================================
   //
-  //  📌  APA ITU RULE-BASED DI SINI?
+  //  📌  APA ITU AI SEJARAH?
   //  ============================================================
-  //  Rule-Based adalah SISTEM yang MENENTUKAN OUTPUT AI
-  //  berdasarkan ATURAN-ATURAN LOGIKA yang sudah ditentukan.
+  //  AI Sejarah adalah sistem berbasis RULE-BASED yang berfungsi
+  //  untuk memberikan edukasi tentang sejarah, filosofi, dan
+  //  nilai budaya kuliner Nusantara.
   //
-  //  Bukan sekadar database tanya-jawab, tetapi:
-  //  - Menerima INPUT dari user (pertanyaan)
+  //  BUKAN CHATBOT BIASA! Ini adalah SISTEM AI yang:
+  //  - Menerima INPUT berupa pertanyaan dari pengguna
   //  - Memproses dengan ATURAN (scoring, pattern matching)
-  //  - Menghasilkan OUTPUT (jawaban terbaik)
+  //  - Menghasilkan OUTPUT berupa informasi sejarah kuliner
   //
   //  ============================================================
   //  METODE: PATTERN MATCHING DENGAN SCORING SYSTEM
   //  ============================================================
   //  
-  //  ALUR KERJA RULE-BASED (DARI INPUT KE OUTPUT):
+  //  ALUR KERJA AI SEJARAH (DARI INPUT KE OUTPUT):
   //  ------------------------------------------------------------
   //  STEP 1: INPUT
-  //          User mengetik pertanyaan di chat
-  //          Contoh: "bagaimana cara beli rendang?"
+  //          User bertanya tentang kuliner Nusantara
+  //          Contoh: "apa sejarah rendang?"
   //
   //  STEP 2: PREPROCESSING
   //          Sistem mengubah input ke huruf kecil (toLowerCase)
-  //          "bagaimana cara beli rendang?"
+  //          "apa sejarah rendang?"
   //
-  //  STEP 3: RULE-BASED SCORING (INTI DARI SISTEM!)
+  //  STEP 3: RULE-BASED SCORING (INTI SISTEM!)
   //          Sistem mencocokkan kata kunci dari input
-  //          dengan database pengetahuan (chatbotKnowledge)
+  //          dengan database pengetahuan (aiSejarahKnowledge)
   //          ----------------------------------------------------
   //          ATURAN SCORING:
   //          - Jika kata kunci EXACT match   → +15 poin
   //          - Jika kata kunci sebagian      → +5 poin
   //          ----------------------------------------------------
   //          Contoh scoring:
-  //          "cara beli" → match dengan keywords ['beli','cara beli']
-  //                        → +15 poin
-  //          "rendang"   → match dengan keywords ['rendang']
-  //                        → +15 poin
-  //          Total skor: 30 → JAWABAN TERBAIK!
+  //          "sejarah rendang" → match dengan keywords ['sejarah', 'rendang']
+  //                            → +15 + 15 = 30 poin
+  //                            → JAWABAN TERBAIK!
   //
   //  STEP 4: SELEKSI JAWABAN (DECISION RULE)
   //          ATURAN: Pilih item dengan skor TERTINGGI
@@ -479,217 +493,232 @@
   //          Jika skor ≤ 10 → lanjut ke FALLBACK
   //
   //  STEP 5: OUTPUT
-  //          Sistem mengirimkan jawaban terbaik ke user
-  //          "Rendang Padang... (informasi lengkap)"
+  //          Sistem mengirimkan informasi sejarah ke user
+  //          "Rendang berasal dari Sumatera Barat..."
   //
   //  ============================================================
-  //  KELEBIHAN RULE-BASED SEBAGAI SISTEM PENENTU OUTPUT:
+  //  KELEBIHAN RULE-BASED PADA AI SEJARAH:
   //  ============================================================
-  //  ✅ Akurasi 100% pada basis pengetahuan yang telah dipetakan
-  //  ✅ Tidak ada halusinasi AI (jawaban selalu terkontrol)
-  //  ✅ Cepat dan ringan, cocok untuk MVP
-  //  ✅ Mudah ditambahkan pengetahuan baru tanpa mengubah sistem
-  //  ✅ Transparan - semua keputusan bisa dilacak
-  //  ✅ Prediktif - output selalu konsisten untuk input yang sama
+  //  ✅ Akurasi 100% - Informasi sejarah yang diberikan sudah
+  //     terverifikasi dan terpetakan dengan baik
+  //  ✅ Tidak ada halusinasi - Jawaban selalu sesuai database
+  //  ✅ Cepat dan ringan - Cocok untuk MVP CitaRasa
+  //  ✅ Mudah diperbarui - Tambah pengetahuan baru tanpa
+  //     mengubah sistem
+  //  ✅ Transparan - Setiap jawaban bisa dilacak sumbernya
   //
   //  ============================================================
-  //  KETERBATASAN RULE-BASED:
+  //  KETERBATASAN:
   //  ============================================================
-  //  ❌ Tidak bisa memahami konteks kalimat kompleks
-  //  ❌ Hanya merespons berdasarkan kata kunci spesifik
-  //  ❌ Tidak bisa belajar dari interaksi (statis)
-  //  ❌ Membutuhkan pembaruan manual database pengetahuan
-  //  ❌ Tidak bisa menangani pertanyaan di luar domain
+  //  ❌ Hanya bisa menjawab berdasarkan database yang tersedia
+  //  ❌ Tidak bisa memahami pertanyaan di luar domain kuliner
+  //  ❌ Tidak bisa belajar dari interaksi (sistem statis)
   //  ============================================================
 
 
   // ============================================================
-  // BAGIAN 4.1: KNOWLEDGE BASE (DATABASE PENGETAHUAN)
+  // BAGIAN 4.1: AI SEJARAH - KNOWLEDGE BASE
   // ============================================================
-  // Database ini adalah sumber PENGETAHUAN bagi sistem AI.
+  // Database pengetahuan untuk AI Sejarah.
   // Setiap objek berisi:
-  //   - keywords: array kata kunci yang AKAN MEMICU jawaban
-  //   - jawaban: OUTPUT yang akan diberikan jika aturan terpenuhi
+  //   - keywords: kata kunci yang AKAN MEMICU pengetahuan
+  //   - jawaban: INFORMASI SEJARAH yang akan diberikan
   //
-  //  Cara kerja: Sistem akan mencocokkan input user dengan
-  //  keywords ini. Jika cocok (sesuai aturan scoring),
-  //  maka output jawaban akan diberikan.
+  //  TOTAL PENGETAHUAN: 14+ topik sejarah kuliner
   // ============================================================
 
-  const chatbotKnowledge = [
-    // --- TOPIK 1: PANDUAN CARA BELI ---
+  const aiSejarahKnowledge = [
+    // --- TOPIK 1: SEJARAH RENDANG ---
     {
-      keywords: ['beli', 'cara beli', 'order', 'pesan', 'transaksi', 'checkout'],
-      jawaban: `🛒 **Cara Membeli Kuliner Daerah di CitaRasa:**\n\n` +
-               `1️⃣ **Pilih Produk** - Jelajahi halaman Kuliner Daerah atau marketplace\n` +
-               `2️⃣ **Klik "Tambah ke Keranjang"** - Produk akan masuk ke keranjang belanja\n` +
-               `3️⃣ **Isi Data Pengiriman** - Masukkan alamat lengkap dan pilih kurir\n` +
-               `4️⃣ **Pilih Pembayaran** - Transfer Bank, E-Wallet, atau COD\n` +
-               `5️⃣ **Konfirmasi** - Pesanan diproses, makanan sampai ke rumah!\n\n` +
-               `💡 Setiap pembelian juga mengumpulkan poin reward yang bisa ditukar hadiah!`
+      keywords: ['rendang', 'padang', 'minang', 'sejarah rendang'],
+      jawaban: `🍛 **Sejarah Rendang**\n\n` +
+               `Rendang adalah masakan khas Minangkabau yang berasal dari Sumatera Barat.\n\n` +
+               `📜 **Filosofi**: Rendang melambangkan musyawarah dan kebersamaan:\n` +
+               `• Daging sapi (pemimpin) - simbol kepala adat\n` +
+               `• Santan (ulama) - simbol pengetahuan agama\n` +
+               `• Cabai (pemuda) - simbol semangat juang\n\n` +
+               `⏳ **Proses memasak 7 jam** mencerminkan kesabaran dan ketelitian.\n\n` +
+               `🌏 UNESCO mengakui rendang sebagai warisan budaya tak benda Indonesia.`
     },
-    // --- TOPIK 2: RENDANG ---
+    // --- TOPIK 2: SEJARAH GUDEG ---
     {
-      keywords: ['rendang', 'padang', 'minang'],
-      jawaban: `🍛 **Rendang Padang**\n` +
-               `Asal: Sumatera Barat\n` +
-               `UMKM: Mak Yun\n` +
-               `Harga: Rp45.000\n` +
-               `Deskripsi: Rendang asli Minang dengan rempah tradisional, dimasak 7 jam.\n\n` +
-               `🛒 **Cara beli**: Kunjungi halaman Kuliner Daerah, cari "Rendang Mak Yun", tambah ke keranjang, lalu checkout.`
+      keywords: ['gudeg', 'jogja', 'yogyakarta', 'sejarah gudeg'],
+      jawaban: `🥘 **Sejarah Gudeg**\n\n` +
+               `Gudeg adalah makanan khas Yogyakarta yang terbuat dari nangka muda.\n\n` +
+               `📜 **Sejarah**:\n` +
+               `• Berasal dari masa Kerajaan Mataram Islam\n` +
+               `• Awalnya disajikan untuk keluarga kerajaan\n` +
+               `• Sekarang jadi ikon kuliner Jogja\n\n` +
+               `🍯 **Keunikan**: Proses memasak selama berjam-jam dengan gula aren\n` +
+               `menghasilkan rasa manis legit yang khas.\n\n` +
+               `🥢 **Penyajian**: Disajikan dengan nasi, ayam, telur, dan sambal krecek.`
     },
-    // --- TOPIK 3: GUDEG ---
+    // --- TOPIK 3: SEJARAH SATE MADURA ---
     {
-      keywords: ['gudeg', 'jogja', 'yogyakarta'],
-      jawaban: `🥘 **Gudeg Jogja**\n` +
-               `Asal: Yogyakarta\n` +
-               `UMKM: Bu Gandes\n` +
-               `Harga: Rp30.000\n` +
-               `Deskripsi: Gudeg manis legit dengan nasi, ayam, telur, dan sambal krecek.\n\n` +
-               `🛒 **Cara beli**: Tersedia di kategori "Kuliner Jawa". Tambah ke keranjang dan checkout.`
+      keywords: ['sate', 'madura', 'sejarah sate'],
+      jawaban: `🍢 **Sejarah Sate Madura**\n\n` +
+               `Sate Madura adalah makanan khas Jawa Timur.\n\n` +
+               `📜 **Sejarah**:\n` +
+               `• Berasal dari Pulau Madura\n` +
+               `• Awalnya adalah makanan para nelayan dan petani\n` +
+               `• Sekarang jadi kuliner favorit di seluruh Indonesia\n\n` +
+               `🥜 **Ciri khas**: Bumbu kacang yang kental dan manis\n\n` +
+               `🍢 **Filosofi**: Menggambarkan keragaman bumbu sebagai\n` +
+               `simbol akulturasi budaya Madura dengan pengaruh luar.`
     },
-    // --- TOPIK 4: SATE MADURA ---
+    // --- TOPIK 4: SEJARAH PEMPEK ---
     {
-      keywords: ['sate', 'madura'],
-      jawaban: `🍢 **Sate Madura**\n` +
-               `Asal: Jawa Timur\n` +
-               `UMKM: Pak Samin\n` +
-               `Harga: Rp25.000\n` +
-               `Deskripsi: Sate ayam dengan bumbu kacang kental dan lontong.\n\n` +
-               `🛒 **Cara beli**: Pesan sekarang di halaman produk Sate Madura.`
+      keywords: ['pempek', 'palembang', 'sejarah pempek'],
+      jawaban: `🍲 **Sejarah Pempek**\n\n` +
+               `Pempek adalah makanan khas Palembang, Sumatera Selatan.\n\n` +
+               `📜 **Sejarah**:\n` +
+               `• Berasal dari masa Kerajaan Sriwijaya (abad ke-7)\n` +
+               `• Nama "pempek" berasal dari kata "apek" (kakek)\n` +
+               `• Konon diciptakan oleh seorang kakek tua di Palembang\n\n` +
+               `🐟 **Bahan utama**: Ikan tenggiri atau belida yang digiling halus.\n\n` +
+               `🍜 **Kuah cuko**: Kuah asam pedas manis yang jadi ciri khas pempek.`
     },
-    // --- TOPIK 5: PEMPEK ---
+    // --- TOPIK 5: SEJARAH RAWON ---
     {
-      keywords: ['pempek', 'palembang'],
-      jawaban: `🍲 **Pempek Palembang**\n` +
-               `Asal: Sumatera Selatan\n` +
-               `UMKM: Kapal Saga\n` +
-               `Harga: Rp35.000\n` +
-               `Deskripsi: Pempek ikan dengan kuah cuko asam pedas manis.\n\n` +
-               `🛒 **Cara beli**: Tersedia di marketplace. Jangan lupa tambahkan ekstra cuko!`
+      keywords: ['rawon', 'sejarah rawon', 'rawon hitam'],
+      jawaban: `🍖 **Sejarah Rawon**\n\n` +
+               `Rawon adalah sup daging khas Jawa Timur.\n\n` +
+               `📜 **Sejarah**:\n` +
+               `• Berasal dari era Kerajaan Majapahit\n` +
+               `• Awalnya adalah makanan para prajurit\n` +
+               `• Warna hitam berasal dari kluwek (kepayang)\n\n` +
+               `🖤 **Keunikan**: Kuah hitam pekat dengan aroma khas\n\n` +
+               `🥩 **Penyajian**: Disajikan dengan nasi, tauge, dan sambal.`
     },
-    // --- TOPIK 6: DAFTAR UMKM ---
+    // --- TOPIK 6: SEJARAH AYAM BETUTU ---
     {
-      keywords: ['umkm', 'penjual', 'daftar umkm', 'jualan'],
-      jawaban: `🏪 **Daftar sebagai UMKM**\n` +
-               `Ingin produk kuliner daerahmu dikenal luas? Daftar UMKM sekarang!\n\n` +
-               `1️⃣ Klik menu "Bergabung" > "Daftar UMKM"\n` +
-               `2️⃣ Isi formulir lengkap dengan data usaha\n` +
-               `3️⃣ Upload foto produk dan dokumen pendukung\n` +
-               `4️⃣ Tim kami akan verifikasi dalam 1x24 jam\n\n` +
-               `Dapatkan fitur gratis untuk memulai!`
+      keywords: ['ayam betutu', 'bali', 'sejarah betutu'],
+      jawaban: `🐔 **Sejarah Ayam Betutu**\n\n` +
+               `Ayam betutu adalah makanan khas Bali.\n\n` +
+               `📜 **Sejarah**:\n` +
+               `• Berasal dari tradisi kuliner masyarakat Bali\n` +
+               `• "Betutu" berarti "dipanggang" dalam bahasa Bali\n` +
+               `• Awalnya disajikan untuk upacara keagamaan\n\n` +
+               `🌿 **Bumbu base genep**: Campuran 10+ rempah khas Bali\n\n` +
+               `🔥 **Proses**: Dimasak dengan api lambat selama 5-6 jam.`
     },
-    // --- TOPIK 7: REWARD & POIN ---
+    // --- TOPIK 7: SEJARAH COTO MAKASSAR ---
     {
-      keywords: ['reward', 'poin', 'tukar poin', 'hadiah'],
-      jawaban: `🎁 **Program Reward**\n` +
-               `Setiap pembelian di CitaRasa akan mendapatkan poin:\n` +
-               `• Setiap Rp10.000 = 10 poin\n` +
-               `• Poin bisa ditukar dengan voucher belanja\n` +
-               `• Reward spesial: merchandise, kelas masak, peralatan UMKM\n\n` +
-               `🔍 Cek halaman Reward untuk melihat katalog lengkap!`
+      keywords: ['coto', 'makassar', 'sejarah coto'],
+      jawaban: `🍲 **Sejarah Coto Makassar**\n\n` +
+               `Coto Makassar adalah sup khas Sulawesi Selatan.\n\n` +
+               `📜 **Sejarah**:\n` +
+               `• Berasal dari budaya kuliner Bugis-Makassar\n` +
+               `• Awalnya adalah makanan para bangsawan\n` +
+               `• Sekarang jadi ikon kuliner Makassar\n\n` +
+               `🥩 **Bahan**: Daging sapi dan jeroan dengan kuah kacang\n\n` +
+               `🍚 **Penyajian**: Disajikan dengan ketupat dan sambal.`
     },
-    // --- TOPIK 8: AFILIASI ---
+    // --- TOPIK 8: SEJARAH PAPEDA ---
     {
-      keywords: ['afiliasi', 'komisi', 'promosi'],
-      jawaban: `🤝 **Program Afiliasi**\n` +
-               `Dapatkan komisi dengan mempromosikan produk kuliner daerah:\n` +
-               `• Daftar gratis, dapatkan link unik\n` +
-               `• Komisi 5-15% dari setiap penjualan\n` +
-               `• Pantau performa di dashboard afiliasi\n\n` +
-               `💰 Mulai dapatkan penghasilan pasif sekarang!`
+      keywords: ['papeda', 'papua', 'maluku', 'sejarah papeda'],
+      jawaban: `🍚 **Sejarah Papeda**\n\n` +
+               `Papeda adalah makanan khas Papua dan Maluku.\n\n` +
+               `📜 **Sejarah**:\n` +
+               `• Berasal dari tradisi kuliner masyarakat adat Papua\n` +
+               `• Bahan dasar sagu sudah digunakan sejak zaman prasejarah\n` +
+               `• Jadi makanan pokok masyarakat di wilayah timur Indonesia\n\n` +
+               `🌴 **Bahan**: Sagu yang diolah menjadi bubur kental\n\n` +
+               `🐟 **Penyajian**: Disajikan dengan ikan kuah kuning.`
     },
-    // --- TOPIK 9: FITUR PREMIUM ---
+    // --- TOPIK 9: SEJARAH TINUTUAN ---
     {
-      keywords: ['premium', 'fitur premium', 'berbayar'],
-      jawaban: `👑 **Fitur Premium untuk Penjual**\n` +
-               `Tingkatkan penjualan dengan fitur eksklusif:\n` +
-               `• Dashboard analitik real-time\n` +
-               `• Promosi prioritas di halaman utama\n` +
-               `• Pelatihan digital marketing\n` +
-               `• Dukungan prioritas\n\n` +
-               `Biaya mulai Rp50.000/bulan. Klik menu Premium untuk info lengkap.`
+      keywords: ['tinutuan', 'manado', 'bubur manado', 'sejarah tinutuan'],
+      jawaban: `🥣 **Sejarah Tinutuan (Bubur Manado)**\n\n` +
+               `Tinutuan adalah bubur khas Manado, Sulawesi Utara.\n\n` +
+               `📜 **Sejarah**:\n` +
+               `• Berasal dari tradisi masyarakat Minahasa\n` +
+               `• Awalnya adalah makanan sederhana para petani\n` +
+               `• Sekarang jadi ikon kuliner Manado\n\n` +
+               `🌿 **Isian**: Bayam, kangkung, jagung, labu kuning, dan singkong.\n\n` +
+               `🥄 **Keunikan**: Kaya serat dan sayuran, cocok untuk sarapan sehat.`
     },
-    // --- TOPIK 10: AI SEJARAH ---
+    // --- TOPIK 10: SEJARAH SOTO BANJAR ---
     {
-      keywords: ['sejarah', 'ai sejarah', 'tanya makanan'],
-      jawaban: `🤖 **AI Sejarah Kuliner**\n` +
-               `Ingin tahu asal-usul makanan favoritmu? Gunakan fitur AI Sejarah!\n\n` +
-               `• Tanyakan sejarah rendang, sate, gudeg, dll\n` +
-               `• Fakta unik dan filosofi di balik makanan\n` +
-               `• Database 30+ makanan Nusantara\n\n` +
-               `🔍 Klik card "AI Sejarah" di halaman utama atau menu AI Sejarah.`
+      keywords: ['soto banjar', 'banjarmasin', 'kalimantan selatan', 'sejarah soto banjar'],
+      jawaban: `🍜 **Sejarah Soto Banjar**\n\n` +
+               `Soto Banjar adalah soto khas Banjarmasin, Kalimantan Selatan.\n\n` +
+               `📜 **Sejarah**:\n` +
+               `• Berasal dari budaya kuliner masyarakat Banjar\n` +
+               `• Awalnya disajikan untuk acara adat dan hajatan\n` +
+               `• Sekarang jadi kuliner favorit di Kalimantan\n\n` +
+               `🐔 **Bahan**: Daging ayam dengan kuah bening gurih\n\n` +
+               `🍚 **Penyajian**: Disajikan dengan ketupat dan sambal.`
     },
-    // --- TOPIK 11: NUSAQUIZ ---
-    {
-      keywords: ['kuis', 'quiz', 'nusaquiz', 'game', 'permainan'],
-      jawaban: `🎮 **NusaQuiz - Gamified Culinary Quiz**\n\n` +
-               `Uji pengetahuan kulinermu dan dapatkan poin!\n\n` +
-               `• 10 pertanyaan seputar kuliner Nusantara\n` +
-               `• Setiap jawaban benar = 10 poin\n` +
-               `• Streak 3x berturut-turut = bonus 5 poin\n` +
-               `• Poin bisa ditukar dengan reward di halaman Reward\n\n` +
-               `👉 Coba sekarang di bagian "NusaQuiz" di halaman utama!`
-    },
-    // --- TOPIK 12: PELESTARIAN BUDAYA ---
+    // --- TOPIK 11: PELESTARIAN BUDAYA ---
     {
       keywords: ['budaya', 'warisan', 'tradisi', 'nilai budaya', 'filosofi', 'kearifan lokal'],
       jawaban: `🌏 **Warisan Budaya Kuliner Nusantara**\n\n` +
                `Setiap makanan di Indonesia menyimpan filosofi dan nilai budaya:\n\n` +
-               `🍛 **Rendang** - Melambangkan musyawarah (daging sapi = pemimpin, santan = ulama, cabe = pemuda)\n` +
+               `🍛 **Rendang** - Melambangkan musyawarah (daging = pemimpin, santan = ulama, cabe = pemuda)\n` +
                `🥘 **Gudeg** - Simbol kesederhanaan dan kehangatan masyarakat Jawa\n` +
                `🍢 **Sate Madura** - Mencerminkan keragaman bumbu (akulturasi budaya)\n\n` +
-               `💡 CitaRasa hadir untuk menjaga warisan ini tetap hidup di era digital!`
+               `💡 AI Sejarah CitaRasa hadir untuk menjaga warisan ini tetap hidup di era digital!`
     },
-    // --- TOPIK 13: ANCAMAN KEPUNAHAN ---
+    // --- TOPIK 12: ANCAMAN KEPUNAHAN ---
     {
       keywords: ['punah', 'terancam', 'hilang', 'generasi muda', 'milenial', 'zaman now'],
       jawaban: `📉 **Ancaman Kepunahan Kuliner Daerah**\n\n` +
                `FAO (2023) mencatat lebih dari 70% makanan khas daerah di Asia Tenggara terancam punah.\n\n` +
                `Penyebab utama:\n` +
                `• Pergeseran preferensi ke makanan instan & internasional\n` +
-               `• Kurangnya akses informasi kuliner lokal\n` +
+               `• Kurangnya akses informasi sejarah dan filosofi kuliner\n` +
                `• Minimnya promosi dan digitalisasi UMKM\n\n` +
-               `🛡️ CitaRasa hadir sebagai gerakan pelestarian:\n` +
-               `✅ AI Sejarah → Edukasi budaya\n` +
+               `🛡️ AI Sejarah CitaRasa hadir sebagai gerakan pelestarian:\n` +
+               `✅ Edukasi sejarah & filosofi makanan\n` +
                `✅ NusaQuiz → Gamifikasi literasi kuliner\n` +
                `✅ Pemberdayaan UMKM → Ekonomi berkelanjutan`
     },
-    // --- TOPIK 14: INDONESIA EMAS 2045 ---
+    // --- TOPIK 13: INDONESIA EMAS 2045 ---
     {
       keywords: ['indonesia emas', '2045', 'visi', 'masa depan'],
-      jawaban: `🇮🇩 **CitaRasa untuk Indonesia Emas 2045**\n\n` +
+      jawaban: `🇮🇩 **AI Sejarah untuk Indonesia Emas 2045**\n\n` +
                `Kuliner bukan sekadar makanan, melainkan identitas bangsa.\n\n` +
-               `Peran CitaRasa dalam visi Indonesia Emas 2045:\n` +
-               `• Mencetak generasi muda yang cinta budaya lokal\n` +
+               `Peran AI Sejarah CitaRasa dalam visi Indonesia Emas 2045:\n` +
+               `• Mencetak generasi muda yang cinta sejarah budaya lokal\n` +
                `• Mengangkat UMKM kuliner ke panggung global\n` +
                `• Menjaga keberlanjutan warisan kuliner Nusantara\n\n` +
                `💪 Dengan teknologi dan kearifan lokal, kita wujudkan Indonesia Emas!`
+    },
+    // --- TOPIK 14: CARA BELI (PEMBERDAYAAN UMKM) ---
+    {
+      keywords: ['beli', 'cara beli', 'order', 'pesan', 'transaksi', 'checkout'],
+      jawaban: `🛒 **Cara Membeli Kuliner Daerah di CitaRasa:**\n\n` +
+               `1️⃣ **Pilih Produk** - Jelajahi halaman Kuliner Daerah\n` +
+               `2️⃣ **Klik "Tambah ke Keranjang"** - Produk masuk ke keranjang\n` +
+               `3️⃣ **Isi Data Pengiriman** - Alamat lengkap dan pilih kurir\n` +
+               `4️⃣ **Pilih Pembayaran** - Transfer Bank, E-Wallet, atau COD\n` +
+               `5️⃣ **Konfirmasi** - Pesanan diproses, makanan sampai ke rumah!\n\n` +
+               `💡 Setiap pembelian juga mengumpulkan poin reward!`
     }
   ];
 
 
   // ============================================================
-  // BAGIAN 4.2: FUNGSI PENENTU OUTPUT AI (cariJawaban)
+  // BAGIAN 4.2: AI SEJARAH - FUNGSI PENENTU OUTPUT
   // ============================================================
-  // INI ADALAH JANTUNG DARI RULE-BASED SYSTEM!
+  // INI ADALAH JANTUNG DARI SISTEM AI SEJARAH!
   //
   //  FUNGSI: MENERIMA INPUT → MEMPROSES DENGAN ATURAN → OUTPUT
   //
   //  ALUR LENGKAP (INPUT → OUTPUT):
   //  ============================================================
-  //  1. INPUT: User mengirim pertanyaan
-  //     Contoh: "bagaimana cara beli rendang?"
+  //  1. INPUT: User mengirim pertanyaan tentang kuliner
+  //     Contoh: "apa sejarah rendang?"
   //
   //  2. PREPROCESSING: Ubah ke huruf kecil (toLowerCase)
-  //     "bagaimana cara beli rendang?"
+  //     "apa sejarah rendang?"
   //
   //  3. DETEKSI SAPAAN (Aturan Khusus #1)
-  //     Jika input = "halo/hai/pagi/siang" → output sapaan
-  //     Jika input = "makasih/terima kasih" → output terima kasih
+  //     Jika input = "halo/hai/pagi" → output sapaan
   //
   //  4. RULE-BASED SCORING (Aturan Utama!)
-  //     Loop setiap item di chatbotKnowledge:
+  //     Loop setiap item di aiSejarahKnowledge:
   //       - Jika kata kunci ADA di input → +15 poin
   //       - Jika kata kunci SEBAGIAN ada → +5 poin
   //     Pilih item dengan skor TERTINGGI
@@ -706,12 +735,11 @@
   //     Jika semua aturan tidak terpenuhi,
   //     kirim daftar topik yang bisa ditanyakan
   //
-  //  8. OUTPUT: Jawaban dikirim ke user
+  //  8. OUTPUT: Informasi sejarah dikirim ke user
   // ============================================================
 
-  function cariJawaban(pertanyaan) {
+  function cariJawabanAI(pertanyaan) {
     // --- VALIDASI INPUT ---
-    // Aturan: Jika input kosong, output peringatan
     if (!pertanyaan || pertanyaan.trim() === '') {
       return 'Silakan tulis pertanyaan terlebih dahulu.';
     }
@@ -719,42 +747,35 @@
     const lowerQ = pertanyaan.toLowerCase().trim();
     
     // --- ATURAN KHUSUS #1: DETEKSI SAPAAN ---
-    // Jika input adalah sapaan, output sapaan balasan
     if (lowerQ.match(/^(halo|hai|hey|hi|pagi|siang|sore|malam)/)) {
-      return '🌾 Halo! Ada yang bisa saya bantu tentang pelestarian kuliner daerah?';
+      return '🌾 Halo! Saya AI Sejarah CitaRasa. Ada yang bisa saya bantu tentang sejarah kuliner Nusantara?';
     }
 
-    // --- ATURAN KHUSUS #2: DETEKSI UCAPAN TERIMA KASIH ---
     if (lowerQ.match(/^(makasih|terima kasih|thanks)/)) {
-      return 'Sama-sama! Senang bisa membantu melestarikan kuliner daerah bersama kamu. Ada lagi yang ingin ditanyakan?';
+      return 'Sama-sama! Senang bisa membantu melestarikan sejarah kuliner Nusantara. Ada lagi yang ingin ditanyakan?';
     }
 
     // ============================================================
     // ATURAN UTAMA: RULE-BASED SCORING SYSTEM
     // ============================================================
-    // Inilah yang MENENTUKAN OUTPUT AI!
-    // Sistem menghitung skor untuk setiap item pengetahuan
+    // Inilah yang MENENTUKAN OUTPUT AI SEJARAH!
+    // Sistem menghitung skor untuk setiap pengetahuan
     // berdasarkan kemunculan kata kunci di input user.
     // ============================================================
 
     let bestMatch = null;
     let highestScore = 0;
 
-    // --- LOOPING SETIAP PENGETAHUAN ---
-    for (let item of chatbotKnowledge) {
+    for (let item of aiSejarahKnowledge) {
       let score = 0;
       
-      // --- HITUNG SKOR BERDASARKAN KATA KUNCI ---
       for (let keyword of item.keywords) {
-        
-        // ATURAN SCORING #1: EXACT MATCH
-        // Jika kata kunci muncul PERSIS di input → +15 poin
+        // ATURAN SCORING #1: EXACT MATCH → +15 poin
         if (lowerQ.includes(keyword)) {
           score += 15;
         }
         
-        // ATURAN SCORING #2: PARTIAL MATCH (substring)
-        // Jika ada kemiripan kata → +5 poin
+        // ATURAN SCORING #2: PARTIAL MATCH → +5 poin
         const words = lowerQ.split(/\s+/);
         for (let word of words) {
           if (word.length > 3 && keyword.includes(word)) {
@@ -763,7 +784,6 @@
         }
       }
       
-      // --- SIMPAN ITEM DENGAN SKOR TERTINGGI ---
       if (score > highestScore) {
         highestScore = score;
         bestMatch = item;
@@ -771,20 +791,13 @@
     }
 
     // --- DECISION RULE: APAKAH SKOR CUKUP TINGGI? ---
-    // ATURAN: Jika skor > 10, jawaban dianggap valid
-    // Jika skor ≤ 10, tidak cukup bukti → cari alternatif
     if (highestScore > 10 && bestMatch) {
-      // OUTPUT: Kirim jawaban terbaik!
       return bestMatch.jawaban;
     }
 
     // ============================================================
     // FALLBACK #1: CEK DATABASE KULINER
     // ============================================================
-    // Jika tidak ada match di chatbotKnowledge,
-    // cek apakah user bertanya tentang makanan tertentu
-    // ============================================================
-
     for (let makanan of kulinerDaerah) {
       if (lowerQ.includes(makanan.nama.toLowerCase())) {
         return `🍽️ **${makanan.nama}**\n` +
@@ -798,99 +811,82 @@
     // ============================================================
     // FALLBACK #2: PESAN DEFAULT
     // ============================================================
-    // Jika semua aturan tidak terpenuhi,
-    // tampilkan daftar topik yang bisa ditanyakan
-    // ============================================================
-
-    return 'Maaf, saya belum paham. Coba tanyakan tentang:\n\n' +
-           '• Cara beli kuliner daerah\n' +
-           '• Informasi rendang/gudeg/sate/pempek\n' +
-           '• Daftar UMKM\n' +
-           '• Program reward\n' +
-           '• Afiliasi\n' +
-           '• Fitur premium\n' +
-           '• NusaQuiz (kuis kuliner)\n' +
-           '• AI Sejarah\n' +
-           '• Pelestarian budaya dan kearifan lokal\n' +
-           '• Visi Indonesia Emas 2045';
+    return 'Maaf, saya belum paham. Saya adalah AI Sejarah CitaRasa.\n\n' +
+           'Coba tanyakan tentang:\n' +
+           '• Sejarah rendang / gudeg / sate / pempek / rawon\n' +
+           '• Filosofi dan nilai budaya kuliner Nusantara\n' +
+           '• Ancaman kepunahan kuliner daerah\n' +
+           '• Peran kuliner untuk Indonesia Emas 2045\n' +
+           '• Cara beli kuliner di CitaRasa';
   }
 
 
   // ============================================================
-  // BAGIAN 4.3: CHATBOT UI (ANTARMUKA PENGGUNA)
+  // BAGIAN 4.3: AI SEJARAH - UI (INTERFACE)
   // ============================================================
-  // FITUR UI CHATBOT:
-  // 1. Floating button untuk toggle chatbot
-  // 2. Window chat dengan pesan user (kanan) dan bot (kiri)
-  // 3. Input field + tombol kirim
-  // 4. Enter key support
-  // 5. Auto-scroll ke pesan terbaru
-  // 6. Close button dan click outside untuk tutup
-  // 7. Format teks bold dengan **markdown**
-  // 8. Line break otomatis dari \n ke <br>
+  // Antarmuka pengguna untuk AI Sejarah
   // ============================================================
 
-  const chatbotToggle = document.getElementById('chatbot-toggle');
-  const chatbot = document.getElementById('chatbot-citarasa');
-  const chatbotClose = document.getElementById('chatbot-close');
-  const chatbotMessages = document.getElementById('chatbot-messages');
-  const chatbotInput = document.getElementById('chatbot-input');
-  const chatbotSend = document.getElementById('chatbot-send');
+  const aiToggle = document.getElementById('ai-sejarah-toggle');
+  const aiWindow = document.getElementById('ai-sejarah-window');
+  const aiClose = document.getElementById('ai-sejarah-close');
+  const aiMessages = document.getElementById('ai-sejarah-messages');
+  const aiInput = document.getElementById('ai-sejarah-input');
+  const aiSend = document.getElementById('ai-sejarah-send');
 
-  function addMessage(text, sender) {
+  function addAIMessage(text, sender) {
     const msgDiv = document.createElement('div');
-    msgDiv.className = `chatbot-message ${sender}`;
+    msgDiv.className = `ai-message ${sender}`;
     
     let formattedText = text.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
     formattedText = formattedText.replace(/\n/g, '<br>');
     msgDiv.innerHTML = formattedText;
     
-    chatbotMessages.appendChild(msgDiv);
-    chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
+    aiMessages.appendChild(msgDiv);
+    aiMessages.scrollTop = aiMessages.scrollHeight;
   }
 
-  function sendMessage() {
-    const userText = chatbotInput.value.trim();
+  function sendAIMessage() {
+    const userText = aiInput.value.trim();
     if (!userText) return;
 
-    addMessage(userText, 'user');
-    chatbotInput.value = '';
+    addAIMessage(userText, 'user');
+    aiInput.value = '';
 
-    // Simulasi jeda "mengetik" (seperti AI sedang memproses)
+    // Simulasi AI sedang memproses
     setTimeout(() => {
-      // Panggil fungsi Rule-Based untuk menentukan OUTPUT!
-      const jawaban = cariJawaban(userText);
-      addMessage(jawaban, 'bot');
+      const jawaban = cariJawabanAI(userText);
+      addAIMessage(jawaban, 'ai');
     }, 800);
   }
 
-  if (chatbotSend) {
-    chatbotSend.addEventListener('click', sendMessage);
+  if (aiSend) {
+    aiSend.addEventListener('click', sendAIMessage);
   }
   
-  if (chatbotInput) {
-    chatbotInput.addEventListener('keypress', (e) => {
-      if (e.key === 'Enter') sendMessage();
+  if (aiInput) {
+    aiInput.addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') sendAIMessage();
     });
   }
 
-  if (chatbotToggle) {
-    chatbotToggle.addEventListener('click', () => {
-      chatbot.style.display = 'flex';
-      chatbotInput.focus();
+  if (aiToggle) {
+    aiToggle.addEventListener('click', () => {
+      aiWindow.style.display = 'flex';
+      aiInput.focus();
     });
   }
 
-  if (chatbotClose) {
-    chatbotClose.addEventListener('click', () => {
-      chatbot.style.display = 'none';
+  if (aiClose) {
+    aiClose.addEventListener('click', () => {
+      aiWindow.style.display = 'none';
     });
   }
 
   document.addEventListener('click', (e) => {
-    if (chatbot && chatbotToggle) {
-      if (!chatbot.contains(e.target) && !chatbotToggle.contains(e.target) && chatbot.style.display === 'flex') {
-        chatbot.style.display = 'none';
+    if (aiWindow && aiToggle) {
+      if (!aiWindow.contains(e.target) && !aiToggle.contains(e.target) && aiWindow.style.display === 'flex') {
+        aiWindow.style.display = 'none';
       }
     }
   });
