@@ -26,12 +26,6 @@
   // ============================================================
   // BAGIAN 1: DATABASE KULINER DAERAH
   // ============================================================
-  // Database ini menyimpan informasi makanan khas Nusantara
-  // yang digunakan untuk:
-  // 1. Menampilkan katalog produk di halaman utama
-  // 2. Sebagai sumber data untuk AI Sejarah (pencocokan nama makanan)
-  // 3. Mendukung fitur rekomendasi berbasis lokasi
-  // ============================================================
 
   const kulinerDaerah = [
     {
@@ -66,9 +60,6 @@
 
   // ============================================================
   // BAGIAN 2: NUSAQUIZ - GAMIFIKASI EDUKASI KULINER
-  // ============================================================
-  // Kuis interaktif untuk menguji pengetahuan generasi muda
-  // tentang kuliner Nusantara. Setiap jawaban benar memberi poin.
   // ============================================================
 
   const quizQuestions = [
@@ -146,8 +137,6 @@
 
   // ============================================================
   // BAGIAN 3: NUSAQUIZ - STATE MANAGEMENT
-  // ============================================================
-  // Mengelola status kuis: skor, streak, timer, dan progres
   // ============================================================
 
   let currentQuizState = {
@@ -454,77 +443,11 @@
   //  AI Sejarah adalah sistem berbasis RULE-BASED yang berfungsi
   //  untuk memberikan edukasi tentang sejarah, filosofi, dan
   //  nilai budaya kuliner Nusantara.
-  //
-  //  BUKAN CHATBOT BIASA! Ini adalah SISTEM AI yang:
-  //  - Menerima INPUT berupa pertanyaan dari pengguna
-  //  - Memproses dengan ATURAN (scoring, pattern matching)
-  //  - Menghasilkan OUTPUT berupa informasi sejarah kuliner
-  //
-  //  ============================================================
-  //  METODE: PATTERN MATCHING DENGAN SCORING SYSTEM
-  //  ============================================================
-  //  
-  //  ALUR KERJA AI SEJARAH (DARI INPUT KE OUTPUT):
-  //  ------------------------------------------------------------
-  //  STEP 1: INPUT
-  //          User bertanya tentang kuliner Nusantara
-  //          Contoh: "apa sejarah rendang?"
-  //
-  //  STEP 2: PREPROCESSING
-  //          Sistem mengubah input ke huruf kecil (toLowerCase)
-  //          "apa sejarah rendang?"
-  //
-  //  STEP 3: RULE-BASED SCORING (INTI SISTEM!)
-  //          Sistem mencocokkan kata kunci dari input
-  //          dengan database pengetahuan (aiSejarahKnowledge)
-  //          ----------------------------------------------------
-  //          ATURAN SCORING:
-  //          - Jika kata kunci EXACT match   → +15 poin
-  //          - Jika kata kunci sebagian      → +5 poin
-  //          ----------------------------------------------------
-  //          Contoh scoring:
-  //          "sejarah rendang" → match dengan keywords ['sejarah', 'rendang']
-  //                            → +15 + 15 = 30 poin
-  //                            → JAWABAN TERBAIK!
-  //
-  //  STEP 4: SELEKSI JAWABAN (DECISION RULE)
-  //          ATURAN: Pilih item dengan skor TERTINGGI
-  //          Jika skor > 10 → jawaban dianggap valid
-  //          Jika skor ≤ 10 → lanjut ke FALLBACK
-  //
-  //  STEP 5: OUTPUT
-  //          Sistem mengirimkan informasi sejarah ke user
-  //          "Rendang berasal dari Sumatera Barat..."
-  //
-  //  ============================================================
-  //  KELEBIHAN RULE-BASED PADA AI SEJARAH:
-  //  ============================================================
-  //  ✅ Akurasi 100% - Informasi sejarah yang diberikan sudah
-  //     terverifikasi dan terpetakan dengan baik
-  //  ✅ Tidak ada halusinasi - Jawaban selalu sesuai database
-  //  ✅ Cepat dan ringan - Cocok untuk MVP CitaRasa
-  //  ✅ Mudah diperbarui - Tambah pengetahuan baru tanpa
-  //     mengubah sistem
-  //  ✅ Transparan - Setiap jawaban bisa dilacak sumbernya
-  //
-  //  ============================================================
-  //  KETERBATASAN:
-  //  ============================================================
-  //  ❌ Hanya bisa menjawab berdasarkan database yang tersedia
-  //  ❌ Tidak bisa memahami pertanyaan di luar domain kuliner
-  //  ❌ Tidak bisa belajar dari interaksi (sistem statis)
-  //  ============================================================
+  // ============================================================
 
 
   // ============================================================
   // BAGIAN 4.1: AI SEJARAH - KNOWLEDGE BASE
-  // ============================================================
-  // Database pengetahuan untuk AI Sejarah.
-  // Setiap objek berisi:
-  //   - keywords: kata kunci yang AKAN MEMICU pengetahuan
-  //   - jawaban: INFORMASI SEJARAH yang akan diberikan
-  //
-  //  TOTAL PENGETAHUAN: 14+ topik sejarah kuliner
   // ============================================================
 
   const aiSejarahKnowledge = [
@@ -702,44 +625,8 @@
   // ============================================================
   // BAGIAN 4.2: AI SEJARAH - FUNGSI PENENTU OUTPUT
   // ============================================================
-  // INI ADALAH JANTUNG DARI SISTEM AI SEJARAH!
-  //
-  //  FUNGSI: MENERIMA INPUT → MEMPROSES DENGAN ATURAN → OUTPUT
-  //
-  //  ALUR LENGKAP (INPUT → OUTPUT):
-  //  ============================================================
-  //  1. INPUT: User mengirim pertanyaan tentang kuliner
-  //     Contoh: "apa sejarah rendang?"
-  //
-  //  2. PREPROCESSING: Ubah ke huruf kecil (toLowerCase)
-  //     "apa sejarah rendang?"
-  //
-  //  3. DETEKSI SAPAAN (Aturan Khusus #1)
-  //     Jika input = "halo/hai/pagi" → output sapaan
-  //
-  //  4. RULE-BASED SCORING (Aturan Utama!)
-  //     Loop setiap item di aiSejarahKnowledge:
-  //       - Jika kata kunci ADA di input → +15 poin
-  //       - Jika kata kunci SEBAGIAN ada → +5 poin
-  //     Pilih item dengan skor TERTINGGI
-  //
-  //  5. DECISION RULE (Aturan Penentu)
-  //     Jika skor > 10 → jawaban valid, KIRIM OUTPUT!
-  //     Jika skor ≤ 10 → lanjut ke FALLBACK
-  //
-  //  6. FALLBACK #1: CEK DATABASE KULINER
-  //     Cek apakah input menyebut nama makanan tertentu
-  //     Jika ya → kirim informasi makanan tersebut
-  //
-  //  7. FALLBACK #2: PESAN DEFAULT
-  //     Jika semua aturan tidak terpenuhi,
-  //     kirim daftar topik yang bisa ditanyakan
-  //
-  //  8. OUTPUT: Informasi sejarah dikirim ke user
-  // ============================================================
 
   function cariJawabanAI(pertanyaan) {
-    // --- VALIDASI INPUT ---
     if (!pertanyaan || pertanyaan.trim() === '') {
       return 'Silakan tulis pertanyaan terlebih dahulu.';
     }
@@ -755,14 +642,6 @@
       return 'Sama-sama! Senang bisa membantu melestarikan sejarah kuliner Nusantara. Ada lagi yang ingin ditanyakan?';
     }
 
-    // ============================================================
-    // ATURAN UTAMA: RULE-BASED SCORING SYSTEM
-    // ============================================================
-    // Inilah yang MENENTUKAN OUTPUT AI SEJARAH!
-    // Sistem menghitung skor untuk setiap pengetahuan
-    // berdasarkan kemunculan kata kunci di input user.
-    // ============================================================
-
     let bestMatch = null;
     let highestScore = 0;
 
@@ -770,12 +649,10 @@
       let score = 0;
       
       for (let keyword of item.keywords) {
-        // ATURAN SCORING #1: EXACT MATCH → +15 poin
         if (lowerQ.includes(keyword)) {
           score += 15;
         }
         
-        // ATURAN SCORING #2: PARTIAL MATCH → +5 poin
         const words = lowerQ.split(/\s+/);
         for (let word of words) {
           if (word.length > 3 && keyword.includes(word)) {
@@ -790,14 +667,10 @@
       }
     }
 
-    // --- DECISION RULE: APAKAH SKOR CUKUP TINGGI? ---
     if (highestScore > 10 && bestMatch) {
       return bestMatch.jawaban;
     }
 
-    // ============================================================
-    // FALLBACK #1: CEK DATABASE KULINER
-    // ============================================================
     for (let makanan of kulinerDaerah) {
       if (lowerQ.includes(makanan.nama.toLowerCase())) {
         return `🍽️ **${makanan.nama}**\n` +
@@ -808,9 +681,6 @@
       }
     }
 
-    // ============================================================
-    // FALLBACK #2: PESAN DEFAULT
-    // ============================================================
     return 'Maaf, saya belum paham. Saya adalah AI Sejarah CitaRasa.\n\n' +
            'Coba tanyakan tentang:\n' +
            '• Sejarah rendang / gudeg / sate / pempek / rawon\n' +
@@ -823,8 +693,6 @@
 
   // ============================================================
   // BAGIAN 4.3: AI SEJARAH - UI (INTERFACE)
-  // ============================================================
-  // Antarmuka pengguna untuk AI Sejarah
   // ============================================================
 
   const aiToggle = document.getElementById('ai-sejarah-toggle');
@@ -853,7 +721,6 @@
     addAIMessage(userText, 'user');
     aiInput.value = '';
 
-    // Simulasi AI sedang memproses
     setTimeout(() => {
       const jawaban = cariJawabanAI(userText);
       addAIMessage(jawaban, 'ai');
@@ -915,7 +782,6 @@
     }
   };
 
-
   // ============================================================
   // BAGIAN 6: ADD TO CART
   // ============================================================
@@ -927,4 +793,107 @@
     });
   });
 
-})();
+
+  // ============================================================
+  // ============================================================
+  // BAGIAN 7: API PREDIKSI MINAT (RANDOM FOREST)
+  // ============================================================
+  // ============================================================
+  // MENGHUBUNGKAN CITARASA DENGAN AI RANDOM FOREST
+  // ENDPOINT: https://cita-rasa.onrender.com/predict
+  // ============================================================
+
+  const API_URL = 'https://cita-rasa.onrender.com/predict';
+
+  /**
+   * Fungsi untuk memprediksi minat pengguna terhadap kuliner UMKM
+   * @param {Object} data - {usia, status, frekuensi, sumber_info, promosi}
+   * @returns {Promise<Object|null>} {minat, kategori} atau null
+   */
+  async function prediksiMinat(data) {
+    try {
+      const response = await fetch(API_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      const result = await response.json();
+      console.log('✅ Hasil prediksi:', result);
+      return result;
+    } catch (error) {
+      console.error('❌ Gagal memanggil API prediksi:', error);
+      return null;
+    }
+  }
+
+  /**
+   * Fungsi untuk menampilkan prediksi di halaman
+   * Panggil saat tombol "Cek Minat" diklik
+   */
+  async function tampilkanPrediksi() {
+    // Ambil nilai dari input form (default jika tidak ada)
+    const usia = parseInt(document.getElementById('input-usia')?.value) || 1;
+    const status = parseInt(document.getElementById('input-status')?.value) || 1;
+    const frekuensi = parseInt(document.getElementById('input-frekuensi')?.value) || 2;
+    const sumberInfo = parseInt(document.getElementById('input-sumber')?.value) || 1;
+    const promosi = parseInt(document.getElementById('input-promosi')?.value) || 1;
+
+    const dataPengguna = { usia, status, frekuensi, sumber_info: sumberInfo, promosi };
+    const result = await prediksiMinat(dataPengguna);
+    
+    const hasilElement = document.getElementById('hasil-prediksi');
+    if (!hasilElement) {
+      if (result) {
+        alert(`🎯 Prediksi Minat: ${result.minat}/5 (${result.kategori})`);
+      } else {
+        alert('⚠️ Gagal mendapatkan prediksi. Coba lagi nanti.');
+      }
+      return;
+    }
+
+    if (result) {
+      const warnaKategori = result.kategori === 'Tinggi' ? 'text-green-600' : 
+                           result.kategori === 'Sedang' ? 'text-yellow-600' : 'text-red-500';
+      
+      hasilElement.innerHTML = `
+        <div class="bg-gradient-to-r from-green-50 to-emerald-50 border border-green-200 rounded-xl p-5 mt-4 shadow-sm">
+          <p class="font-bold text-green-800 text-lg">🎯 Prediksi Minat Kuliner UMKM</p>
+          <div class="flex items-center gap-4 mt-2">
+            <div class="text-center">
+              <p class="text-sm text-gray-600">Skor Minat</p>
+              <p class="text-3xl font-bold text-indigo-600">${result.minat} <span class="text-base text-gray-400">/ 5</span></p>
+            </div>
+            <div class="h-12 w-px bg-gray-300"></div>
+            <div class="text-center">
+              <p class="text-sm text-gray-600">Kategori</p>
+              <p class="text-xl font-bold ${warnaKategori}">${result.kategori}</p>
+            </div>
+          </div>
+          <p class="text-sm text-gray-500 mt-3">✨ Rekomendasi kuliner akan disesuaikan berdasarkan hasil ini.</p>
+        </div>
+      `;
+    } else {
+      hasilElement.innerHTML = `
+        <div class="bg-red-50 border border-red-200 rounded-xl p-4 mt-4">
+          <p class="text-red-600">⚠️ Gagal mendapatkan prediksi. Silakan coba lagi.</p>
+        </div>
+      `;
+    }
+  }
+
+  // ============================================================
+  // Hubungkan ke tombol (jika ada di HTML)
+  // ============================================================
+  document.addEventListener('DOMContentLoaded', function() {
+    const btnPrediksi = document.getElementById('btn-prediksi');
+    if (btnPrediksi) {
+      btnPrediksi.addEventListener('click', tampilkanPrediksi);
+    }
+  });
+
+})();  // ← PENUTUP FUNGSI UTAMA (JANGAN DIHAPUS!)
