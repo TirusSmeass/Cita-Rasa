@@ -1,6 +1,6 @@
 // ============================================================
 // ============================================================
-// FILE: MOJORASA - UMKM MOJOKERTO & KULINER DAERAH
+// FILE: CITARASA - UMKM MOJOKERTO & KULINER DAERAH
 // VERSI: 4.1 (Update Kuis & Database Kuliner Mojokerto)
 // ============================================================
 // ============================================================
@@ -33,7 +33,7 @@
       daerah: "Kota Mojokerto, Jawa Timur",
       umkm: "UMKM Onde-onde Bo Liem",
       harga: 35000,
-      caraBeli: "Onde-onde khas Mojokerto bisa dibeli langsung di halaman Kuliner Daerah MojoRasa. Klik produk, tambah ke keranjang, lalu checkout."
+      caraBeli: "Onde-onde khas Mojokerto bisa dibeli langsung di halaman Kuliner Daerah CitaRasa. Klik produk, tambah ke keranjang, lalu checkout."
     },
     {
       nama: "Sambel Wader Trowulan",
@@ -47,14 +47,14 @@
       daerah: "Bangsal, Mojokerto",
       umkm: "Sentra Rambak Bangsal",
       harga: 28000,
-      caraBeli: "Kerupuk Rambak kulit sapi asli Bangsal bisa dipesan langsung di halaman produk MojoRasa."
+      caraBeli: "Kerupuk Rambak kulit sapi asli Bangsal bisa dipesan langsung di halaman produk CitaRasa."
     },
     {
       nama: "Sate Keong Trowulan",
       daerah: "Trowulan, Mojokerto",
       umkm: "UMKM Sate Keong Majapahit",
       harga: 18000,
-      caraBeli: "Sate Keong bumbu kacang pedas khas Trowulan bisa dipesan melalui marketplace MojoRasa."
+      caraBeli: "Sate Keong bumbu kacang pedas khas Trowulan bisa dipesan melalui marketplace CitaRasa."
     },
     {
       nama: "Rendang",
@@ -461,7 +461,7 @@
 
 
   // ============================================================
-  // BAGIAN 4: AI SEJARAH & ASISTEN MOJORASA (RULE-BASED SYSTEM)
+  // BAGIAN 4: AI SEJARAH & ASISTEN CITARASA (RULE-BASED SYSTEM)
   // ============================================================
 
   const aiSejarahKnowledge = [
@@ -544,14 +544,14 @@
     // --- TOPIK 10: PELESTARIAN BUDAYA ---
     {
       keywords: ['budaya', 'warisan', 'tradisi', 'nilai budaya', 'filosofi', 'kearifan lokal'],
-      jawaban: `🌏 **Pelestarian Budaya Kuliner di MojoRasa**\n\n` +
+      jawaban: `🌏 **Pelestarian Budaya Kuliner di CitaRasa**\n\n` +
                `Setiap kuliner daerah—mulai dari Onde-onde Mojokerto, Sambel Wader Trowulan, hingga Rendang—menyimpan identitas sejarah.\n\n` +
-               `💡 MojoRasa hadir menghubungkan edukasi sejarah, NusaQuiz, dan pemberdayaan langsung UMKM Mojokerto & Nusantara!`
+               `💡 CitaRasa hadir menghubungkan edukasi sejarah, NusaQuiz, dan pemberdayaan langsung UMKM Mojokerto & Nusantara!`
     },
     // --- TOPIK 11: CARA BELI (PEMBERDAYAAN UMKM) ---
     {
       keywords: ['beli', 'cara beli', 'order', 'pesan', 'transaksi', 'checkout', 'rekomendasi'],
-      jawaban: `🛒 **Rekomendasi & Cara Beli Produk UMKM di MojoRasa:**\n\n` +
+      jawaban: `🛒 **Rekomendasi & Cara Beli Produk UMKM di CitaRasa:**\n\n` +
                `🔥 **Populer dari Mojokerto**: Onde-onde Bo Liem, Sambel Wader Trowulan, Kerupuk Rambak Bangsal, Sate Keong.\n\n` +
                `1️⃣ Pilih produk di menu **Kuliner Daerah** atau **UMKM Mojokerto**\n` +
                `2️⃣ Klik tombol **Tambah ke Keranjang (+)**\n` +
@@ -572,7 +572,7 @@
     const lowerQ = pertanyaan.toLowerCase().trim();
     
     if (lowerQ.match(/^(halo|hai|hey|hi|pagi|siang|sore|malam)/)) {
-      return '🌾 Halo! Saya asisten MojoRasa. Ada yang bisa saya bantu seputar kuliner UMKM Mojokerto atau sejarah kuliner Nusantara?';
+      return '🌾 Halo! Saya asisten CitaRasa. Ada yang bisa saya bantu seputar kuliner UMKM Mojokerto atau sejarah kuliner Nusantara?';
     }
 
     if (lowerQ.match(/^(makasih|terima kasih|thanks)/)) {
@@ -621,7 +621,7 @@
     return 'Maaf, saya belum menemukan info spesifik itu. Coba tanyakan tentang:\n' +
            '• Sejarah Onde-onde Mojokerto / Sambel Wader Trowulan / Kerupuk Rambak Bangsal\n' +
            '• Warisan kuliner era Majapahit (Rawon, Sate Keong, Wedang Secang)\n' +
-           '• Rekomendasi & cara beli produk UMKM di MojoRasa';
+           '• Rekomendasi & cara beli produk UMKM di CitaRasa';
   }
 
   // ============================================================
@@ -727,7 +727,7 @@
   document.querySelectorAll('.add-to-cart').forEach(btn => {
     btn.addEventListener('click', function() {
       const name = this.dataset.name;
-      alert(`✅ "${name}" ditambahkan ke keranjang MojoRasa!\n\nLanjutkan ke halaman checkout untuk mendukung UMKM lokal.`);
+      alert(`✅ "${name}" ditambahkan ke keranjang CitaRasa!\n\nLanjutkan ke halaman checkout untuk mendukung UMKM lokal.`);
     });
   });
 
