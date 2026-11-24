@@ -34,19 +34,20 @@
             <img src="citarasa.png" 
                  alt="CitaRasa Logo" 
                  class="w-11 h-11 rounded-2xl object-cover shadow-sm ring-2 ring-amber-500/20 group-hover:scale-105 transition duration-300"
-                 onerror="this.src='https://via.placeholder.com/40x40/f58421/ffffff?text=MR'">
+                 onerror="this.src='https://via.placeholder.com/40x40/f58421/ffffff?text=CR'">
           </div>
           <div>
-            <span class="text-xl font-extrabold tracking-tight text-stone-900">MOJO<span class="text-amber-600">RASA</span></span>
+            <span class="text-xl font-extrabold tracking-tight text-stone-900">CITA<span class="text-amber-600">RASA</span></span>
             <p class="text-[11px] font-medium tracking-wide text-stone-500 -mt-1">UMKM Mojokerto & kuliner daerah</p>
           </div>
         </a>
 
         <!-- Desktop Menu -->
-        <div class="hidden md:flex items-center gap-7">
+        <div class="hidden md:flex items-center gap-6">
           <a href="#beranda" class="nav-link text-sm font-semibold text-stone-600 hover:text-amber-600 transition">Beranda</a>
           <a href="kuliner.html" class="nav-link text-sm font-semibold text-stone-600 hover:text-amber-600 transition">Kuliner Daerah</a>
           <a href="#umkm" class="nav-link text-sm font-semibold text-stone-600 hover:text-amber-600 transition">UMKM Mojokerto</a>
+          <a href="#pendampingan" class="nav-link text-sm font-semibold text-stone-600 hover:text-amber-600 transition">Pendampingan</a>
           <a href="sejarah.html" class="nav-link text-sm font-semibold text-stone-600 hover:text-amber-600 transition">AI Sejarah</a>
           
           <!-- ===== FITUR DATA METRIC BARU ===== -->
@@ -64,6 +65,7 @@
               <a href="reward.html">🎁 Reward</a>
               <a href="#afiliasi">🤝 Afiliasi</a>
               <a href="leaderboard.html">🏆 Leaderboard</a>
+              <a href="#cp-24jam">📞 CP 24 Jam</a>
             </div>
           </div>
 
@@ -100,6 +102,8 @@
         <a href="#beranda" class="py-2 px-3 rounded-xl text-sm font-medium text-stone-700 hover:bg-amber-50 hover:text-amber-700" onclick="closeMobileMenu()">🏠 Beranda</a>
         <a href="kuliner.html" class="py-2 px-3 rounded-xl text-sm font-medium text-stone-700 hover:bg-amber-50 hover:text-amber-700" onclick="closeMobileMenu()">🍜 Kuliner Daerah</a>
         <a href="#umkm" class="py-2 px-3 rounded-xl text-sm font-medium text-stone-700 hover:bg-amber-50 hover:text-amber-700" onclick="closeMobileMenu()">🏪 UMKM Mojokerto</a>
+        <a href="#pendampingan" class="py-2 px-3 rounded-xl text-sm font-semibold text-emerald-700 bg-emerald-50/70" onclick="closeMobileMenu()">🎓 Pendampingan Mahasiswa</a>
+        <a href="#cp-24jam" class="py-2 px-3 rounded-xl text-sm font-semibold text-amber-700 bg-amber-50/70" onclick="closeMobileMenu()">📞 CP Layanan 24 Jam</a>
         <a href="sejarah.html" class="py-2 px-3 rounded-xl text-sm font-semibold text-indigo-600 bg-indigo-50/60" onclick="closeMobileMenu()">🤖 AI Sejarah</a>
         
         <!-- ===== FITUR DATA METRIC BARU DI MOBILE ===== -->
@@ -112,7 +116,7 @@
           <a href="reward.html" class="block py-2 px-3 rounded-xl text-sm text-stone-700 hover:bg-stone-50">🎁 Reward</a>
           <a href="#afiliasi" class="block py-2 px-3 rounded-xl text-sm text-stone-700 hover:bg-stone-50">🤝 Afiliasi</a>
           <a href="leaderboard.html" class="block py-2 px-3 rounded-xl text-sm text-stone-700 hover:bg-stone-50">🏆 Leaderboard</a>
-          <a href="index.html" class="block py-2 px-3 rounded-xl text-sm text-amber-600 font-bold">👑 Premium</a>
+          <a href="premium.html" class="block py-2 px-3 rounded-xl text-sm text-amber-600 font-bold">👑 Premium</a>
         </div>
         
         <div class="border-t border-stone-100 pt-3 grid grid-cols-2 gap-2">
@@ -147,8 +151,8 @@
             <a href="kuliner.html" class="bg-gradient-to-r from-amber-600 to-amber-700 hover:from-amber-700 hover:to-amber-800 text-white px-8 py-4 rounded-full text-sm font-bold transition-all duration-300 shadow-lg shadow-amber-600/25 hover:-translate-y-0.5 flex items-center gap-2.5">
               <i class="fas fa-compass"></i> Jelajahi Kuliner
             </a>
-            <a href="#cara-beli" class="bg-stone-50 hover:bg-amber-50 border border-amber-600/40 text-amber-800 px-8 py-4 rounded-full text-sm font-bold transition-all flex items-center gap-2.5">
-              <i class="fas fa-shopping-cart text-amber-600"></i> Cara Beli
+            <a href="#pendampingan" class="bg-emerald-50 hover:bg-emerald-100 border border-emerald-600/30 text-emerald-800 px-7 py-4 rounded-full text-sm font-bold transition-all flex items-center gap-2.5">
+              <i class="fab fa-whatsapp text-emerald-600 text-base"></i> Konsultasi UMKM
             </a>
           </div>
 
@@ -159,12 +163,12 @@
               <p class="text-xs text-stone-500 font-medium">Jangkauan Mojokerto</p>
             </div>
             <div>
-              <p class="text-lg font-extrabold text-amber-600">UMKM</p>
-              <p class="text-xs text-stone-500 font-medium">Produk Asli Lokal</p>
+              <p class="text-lg font-extrabold text-amber-600">24 Jam</p>
+              <p class="text-xs text-stone-500 font-medium">Layanan CP Aktif</p>
             </div>
             <div>
-              <p class="text-lg font-extrabold text-emerald-600">Lestari</p>
-              <p class="text-xs text-stone-500 font-medium">Warisan Kuliner Daerah</p>
+              <p class="text-lg font-extrabold text-emerald-600">Gratis</p>
+              <p class="text-xs text-stone-500 font-medium">Pendampingan Mahasiswa</p>
             </div>
           </div>
         </div>
@@ -176,7 +180,7 @@
                 <img src="onde onde mojokerto.jpg" 
                      alt="Onde Onde Mojokerto" 
                      class="h-48 sm:h-56 w-full object-cover group-hover:scale-105 transition duration-500"
-                     onerror="this.src='https://via.placeholder.com/400x400/f58421/ffffff?text=Rendang'">
+                     onerror="this.src='https://via.placeholder.com/400x400/f58421/ffffff?text=Onde-Onde'">
                 <div class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/75 via-black/30 to-transparent p-4">
                   <span class="text-white font-bold text-sm block">Onde onde Mojokerto</span>
                   <span class="text-amber-300 text-[11px] font-medium">Kuliner Daerah Nusantara</span>
@@ -199,7 +203,7 @@
                 <img src="Sambelwader.jpg" 
                      alt="SambelWader Mojokerto" 
                      class="h-44 sm:h-48 w-full object-cover group-hover:scale-105 transition duration-500"
-                     onerror="this.src='https://via.placeholder.com/400x400/f58421/ffffff?text=Gudeg'">
+                     onerror="this.src='https://via.placeholder.com/400x400/f58421/ffffff?text=Sambel+Wader'">
                 <div class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/75 via-black/30 to-transparent p-4">
                   <span class="text-white font-bold text-sm block">SambelWader Mojokerto</span>
                   <span class="text-amber-300 text-[11px] font-medium">Kuliner Daerah Nusantara</span>
@@ -599,6 +603,165 @@
       </div>
     </section>
 
+    <!-- ============================================================ -->
+    <!-- ===== 🎓 FITUR BARU: KONSULTASI & PENDAMPINGAN UMKM BERSAMA MAHASISWA VIA WA ===== -->
+    <!-- ============================================================ -->
+    <section id="pendampingan" class="mb-24 scroll-mt-24 bg-gradient-to-br from-emerald-950 via-teal-900 to-stone-900 rounded-[2.5rem] p-8 sm:p-12 md:p-14 text-white relative overflow-hidden shadow-2xl">
+      <div class="absolute -top-24 -right-24 w-96 h-96 bg-emerald-400/20 rounded-full blur-3xl pointer-events-none"></div>
+      <div class="absolute -bottom-24 -left-24 w-80 h-80 bg-amber-400/15 rounded-full blur-3xl pointer-events-none"></div>
+
+      <div class="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+        <div class="lg:col-span-6">
+          <span class="inline-flex items-center gap-2 px-4 py-1.5 bg-emerald-500/20 border border-emerald-400/30 text-emerald-300 rounded-full text-xs font-bold tracking-wider mb-4">
+            <i class="fas fa-user-graduate"></i> PROGRAM PENGABDIAN & KOLABORASI MAHASISWA
+          </span>
+          <h2 class="font-display text-3xl sm:text-4xl font-extrabold leading-tight mb-4">
+            Konsultasi & Pendampingan UMKM <span class="text-emerald-400">Bersama Mahasiswa</span>
+          </h2>
+          <p class="text-emerald-100/90 text-sm sm:text-base leading-relaxed mb-7">
+            Punya usaha kuliner di Mojokerto dan butuh bantuan mengelola pemasaran digital, foto produk, pencatatan keuangan, atau perizinan? Tim mahasiswa relawan CitaRasa siap mendampingi langsung via WhatsApp!
+          </p>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5 mb-8">
+            <div class="bg-white/10 backdrop-blur-sm border border-white/10 rounded-2xl p-4 flex items-start gap-3">
+              <div class="w-9 h-9 rounded-xl bg-emerald-500/30 text-emerald-300 flex items-center justify-center shrink-0">
+                <i class="fas fa-bullhorn text-sm"></i>
+              </div>
+              <div>
+                <h4 class="font-bold text-sm text-white">Digital Marketing</h4>
+                <p class="text-xs text-emerald-100/75 mt-0.5">Konten IG/TikTok & pendaftaran marketplace</p>
+              </div>
+            </div>
+            <div class="bg-white/10 backdrop-blur-sm border border-white/10 rounded-2xl p-4 flex items-start gap-3">
+              <div class="w-9 h-9 rounded-xl bg-amber-500/30 text-amber-300 flex items-center justify-center shrink-0">
+                <i class="fas fa-box-open text-sm"></i>
+              </div>
+              <div>
+                <h4 class="font-bold text-sm text-white">Branding & Kemasan</h4>
+                <p class="text-xs text-emerald-100/75 mt-0.5">Desain logo, stiker kemasan & foto produk</p>
+              </div>
+            </div>
+            <div class="bg-white/10 backdrop-blur-sm border border-white/10 rounded-2xl p-4 flex items-start gap-3">
+              <div class="w-9 h-9 rounded-xl bg-sky-500/30 text-sky-300 flex items-center justify-center shrink-0">
+                <i class="fas fa-certificate text-sm"></i>
+              </div>
+              <div>
+                <h4 class="font-bold text-sm text-white">NIB, PIRT & Halal</h4>
+                <p class="text-xs text-emerald-100/75 mt-0.5">Pendampingan pengurusan legalitas usaha</p>
+              </div>
+            </div>
+            <div class="bg-white/10 backdrop-blur-sm border border-white/10 rounded-2xl p-4 flex items-start gap-3">
+              <div class="w-9 h-9 rounded-xl bg-purple-500/30 text-purple-300 flex items-center justify-center shrink-0">
+                <i class="fas fa-calculator text-sm"></i>
+              </div>
+              <div>
+                <h4 class="font-bold text-sm text-white">Pembukuan & HPP</h4>
+                <p class="text-xs text-emerald-100/75 mt-0.5">Hitung harga jual & laporan kas sederhana</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Form Konsultasi Langsung ke WA Mahasiswa -->
+        <div class="lg:col-span-6 bg-white text-stone-800 rounded-3xl p-6 sm:p-8 shadow-xl">
+          <div class="flex items-center gap-3 mb-5 pb-4 border-b border-stone-100">
+            <div class="w-11 h-11 rounded-2xl bg-emerald-100 text-emerald-700 flex items-center justify-center text-xl">
+              <i class="fab fa-whatsapp"></i>
+            </div>
+            <div>
+              <h3 class="font-bold text-lg text-stone-900">Ajukan Jadwal Konsultasi</h3>
+              <p class="text-xs text-stone-500">Terhubung langsung dengan Koordinator Mahasiswa Pendamping</p>
+            </div>
+          </div>
+
+          <div class="space-y-4">
+            <div>
+              <label class="block text-xs font-bold uppercase tracking-wider text-stone-500 mb-1.5">Nama Pemilik / Nama Usaha UMKM</label>
+              <input type="text" id="wa-nama-umkm" placeholder="Contoh: Bu Siti - Onde-onde Barokah" class="w-full rounded-xl border border-stone-200 bg-stone-50 px-4 py-3 text-sm font-medium text-stone-800 focus:bg-white focus:border-emerald-500 focus:outline-none transition">
+            </div>
+
+            <div>
+              <label class="block text-xs font-bold uppercase tracking-wider text-stone-500 mb-1.5">Kecamatan / Lokasi di Mojokerto</label>
+              <input type="text" id="wa-lokasi-umkm" placeholder="Contoh: Trowulan / Bangsal / Magersari" class="w-full rounded-xl border border-stone-200 bg-stone-50 px-4 py-3 text-sm font-medium text-stone-800 focus:bg-white focus:border-emerald-500 focus:outline-none transition">
+            </div>
+
+            <div>
+              <label class="block text-xs font-bold uppercase tracking-wider text-stone-500 mb-1.5">Topik Pendampingan</label>
+              <select id="wa-topik-umkm" class="w-full rounded-xl border border-stone-200 bg-stone-50 px-4 py-3 text-sm font-medium text-stone-800 focus:bg-white focus:border-emerald-500 focus:outline-none transition">
+                <option value="Digital Marketing & Promosi Sosial Media">Digital Marketing & Promosi Sosial Media</option>
+                <option value="Desain Kemasan, Logo & Foto Produk">Desain Kemasan, Logo & Foto Produk</option>
+                <option value="Pendampingan NIB, PIRT & Sertifikasi Halal">Pendampingan NIB, PIRT & Sertifikasi Halal</option>
+                <option value="Pembukuan Keuangan & Perhitungan HPP">Pembukuan Keuangan & Perhitungan HPP</option>
+                <option value="Pendaftaran Mitra UMKM di CitaRasa">Pendaftaran Mitra UMKM di CitaRasa</option>
+              </select>
+            </div>
+
+            <button type="button" onclick="kirimKonsultasiWA()" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white px-6 py-4 rounded-xl font-bold text-sm sm:text-base transition shadow-lg shadow-emerald-600/25 flex items-center justify-center gap-2.5 mt-2">
+              <i class="fab fa-whatsapp text-xl"></i> Konsultasi dengan Mahasiswa via WA
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- ===== 📞 FITUR BARU: CONTACT PERSON (CP) LAYANAN 24 JAM ===== -->
+    <!-- ============================================================ -->
+    <section id="cp-24jam" class="mb-24 scroll-mt-24">
+      <div class="bg-amber-50/90 border border-amber-200/80 rounded-[2.5rem] p-8 sm:p-10 md:p-12 shadow-sm">
+        <div class="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-8">
+          <div class="max-w-2xl">
+            <div class="inline-flex items-center gap-2 px-3.5 py-1.5 bg-white border border-amber-200 text-amber-800 rounded-full text-xs font-bold tracking-wider mb-4 shadow-xs">
+              <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-ping"></span>
+              SIAGA 24 JAM NON-STOP
+            </div>
+            <h2 class="font-display text-2xl sm:text-3xl font-extrabold text-stone-900 mb-3">
+              Contact Person (CP) Bantuan & Layanan 24 Jam
+            </h2>
+            <p class="text-stone-600 text-sm sm:text-base leading-relaxed">
+              Mengalami kendala pemesanan kuliner, pengiriman luar kota, pendaftaran mitra UMKM Mojokerto, atau butuh respon cepat kapan saja? Hubungi tim piket 24 jam CitaRasa.
+            </p>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 w-full lg:w-auto shrink-0">
+            <!-- CP 1: Layanan Pelanggan & Order -->
+            <a href="https://wa.me/6281234567890?text=Halo%20CP%2024%20Jam%20CitaRasa,%20saya%20butuh%20bantuan%20terkait%20layanan%20dan%20pemesanan%20kuliner." 
+               target="_blank" 
+               rel="noopener noreferrer"
+               class="bg-white hover:bg-stone-900 text-stone-900 hover:text-white border border-stone-200 rounded-2xl p-5 transition-all duration-300 shadow-sm hover:shadow-lg group">
+              <div class="flex items-center gap-3 mb-2">
+                <div class="w-10 h-10 rounded-xl bg-emerald-100 text-emerald-600 group-hover:bg-emerald-500 group-hover:text-white flex items-center justify-center transition">
+                  <i class="fab fa-whatsapp text-lg"></i>
+                </div>
+                <div>
+                  <span class="text-[10px] font-bold uppercase tracking-wider text-emerald-600 group-hover:text-emerald-400 block">Online 24 Jam</span>
+                  <h4 class="font-bold text-sm">CP Layanan & Order</h4>
+                </div>
+              </div>
+              <p class="text-xs text-stone-500 group-hover:text-stone-300 mt-1">+62 812-3456-7890 (Admin Piket)</p>
+            </a>
+
+            <!-- CP 2: Hotline Mitra UMKM Mojokerto -->
+            <a href="https://wa.me/6281234567890?text=Halo%20CP%20Mitra%20UMKM%20CitaRasa,%20saya%20pelaku%20UMKM%20Mojokerto%20ingin%20bertanya%20seputar%20kemitraan." 
+               target="_blank" 
+               rel="noopener noreferrer"
+               class="bg-white hover:bg-amber-600 text-stone-900 hover:text-white border border-stone-200 rounded-2xl p-5 transition-all duration-300 shadow-sm hover:shadow-lg group">
+              <div class="flex items-center gap-3 mb-2">
+                <div class="w-10 h-10 rounded-xl bg-amber-100 text-amber-600 group-hover:bg-white/20 group-hover:text-white flex items-center justify-center transition">
+                  <i class="fas fa-headset text-lg"></i>
+                </div>
+                <div>
+                  <span class="text-[10px] font-bold uppercase tracking-wider text-amber-600 group-hover:text-amber-100 block">Respon Cepat</span>
+                  <h4 class="font-bold text-sm">CP Mitra UMKM</h4>
+                </div>
+              </div>
+              <p class="text-xs text-stone-500 group-hover:text-amber-100 mt-1">+62 812-3456-7890 (Tim Mahasiswa)</p>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <!-- ===== AFILIASI SECTION ===== -->
     <section class="mb-12 bg-white rounded-[2.5rem] p-8 sm:p-12 md:p-14 border border-stone-200/80 shadow-lg shadow-stone-200/30" id="afiliasi">
       <div class="flex flex-col lg:flex-row items-center gap-10 lg:gap-14">
@@ -655,12 +818,15 @@
             <img src="https://i.ibb.co.com/QdvhmJc/citarasa-logo.png" 
                  alt="CitaRasa Logo" 
                  class="w-9 h-9 rounded-xl object-cover"
-                 onerror="this.src='https://via.placeholder.com/32x32/f58421/ffffff?text=MR'">
-            <span class="text-white font-extrabold text-xl tracking-tight">Mojo<span class="text-amber-500">Rasa</span></span>
+                 onerror="this.src='https://via.placeholder.com/32x32/f58421/ffffff?text=CR'">
+            <span class="text-white font-extrabold text-xl tracking-tight">Cita<span class="text-amber-500">Rasa</span></span>
           </div>
-          <p class="text-sm leading-relaxed text-stone-400">
+          <p class="text-sm leading-relaxed text-stone-400 mb-4">
             Platform digital pemberdayaan UMKM kuliner Mojokerto dan pelestarian kekayaan gastronomi daerah Nusantara.
           </p>
+          <a href="https://wa.me/6281234567890?text=Halo%20CP%2024%20Jam%20CitaRasa,%20saya%20ingin%20bertanya." target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 text-xs font-bold text-emerald-400 hover:text-emerald-300 transition">
+            <i class="fab fa-whatsapp text-base"></i> CP 24 Jam: +62 812-3456-7890
+          </a>
         </div>
         <div>
           <h4 class="text-white font-bold text-sm uppercase tracking-wider mb-4">Jelajahi</h4>
@@ -672,12 +838,12 @@
           </ul>
         </div>
         <div>
-          <h4 class="text-white font-bold text-sm uppercase tracking-wider mb-4">Program</h4>
+          <h4 class="text-white font-bold text-sm uppercase tracking-wider mb-4">Layanan & Program</h4>
           <ul class="space-y-2.5 text-sm">
-            <li><a href="reward.html" class="hover:text-amber-400 transition">Reward</a></li>
+            <li><a href="#pendampingan" class="hover:text-amber-400 transition">Pendampingan Mahasiswa</a></li>
+            <li><a href="#cp-24jam" class="hover:text-amber-400 transition">CP Layanan 24 Jam</a></li>
+            <li><a href="reward.html" class="hover:text-amber-400 transition">Reward & Leaderboard</a></li>
             <li><a href="#afiliasi" class="hover:text-amber-400 transition">Afiliasi</a></li>
-            <li><a href="leaderboard.html" class="hover:text-amber-400 transition">Leaderboard</a></li>
-            <li><a href="premium.html" class="hover:text-amber-400 transition">Premium</a></li>
           </ul>
         </div>
         <div>
@@ -696,6 +862,19 @@
     </div>
   </footer>
 
+  <!-- ===== FLOATING CP 24 JAM WHATSAPP (Kiri Bawah agar tidak bertabrakan dengan Chatbot) ===== -->
+  <a href="https://wa.me/6281234567890?text=Halo%20CP%2024%20Jam%20CitaRasa,%20saya%20ingin%20konsultasi%20/%20butuh%20bantuan."
+     target="_blank"
+     rel="noopener noreferrer"
+     title="Contact Person 24 Jam via WhatsApp"
+     class="fixed bottom-6 left-6 z-40 flex items-center gap-2.5 bg-emerald-600 hover:bg-emerald-700 text-white px-4 py-3 rounded-full shadow-xl shadow-emerald-600/30 transition-all hover:scale-105">
+    <i class="fab fa-whatsapp text-2xl"></i>
+    <div class="hidden sm:block text-left leading-tight">
+      <span class="block text-[10px] font-semibold text-emerald-100">CP 24 Jam</span>
+      <span class="block text-xs font-bold">Chat WhatsApp</span>
+    </div>
+  </a>
+
   <!-- ===== CHATBOT CITARASA ===== -->
   <div id="chatbot-toggle" title="Tanya CitaRasa">
     <i class="fas fa-comment-alt"></i>
@@ -713,8 +892,8 @@
         Saya siap membantu kamu:
 - Eksplorasi UMKM kuliner Mojokerto
 - Melestarikan kuliner khas daerah
-- Cara beli produk UMKM lokal
-- Program reward & afiliasi
+- Pendampingan UMKM bersama mahasiswa
+- Layanan CP 24 jam & afiliasi
         <br><br>
         💡 Coba tanya: "rekomendasi kuliner khas Mojokerto?"
       </div>
@@ -726,6 +905,20 @@
       </button>
     </div>
   </div>
+
+  <!-- ===== SCRIPT KONSULTASI WA MAHASISWA ===== -->
+  <script>
+    function kirimKonsultasiWA() {
+      const nomorWA = '6281234567890'; // Ganti dengan nomor WA tim mahasiswa pendamping
+      const nama = document.getElementById('wa-nama-umkm').value.trim() || 'Pelaku UMKM Mojokerto';
+      const lokasi = document.getElementById('wa-lokasi-umkm').value.trim() || 'Mojokerto';
+      const topik = document.getElementById('wa-topik-umkm').value;
+
+      const pesan = `Halo Tim Mahasiswa Pendamping CitaRasa 👋\n\nSaya ingin mengajukan konsultasi pendampingan UMKM:\n• *Nama / Usaha*: ${nama}\n• *Lokasi*: ${lokasi}\n• *Topik*: ${topik}\n\nMohon info jadwal pendampingannya. Terima kasih!`;
+      const url = `https://wa.me/${nomorWA}?text=${encodeURIComponent(pesan)}`;
+      window.open(url, '_blank', 'noopener,noreferrer');
+    }
+  </script>
 
   <!-- ===== JAVASCRIPT ===== -->
   <script src="script.js"></script>
