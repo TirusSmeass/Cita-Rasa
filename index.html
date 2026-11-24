@@ -1,0 +1,733 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1" name="viewport" />
+  <title>MojoRasa - Pemberdayaan UMKM Mojokerto & Pelestarian Kuliner Daerah</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,800;1,700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet" />
+  
+  <!-- ===== CSS MojoRasa ===== -->
+  <link rel="stylesheet" href="style.css">
+
+  <style>
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background-color: #FAF9F6;
+      color: #1C1917;
+    }
+    .font-display {
+      font-family: 'Playfair Display', serif;
+    }
+  </style>
+</head>
+<body class="antialiased selection:bg-amber-200 selection:text-amber-900">
+
+  <!-- ===== NAVBAR ===== -->
+  <nav class="glass-nav sticky top-0 z-50 bg-white/85 backdrop-blur-xl border-b border-stone-200/70 transition-all">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-20">
+        <!-- Logo -->
+        <a href="index.html" class="flex items-center gap-3.5 group">
+          <div class="relative">
+            <img src="mojorasa.png" 
+                 alt="MojoRasa Logo" 
+                 class="w-11 h-11 rounded-2xl object-cover shadow-sm ring-2 ring-amber-500/20 group-hover:scale-105 transition duration-300"
+                 onerror="this.src='https://via.placeholder.com/40x40/f58421/ffffff?text=MR'">
+          </div>
+          <div>
+            <span class="text-xl font-extrabold tracking-tight text-stone-900">MOJO<span class="text-amber-600">RASA</span></span>
+            <p class="text-[11px] font-medium tracking-wide text-stone-500 -mt-1">UMKM Mojokerto & kuliner daerah</p>
+          </div>
+        </a>
+
+        <!-- Desktop Menu -->
+        <div class="hidden md:flex items-center gap-7">
+          <a href="#beranda" class="nav-link text-sm font-semibold text-stone-600 hover:text-amber-600 transition">Beranda</a>
+          <a href="kuliner.html" class="nav-link text-sm font-semibold text-stone-600 hover:text-amber-600 transition">Kuliner Daerah</a>
+          <a href="#umkm" class="nav-link text-sm font-semibold text-stone-600 hover:text-amber-600 transition">UMKM Mojokerto</a>
+          <a href="sejarah.html" class="nav-link text-sm font-semibold text-stone-600 hover:text-amber-600 transition">AI Sejarah</a>
+          
+          <!-- ===== FITUR DATA METRIC BARU ===== -->
+          <a href="metrik.html" class="nav-link text-sm font-semibold text-stone-600 hover:text-amber-600 transition flex items-center gap-1.5 bg-stone-100/80 px-3 py-1.5 rounded-lg">
+            <i class="fas fa-chart-line text-amber-600 text-xs"></i> Data Metrik
+          </a>
+          
+          <!-- User Dropdown -->
+          <div class="relative group">
+            <button class="flex items-center gap-1.5 text-sm text-stone-600 hover:text-amber-600 font-semibold py-2 transition">
+              <span>Program</span>
+              <i class="fas fa-chevron-down text-[10px] opacity-70 group-hover:rotate-180 transition-transform"></i>
+            </button>
+            <div class="dropdown-menu">
+              <a href="reward.html">🎁 Reward</a>
+              <a href="#afiliasi">🤝 Afiliasi</a>
+              <a href="leaderboard.html">🏆 Leaderboard</a>
+            </div>
+          </div>
+
+          <div class="h-5 w-[1px] bg-stone-200"></div>
+
+          <!-- Premium -->
+          <a href="premium.html" class="bg-stone-900 hover:bg-amber-600 text-white px-4 py-2.5 rounded-full text-xs font-bold tracking-wide transition-all duration-300 shadow-sm hover:shadow-amber-500/25 flex items-center gap-1.5">
+            <i class="fas fa-crown text-amber-400"></i> Premium
+          </a>
+
+          <!-- Daftar Dropdown -->
+          <div class="relative group">
+            <button class="flex items-center gap-1.5 bg-amber-50 text-amber-800 border border-amber-200/80 px-4 py-2 rounded-full text-xs font-bold hover:bg-amber-100 transition">
+              <span>Bergabung</span>
+              <i class="fas fa-chevron-down text-[10px]"></i>
+            </button>
+            <div class="dropdown-menu">
+              <a href="#">🔑 Masuk</a>
+              <a href="#">📝 Daftar UMKM</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Mobile menu button -->
+        <button class="md:hidden w-10 h-10 rounded-xl bg-stone-100 hover:bg-amber-50 flex items-center justify-center text-stone-700 hover:text-amber-700 transition" id="menu-toggle">
+          <i class="fas fa-bars text-lg"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile menu -->
+    <div class="md:hidden bg-white border-t border-stone-100 hidden px-5 py-5 shadow-xl" id="mobile-menu">
+      <div class="flex flex-col space-y-2.5">
+        <a href="#beranda" class="py-2 px-3 rounded-xl text-sm font-medium text-stone-700 hover:bg-amber-50 hover:text-amber-700" onclick="closeMobileMenu()">🏠 Beranda</a>
+        <a href="kuliner.html" class="py-2 px-3 rounded-xl text-sm font-medium text-stone-700 hover:bg-amber-50 hover:text-amber-700" onclick="closeMobileMenu()">🍜 Kuliner Daerah</a>
+        <a href="#umkm" class="py-2 px-3 rounded-xl text-sm font-medium text-stone-700 hover:bg-amber-50 hover:text-amber-700" onclick="closeMobileMenu()">🏪 UMKM Mojokerto</a>
+        <a href="sejarah.html" class="py-2 px-3 rounded-xl text-sm font-semibold text-indigo-600 bg-indigo-50/60" onclick="closeMobileMenu()">🤖 AI Sejarah</a>
+        
+        <!-- ===== FITUR DATA METRIC BARU DI MOBILE ===== -->
+        <a href="metrik.html" class="py-2 px-3 rounded-xl text-sm font-semibold text-amber-700 bg-amber-50/70 flex items-center gap-2" onclick="closeMobileMenu()">
+          <i class="fas fa-chart-line"></i> Data Metrik
+        </a>
+        
+        <div class="border-t border-stone-100 pt-3 mt-1">
+          <p class="text-[11px] font-bold tracking-wider text-stone-400 px-3 mb-1.5">PROGRAM</p>
+          <a href="reward.html" class="block py-2 px-3 rounded-xl text-sm text-stone-700 hover:bg-stone-50">🎁 Reward</a>
+          <a href="#afiliasi" class="block py-2 px-3 rounded-xl text-sm text-stone-700 hover:bg-stone-50">🤝 Afiliasi</a>
+          <a href="leaderboard.html" class="block py-2 px-3 rounded-xl text-sm text-stone-700 hover:bg-stone-50">🏆 Leaderboard</a>
+          <a href="index.html" class="block py-2 px-3 rounded-xl text-sm text-amber-600 font-bold">👑 Premium</a>
+        </div>
+        
+        <div class="border-t border-stone-100 pt-3 grid grid-cols-2 gap-2">
+          <a href="#" class="text-center py-2.5 rounded-xl bg-stone-100 text-xs font-bold text-stone-700">🔑 Masuk</a>
+          <a href="#" class="text-center py-2.5 rounded-xl bg-amber-600 text-xs font-bold text-white">📝 Daftar UMKM</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12">
+
+    <!-- ===== HERO SECTION ===== -->
+    <section id="beranda" class="relative rounded-[2.5rem] overflow-hidden mb-24 bg-white border border-stone-200/80 shadow-xl shadow-stone-200/40">
+      <div class="absolute -top-24 -left-24 w-96 h-96 bg-amber-200/35 rounded-full blur-3xl pointer-events-none"></div>
+      <div class="absolute -bottom-24 right-1/3 w-80 h-80 bg-orange-100/45 rounded-full blur-3xl pointer-events-none"></div>
+      <div class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1604329760661-e71dc83f8f26?q=80&w=2070&auto=format&fit=crop')] bg-cover bg-center opacity-[0.03] pointer-events-none"></div>
+
+      <div class="relative z-10 px-6 py-12 sm:px-12 md:py-20 lg:px-16 flex flex-col lg:flex-row items-center gap-12 lg:gap-16">
+        <div class="lg:w-1/2">
+          <span class="inline-flex items-center gap-2 px-4 py-2 bg-amber-50 border border-amber-200/80 text-amber-800 rounded-full text-xs font-bold tracking-wide mb-6">
+            <i class="fas fa-landmark text-amber-600"></i> UMKM MOJOKERTO & KULINER DAERAH
+          </span>
+          <h1 class="font-display text-4xl sm:text-5xl lg:text-[3.5rem] font-extrabold leading-[1.12] tracking-tight text-stone-900 mb-6">
+            <span class="gradient-text bg-gradient-to-r from-amber-600 via-orange-600 to-amber-700 bg-clip-text text-transparent">Majukan UMKM Mojokerto</span><br />
+            <span>& Lestarikan Kuliner Daerah</span>
+          </h1>
+          <p class="text-base sm:text-lg text-stone-600 leading-relaxed mb-8 max-w-xl">
+            Dari Bumi Majapahit untuk Nusantara. Setiap pembelian di <strong class="text-stone-800">MojoRasa</strong> membantu pelaku UMKM Mojokerto naik kelas sekaligus menjaga keaslian kuliner daerah tetap lestari.
+          </p>
+          <div class="flex flex-wrap items-center gap-4 mb-10">
+            <a href="kuliner.html" class="bg-gradient-to-r from-amber-600 to-amber-700 hover:from-amber-700 hover:to-amber-800 text-white px-8 py-4 rounded-full text-sm font-bold transition-all duration-300 shadow-lg shadow-amber-600/25 hover:-translate-y-0.5 flex items-center gap-2.5">
+              <i class="fas fa-compass"></i> Jelajahi Kuliner
+            </a>
+            <a href="#cara-beli" class="bg-stone-50 hover:bg-amber-50 border border-amber-600/40 text-amber-800 px-8 py-4 rounded-full text-sm font-bold transition-all flex items-center gap-2.5">
+              <i class="fas fa-shopping-cart text-amber-600"></i> Cara Beli
+            </a>
+          </div>
+
+          <!-- Highlight Wilayah & Dampak -->
+          <div class="pt-6 border-t border-stone-100 grid grid-cols-3 gap-4 max-w-md">
+            <div>
+              <p class="text-lg font-extrabold text-stone-900">18 Kec.</p>
+              <p class="text-xs text-stone-500 font-medium">Jangkauan Mojokerto</p>
+            </div>
+            <div>
+              <p class="text-lg font-extrabold text-amber-600">UMKM</p>
+              <p class="text-xs text-stone-500 font-medium">Produk Asli Lokal</p>
+            </div>
+            <div>
+              <p class="text-lg font-extrabold text-emerald-600">Lestari</p>
+              <p class="text-xs text-stone-500 font-medium">Warisan Kuliner Daerah</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="lg:w-1/2 w-full">
+          <div class="grid grid-cols-2 gap-4 sm:gap-5">
+            <div class="space-y-4 sm:space-y-5">
+              <div class="relative group overflow-hidden rounded-3xl shadow-md card-modern">
+                <img src="onde onde mojokerto.jpg" 
+                     alt="Onde Onde Mojokerto" 
+                     class="h-48 sm:h-56 w-full object-cover group-hover:scale-105 transition duration-500"
+                     onerror="this.src='https://via.placeholder.com/400x400/f58421/ffffff?text=Rendang'">
+                <div class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/75 via-black/30 to-transparent p-4">
+                  <span class="text-white font-bold text-sm block">Onde onde Mojokerto</span>
+                  <span class="text-amber-300 text-[11px] font-medium">Kuliner Daerah Nusantara</span>
+                </div>
+              </div>
+              <div class="relative group overflow-hidden rounded-3xl shadow-md card-modern">
+                <img src="sate.jpg" 
+                     alt="Sate Madura" 
+                     class="h-44 sm:h-48 w-full object-cover group-hover:scale-105 transition duration-500"
+                     onerror="this.src='https://via.placeholder.com/400x400/f58421/ffffff?text=Sate'">
+                <div class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/75 via-black/30 to-transparent p-4">
+                  <span class="text-white font-bold text-sm block">Sate Madura</span>
+                  <span class="text-amber-300 text-[11px] font-medium">Kuliner Jawa Timur</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="space-y-4 sm:space-y-5 pt-6 sm:pt-10">
+              <div class="relative group overflow-hidden rounded-3xl shadow-md card-modern">
+                <img src="Sambelwader.jpg" 
+                     alt="SambelWader Mojokerto" 
+                     class="h-44 sm:h-48 w-full object-cover group-hover:scale-105 transition duration-500"
+                     onerror="this.src='https://via.placeholder.com/400x400/f58421/ffffff?text=Gudeg'">
+                <div class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/75 via-black/30 to-transparent p-4">
+                  <span class="text-white font-bold text-sm block">SambelWader Mojokerto</span>
+                  <span class="text-amber-300 text-[11px] font-medium">Kuliner Daerah Nusantara</span>
+                </div>
+              </div>
+              <div class="relative group overflow-hidden rounded-3xl shadow-md card-modern">
+                <img src="satekeong.png" 
+                     alt="Sate Keong Mojokerto" 
+                     class="h-48 sm:h-56 w-full object-cover group-hover:scale-105 transition duration-500"
+                     onerror="this.src='https://via.placeholder.com/400x400/f58421/ffffff?text=Sate+Keong'">
+                <div class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/75 via-black/30 to-transparent p-4">
+                  <span class="text-white font-bold text-sm block">Sate Keong Mojokerto</span>
+                  <span class="text-amber-300 text-[11px] font-medium">Kuliner Daerah Nusantara</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- ===== 🔥 API PREDIKSI MINAT (RANDOM FOREST) ===== -->
+    <!-- ============================================================ -->
+    <section class="mb-24 scroll-mt-24 bg-gradient-to-br from-slate-900 via-indigo-950 to-slate-900 rounded-[2.5rem] p-6 sm:p-10 md:p-14 text-white relative overflow-hidden shadow-2xl">
+      <div class="absolute top-0 right-0 w-96 h-96 bg-indigo-500/20 rounded-full blur-3xl pointer-events-none"></div>
+      <div class="absolute bottom-0 left-0 w-80 h-80 bg-amber-500/10 rounded-full blur-3xl pointer-events-none"></div>
+
+      <div class="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+        <div class="lg:col-span-5">
+          <span class="inline-flex items-center gap-2 px-3.5 py-1.5 bg-indigo-500/20 border border-indigo-400/30 text-indigo-300 rounded-full text-xs font-bold tracking-wider mb-4">
+            <i class="fas fa-brain"></i> AI PREDIKSI UMKM
+          </span>
+          <h2 class="font-display text-3xl sm:text-4xl font-bold leading-tight mb-4">
+            Cek <span class="text-amber-400">Minat Kuliner Lokal</span> Kamu!
+          </h2>
+          <p class="text-slate-300 text-sm sm:text-base leading-relaxed mb-6">
+            Berdasarkan data riset survei 102 responden, AI MojoRasa akan memprediksi tingkat minatmu dalam mendukung dan mengonsumsi produk kuliner UMKM Mojokerto & daerah.
+          </p>
+          <div class="bg-white/5 border border-white/10 rounded-2xl p-4 flex items-start gap-3">
+            <i class="fas fa-chart-pie text-amber-400 mt-1"></i>
+            <p class="text-xs text-slate-300 leading-relaxed">
+              Hasil prediksi membantu pemetaan potensi pasar bagi pelaku UMKM kuliner di Mojokerto agar promosi lebih tepat sasaran.
+            </p>
+          </div>
+        </div>
+
+        <div class="lg:col-span-7 bg-white text-stone-800 rounded-3xl p-6 sm:p-8 shadow-xl">
+          <!-- Input Form -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
+            <div>
+              <label class="block text-xs font-bold uppercase tracking-wider text-stone-500 mb-1.5">Usia</label>
+              <select id="input-usia" class="w-full rounded-xl border border-stone-200 bg-stone-50 px-4 py-3 text-sm font-medium text-stone-800 focus:bg-white focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20 focus:outline-none transition">
+                <option value="0">&lt; 18 tahun</option>
+                <option value="1" selected>18–22 tahun</option>
+                <option value="2">23–27 tahun</option>
+                <option value="3">27+ tahun</option>
+              </select>
+            </div>
+            <div>
+              <label class="block text-xs font-bold uppercase tracking-wider text-stone-500 mb-1.5">Status</label>
+              <select id="input-status" class="w-full rounded-xl border border-stone-200 bg-stone-50 px-4 py-3 text-sm font-medium text-stone-800 focus:bg-white focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20 focus:outline-none transition">
+                <option value="0">Pelajar</option>
+                <option value="1" selected>Mahasiswa</option>
+                <option value="2">Pekerja</option>
+                <option value="3">Wirausaha/UMKM</option>
+              </select>
+            </div>
+            <div>
+              <label class="block text-xs font-bold uppercase tracking-wider text-stone-500 mb-1.5">Frekuensi Konsumsi Kuliner</label>
+              <select id="input-frekuensi" class="w-full rounded-xl border border-stone-200 bg-stone-50 px-4 py-3 text-sm font-medium text-stone-800 focus:bg-white focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20 focus:outline-none transition">
+                <option value="0">Tidak pernah</option>
+                <option value="1">Kadang-kadang</option>
+                <option value="2" selected>Sering</option>
+                <option value="3">Sangat sering</option>
+              </select>
+            </div>
+            <div>
+              <label class="block text-xs font-bold uppercase tracking-wider text-stone-500 mb-1.5">Sumber Informasi</label>
+              <select id="input-sumber" class="w-full rounded-xl border border-stone-200 bg-stone-50 px-4 py-3 text-sm font-medium text-stone-800 focus:bg-white focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20 focus:outline-none transition">
+                <option value="0">Media sosial</option>
+                <option value="1" selected>Aplikasi makanan</option>
+                <option value="2">Teman/rekomendasi</option>
+                <option value="3">Internet/website</option>
+              </select>
+            </div>
+            <div class="sm:col-span-2">
+              <label class="block text-xs font-bold uppercase tracking-wider text-stone-500 mb-1.5">Penilaian Promosi Kuliner Lokal</label>
+              <select id="input-promosi" class="w-full rounded-xl border border-stone-200 bg-stone-50 px-4 py-3 text-sm font-medium text-stone-800 focus:bg-white focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20 focus:outline-none transition">
+                <option value="2">Sangat menarik</option>
+                <option value="1" selected>Cukup menarik</option>
+                <option value="0">Kurang menarik</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Tombol Prediksi -->
+          <button id="btn-prediksi" class="w-full bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white px-8 py-4 rounded-xl font-bold hover:shadow-xl transition shadow-lg flex items-center justify-center gap-2.5 text-base">
+            <i class="fas fa-robot"></i> Prediksi Minat Kuliner Saya!
+          </button>
+
+          <!-- Tempat Hasil Prediksi -->
+          <div id="hasil-prediksi" class="mt-6"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== NUSAQUIZ - GAMIFIED CULINARY QUIZ ===== -->
+    <section class="mb-24 scroll-mt-24" id="nusaquiz">
+      <div class="text-center mb-10">
+        <span class="inline-flex items-center gap-1.5 px-4 py-1.5 bg-quiz-100 text-quiz-700 rounded-full text-xs font-bold tracking-wider mb-3">
+          <i class="fas fa-gamepad"></i> GAMIFIED QUIZ
+        </span>
+        <h2 class="font-display text-3xl md:text-4xl font-extrabold text-stone-900">
+          <span class="gradient-text">NusaQuiz</span> — Uji Wawasan Kuliner Mojokerto & Daerah!
+        </h2>
+        <p class="text-stone-600 max-w-2xl mx-auto mt-3 text-sm sm:text-base">
+          Jawab pertanyaan seputar kuliner khas Mojokerto & Nusantara, kumpulkan poin, dan tukarkan dengan voucher produk UMKM lokal!
+        </p>
+      </div>
+
+      <!-- Quiz Container -->
+      <div class="quiz-card max-w-4xl mx-auto p-6 sm:p-10 bg-white rounded-[2rem] shadow-xl shadow-stone-200/50 border border-stone-200/80">
+        <!-- Header Quiz -->
+        <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-6">
+          <div class="flex items-center gap-3.5">
+            <div class="w-12 h-12 rounded-2xl bg-quiz-500 flex items-center justify-center text-white shadow-md">
+              <i class="fas fa-question text-xl"></i>
+            </div>
+            <div>
+              <h3 class="font-bold text-lg text-stone-900">Kuis Kuliner Daerah & Majapahit</h3>
+              <p class="text-xs font-semibold text-stone-500">Soal <span id="current-question">1</span>/<span id="total-questions">10</span></p>
+            </div>
+          </div>
+          <div class="flex items-center gap-3">
+            <div class="badge-points flex items-center gap-1.5 px-4 py-2 rounded-full text-xs font-bold">
+              <i class="fas fa-star"></i>
+              <span id="quiz-points">0</span> Poin
+            </div>
+            <div class="badge-points bg-amber-500 flex items-center gap-1.5 px-4 py-2 rounded-full text-xs font-bold">
+              <i class="fas fa-fire"></i>
+              <span id="quiz-streak">0</span> Streak
+            </div>
+          </div>
+        </div>
+
+        <!-- Timer Bar -->
+        <div class="timer-bar mb-8 rounded-full overflow-hidden">
+          <div class="timer-progress" id="quiz-timer" style="width: 100%;"></div>
+        </div>
+
+        <!-- Question -->
+        <div class="mb-8">
+          <h4 class="text-xl sm:text-2xl font-bold text-stone-900 leading-snug mb-6" id="question-text">Loading pertanyaan...</h4>
+          
+          <!-- Options -->
+          <div class="space-y-3" id="quiz-options">
+            <!-- Options akan diisi JavaScript -->
+          </div>
+        </div>
+
+        <!-- Feedback & Next Button -->
+        <div class="flex flex-col sm:flex-row items-center justify-between gap-4 pt-6 border-t border-stone-100">
+          <div id="quiz-feedback" class="text-sm font-semibold"></div>
+          <div class="flex gap-3 w-full sm:w-auto justify-end">
+            <button id="quiz-next" class="bg-quiz-600 hover:bg-quiz-700 text-white px-7 py-3 rounded-full text-sm font-bold transition disabled:opacity-50 disabled:cursor-not-allowed shadow-md flex items-center justify-center w-full sm:w-auto">
+              Soal Selanjutnya <i class="fas fa-arrow-right ml-2"></i>
+            </button>
+            <button id="quiz-restart" title="Ulangi Kuis" class="border-2 border-quiz-600 text-quiz-700 px-5 py-3 rounded-full font-semibold hover:bg-quiz-50 transition">
+              <i class="fas fa-redo-alt"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- Hasil Akhir (hidden by default) -->
+        <div id="quiz-result" class="hidden mt-8 p-8 bg-gradient-to-r from-quiz-100 to-quiz-50 rounded-3xl text-center">
+          <div class="text-5xl mb-4">🏆</div>
+          <h4 class="font-display text-2xl font-bold mb-2">Quiz Selesai!</h4>
+          <p class="text-lg mb-4">Kamu mendapatkan <span id="final-points" class="font-bold text-quiz-700">0</span> poin!</p>
+          <p class="text-sm text-neutral-600 mb-6">Jawaban benar: <span id="correct-count">0</span>/<span id="total-count">10</span></p>
+          <div class="flex flex-wrap gap-3 justify-center">
+            <button id="quiz-play-again" class="bg-quiz-600 hover:bg-quiz-700 text-white px-8 py-3 rounded-full font-semibold transition">
+              Main Lagi <i class="fas fa-play ml-2"></i>
+            </button>
+            <a href="reward.html" class="border-2 border-quiz-600 text-quiz-700 px-8 py-3 rounded-full font-semibold hover:bg-quiz-50 transition">
+              Tukar Poin
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Leaderboard Mini -->
+      <div class="max-w-4xl mx-auto mt-5 flex justify-end">
+        <a href="leaderboard.html" class="text-sm text-quiz-600 hover:text-quiz-700 font-bold flex items-center gap-1.5 group">
+          Lihat Peringkat <i class="fas fa-arrow-right group-hover:translate-x-1 transition-transform"></i>
+        </a>
+      </div>
+    </section>
+
+    <!-- ===== CARA BELI SECTION ===== -->
+    <section id="cara-beli" class="mb-24 scroll-mt-24">
+      <div class="text-center mb-12">
+        <span class="inline-flex items-center gap-1.5 px-4 py-1.5 bg-emerald-50 border border-emerald-200 text-emerald-700 rounded-full text-xs font-bold tracking-wider mb-3">
+          <i class="fas fa-shopping-bag"></i> MUDAH & CEPAT
+        </span>
+        <h2 class="font-display text-3xl md:text-4xl font-extrabold text-stone-900">
+          Cara <span class="gradient-text">Dukung UMKM</span> di MojoRasa
+        </h2>
+        <p class="text-stone-600 max-w-2xl mx-auto mt-3 text-sm sm:text-base">Belanja langsung dari pengrajin kuliner Mojokerto dan daerah hanya dalam 4 langkah mudah</p>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
+        <div class="guide-card bg-white rounded-3xl p-7 text-center card-modern border border-stone-200/80 shadow-sm relative">
+          <div class="w-14 h-14 rounded-2xl bg-amber-100 flex items-center justify-center mx-auto mb-5 text-xl font-extrabold text-amber-700 shadow-inner">1</div>
+          <h3 class="font-bold text-lg text-stone-900 mb-2">Pilih Produk Lokal</h3>
+          <p class="text-stone-600 text-sm leading-relaxed">Temukan kuliner khas Mojokerto & daerah dari pelaku UMKM terkurasi</p>
+        </div>
+        <div class="guide-card bg-white rounded-3xl p-7 text-center card-modern border border-stone-200/80 shadow-sm relative">
+          <div class="w-14 h-14 rounded-2xl bg-amber-100 flex items-center justify-center mx-auto mb-5 text-xl font-extrabold text-amber-700 shadow-inner">2</div>
+          <h3 class="font-bold text-lg text-stone-900 mb-2">Tambah ke Keranjang</h3>
+          <p class="text-stone-600 text-sm leading-relaxed">Klik tombol tambah pada kuliner favorit untuk dimasukkan ke keranjang</p>
+        </div>
+        <div class="guide-card bg-white rounded-3xl p-7 text-center card-modern border border-stone-200/80 shadow-sm relative">
+          <div class="w-14 h-14 rounded-2xl bg-amber-100 flex items-center justify-center mx-auto mb-5 text-xl font-extrabold text-amber-700 shadow-inner">3</div>
+          <h3 class="font-bold text-lg text-stone-900 mb-2">Isi Data Pengiriman</h3>
+          <p class="text-stone-600 text-sm leading-relaxed">Lengkapi alamat tujuan di area Mojokerto maupun pengiriman luar kota</p>
+        </div>
+        <div class="guide-card bg-white rounded-3xl p-7 text-center card-modern border border-stone-200/80 shadow-sm relative">
+          <div class="w-14 h-14 rounded-2xl bg-amber-100 flex items-center justify-center mx-auto mb-5 text-xl font-extrabold text-amber-700 shadow-inner">4</div>
+          <h3 class="font-bold text-lg text-stone-900 mb-2">Bayar & Terima</h3>
+          <p class="text-stone-600 text-sm leading-relaxed">Pesanan diproses langsung oleh UMKM dan diantar hangat ke rumahmu</p>
+        </div>
+      </div>
+
+      <div class="mt-10 text-center">
+        <a href="kuliner.html" class="inline-flex items-center gap-2.5 bg-gradient-to-r from-amber-600 to-amber-700 hover:from-amber-700 hover:to-amber-800 text-white px-8 py-4 rounded-full text-sm font-bold hover:shadow-xl transition shadow-lg shadow-amber-600/20">
+          <i class="fas fa-store"></i> Mulai Belanja Produk UMKM
+        </a>
+      </div>
+    </section>
+
+    <!-- ===== AI SEJARAH CARD ===== -->
+    <section class="mb-24">
+      <a href="sejarah.html" class="block relative overflow-hidden bg-gradient-to-r from-indigo-600 via-indigo-700 to-purple-700 rounded-[2.5rem] p-8 sm:p-12 text-white hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 group">
+        <div class="absolute right-0 top-0 w-96 h-96 bg-white/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/3 pointer-events-none"></div>
+        <div class="relative z-10 flex flex-col lg:flex-row items-start lg:items-center justify-between gap-8">
+          <div>
+            <span class="inline-flex items-center gap-2 px-4 py-1.5 bg-white/20 rounded-full text-xs font-bold tracking-wider mb-4 backdrop-blur-sm">
+              <i class="fas fa-robot"></i> ARSIP BUDAYA & GASTRONOMI
+            </span>
+            <h2 class="font-display text-3xl sm:text-4xl font-bold mb-3">AI Sejarah Kuliner & Majapahit</h2>
+            <p class="text-base sm:text-lg text-indigo-100 mb-7 max-w-xl leading-relaxed">
+              Telusuri jejak sejarah kuliner Mojokerto, warisan gastronomi era Majapahit, hingga asal-usul makanan khas daerah Nusantara secara instan!
+            </p>
+            <div class="flex flex-wrap items-center gap-4">
+              <span class="bg-white text-indigo-700 group-hover:bg-amber-400 group-hover:text-stone-900 px-6 py-3.5 rounded-full text-sm font-bold transition-colors shadow-md">
+                Tanya AI Sejarah <i class="fas fa-arrow-right ml-2"></i>
+              </span>
+              <span class="text-indigo-200 text-xs font-medium">Gratis • Database Kuliner Daerah</span>
+            </div>
+          </div>
+          <div class="flex gap-3 sm:gap-4 shrink-0">
+            <div class="w-16 h-16 sm:w-20 sm:h-20 bg-white/15 rounded-2xl flex items-center justify-center backdrop-blur-md border border-white/20">
+              <i class="fas fa-history text-2xl sm:text-3xl"></i>
+            </div>
+            <div class="w-16 h-16 sm:w-20 sm:h-20 bg-white/15 rounded-2xl flex items-center justify-center backdrop-blur-md border border-white/20">
+              <i class="fas fa-utensils text-2xl sm:text-3xl"></i>
+            </div>
+            <div class="w-16 h-16 sm:w-20 sm:h-20 bg-white/15 rounded-2xl flex items-center justify-center backdrop-blur-md border border-white/20">
+              <i class="fas fa-book-open text-2xl sm:text-3xl"></i>
+            </div>
+          </div>
+        </div>
+      </a>
+    </section>
+
+    <!-- ===== UMKM MARKETPLACE ===== -->
+    <section class="mb-24 scroll-mt-24" id="umkm">
+      <div class="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-4">
+        <div>
+          <span class="inline-flex items-center gap-1.5 px-4 py-1.5 bg-amber-100/80 text-amber-800 rounded-full text-xs font-bold tracking-wider mb-3">
+            <i class="fas fa-store"></i> ETALASE UMKM MOJOKERTO & DAERAH
+          </span>
+          <h2 class="font-display text-3xl md:text-4xl font-extrabold text-stone-900">
+            Marketplace <span class="gradient-text">Kuliner Daerah</span>
+          </h2>
+        </div>
+        <p class="text-stone-600 text-sm sm:text-base max-w-md">
+          Dukung perputaran ekonomi UMKM Mojokerto dan pelestarian resep warisan daerah langsung dari dapurnya.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <!-- Card 1 - Rendang -->
+        <div class="product-card card-modern bg-white rounded-3xl overflow-hidden border border-stone-200/80 shadow-sm hover:shadow-xl transition-all duration-300 group flex flex-col justify-between">
+          <div>
+            <div class="overflow-hidden relative h-52 bg-stone-100">
+              <span class="absolute top-3 left-3 z-10 bg-stone-900/80 backdrop-blur-sm text-amber-300 text-[10px] font-bold px-2.5 py-1 rounded-full">
+                Mitra MojoRasa
+              </span>
+              <img src="rendang.jpeg" 
+                   alt="Rendang Padang" 
+                   class="product-image w-full h-full object-cover group-hover:scale-105 transition duration-500"
+                   onerror="this.src='https://via.placeholder.com/400x300/f58421/ffffff?text=Rendang'">
+            </div>
+            <div class="p-5 pb-2">
+              <p class="text-xs font-semibold text-amber-700 mb-1">Kuliner Daerah • Sumbar</p>
+              <h3 class="font-bold text-lg text-stone-900 mb-1 group-hover:text-amber-600 transition">Rendang Padang</h3>
+              <p class="text-xs text-stone-500">UMKM: Mak Yun • Dapur Daerah</p>
+            </div>
+          </div>
+          <div class="p-5 pt-4 mt-2 border-t border-stone-100 flex items-center justify-between">
+            <span class="text-xl font-extrabold text-amber-700">Rp45K</span>
+            <button class="bg-amber-600 hover:bg-amber-700 text-white w-10 h-10 rounded-full flex items-center justify-center transition shadow-sm add-to-cart" data-name="Rendang Padang" data-price="45000">
+              <i class="fas fa-plus"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- Card 2 - Gudeg -->
+        <div class="product-card card-modern bg-white rounded-3xl overflow-hidden border border-stone-200/80 shadow-sm hover:shadow-xl transition-all duration-300 group flex flex-col justify-between">
+          <div>
+            <div class="overflow-hidden relative h-52 bg-stone-100">
+              <span class="absolute top-3 left-3 z-10 bg-stone-900/80 backdrop-blur-sm text-amber-300 text-[10px] font-bold px-2.5 py-1 rounded-full">
+                Mitra MojoRasa
+              </span>
+              <img src="gudeg.jpg" 
+                   alt="Gudeg Jogja" 
+                   class="product-image w-full h-full object-cover group-hover:scale-105 transition duration-500"
+                   onerror="this.src='https://via.placeholder.com/400x300/f58421/ffffff?text=Gudeg'">
+            </div>
+            <div class="p-5 pb-2">
+              <p class="text-xs font-semibold text-amber-700 mb-1">Kuliner Daerah • DIY</p>
+              <h3 class="font-bold text-lg text-stone-900 mb-1 group-hover:text-amber-600 transition">Gudeg Jogja</h3>
+              <p class="text-xs text-stone-500">UMKM: Bu Gandes • Yogyakarta</p>
+            </div>
+          </div>
+          <div class="p-5 pt-4 mt-2 border-t border-stone-100 flex items-center justify-between">
+            <span class="text-xl font-extrabold text-amber-700">Rp30K</span>
+            <button class="bg-amber-600 hover:bg-amber-700 text-white w-10 h-10 rounded-full flex items-center justify-center transition shadow-sm add-to-cart" data-name="Gudeg Jogja" data-price="30000">
+              <i class="fas fa-plus"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- Card 3 - Sate Madura -->
+        <div class="product-card card-modern bg-white rounded-3xl overflow-hidden border border-stone-200/80 shadow-sm hover:shadow-xl transition-all duration-300 group flex flex-col justify-between">
+          <div>
+            <div class="overflow-hidden relative h-52 bg-stone-100">
+              <span class="absolute top-3 left-3 z-10 bg-amber-600 text-white text-[10px] font-bold px-2.5 py-1 rounded-full">
+                UMKM Jatim
+              </span>
+              <img src="sate.jpg" 
+                   alt="Sate Madura" 
+                   class="product-image w-full h-full object-cover group-hover:scale-105 transition duration-500"
+                   onerror="this.src='https://via.placeholder.com/400x300/f58421/ffffff?text=Sate'">
+            </div>
+            <div class="p-5 pb-2">
+              <p class="text-xs font-semibold text-amber-700 mb-1">Kuliner Jawa Timur</p>
+              <h3 class="font-bold text-lg text-stone-900 mb-1 group-hover:text-amber-600 transition">Sate Madura</h3>
+              <p class="text-xs text-stone-500">UMKM: Pak Samin • Jawa Timur</p>
+            </div>
+          </div>
+          <div class="p-5 pt-4 mt-2 border-t border-stone-100 flex items-center justify-between">
+            <span class="text-xl font-extrabold text-amber-700">Rp25K</span>
+            <button class="bg-amber-600 hover:bg-amber-700 text-white w-10 h-10 rounded-full flex items-center justify-center transition shadow-sm add-to-cart" data-name="Sate Madura" data-price="25000">
+              <i class="fas fa-plus"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- Card 4 - Pempek -->
+        <div class="product-card card-modern bg-white rounded-3xl overflow-hidden border border-stone-200/80 shadow-sm hover:shadow-xl transition-all duration-300 group flex flex-col justify-between">
+          <div>
+            <div class="overflow-hidden relative h-52 bg-stone-100">
+              <span class="absolute top-3 left-3 z-10 bg-stone-900/80 backdrop-blur-sm text-amber-300 text-[10px] font-bold px-2.5 py-1 rounded-full">
+                Mitra MojoRasa
+              </span>
+              <img src="pempek.jpg" 
+                   alt="Pempek Palembang" 
+                   class="product-image w-full h-full object-cover group-hover:scale-105 transition duration-500"
+                   onerror="this.src='https://via.placeholder.com/400x300/f58421/ffffff?text=Pempek'">
+            </div>
+            <div class="p-5 pb-2">
+              <p class="text-xs font-semibold text-amber-700 mb-1">Kuliner Daerah • Sumsel</p>
+              <h3 class="font-bold text-lg text-stone-900 mb-1 group-hover:text-amber-600 transition">Pempek Palembang</h3>
+              <p class="text-xs text-stone-500">UMKM: Kapal Saga • Sumsel</p>
+            </div>
+          </div>
+          <div class="p-5 pt-4 mt-2 border-t border-stone-100 flex items-center justify-between">
+            <span class="text-xl font-extrabold text-amber-700">Rp35K</span>
+            <button class="bg-amber-600 hover:bg-amber-700 text-white w-10 h-10 rounded-full flex items-center justify-center transition shadow-sm add-to-cart" data-name="Pempek Palembang" data-price="35000">
+              <i class="fas fa-plus"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== AFILIASI SECTION ===== -->
+    <section class="mb-12 bg-white rounded-[2.5rem] p-8 sm:p-12 md:p-14 border border-stone-200/80 shadow-lg shadow-stone-200/30" id="afiliasi">
+      <div class="flex flex-col lg:flex-row items-center gap-10 lg:gap-14">
+        <div class="lg:w-1/2">
+          <span class="inline-flex items-center gap-1.5 px-4 py-1.5 bg-emerald-50 border border-emerald-200 text-emerald-700 rounded-full text-xs font-bold tracking-wider mb-4">
+            <i class="fas fa-hand-holding-usd"></i> KOLABORASI KREATOR & UMKM MOJOKERTO
+          </span>
+          <h2 class="font-display text-3xl sm:text-4xl font-extrabold text-stone-900 mb-4 leading-tight">
+            Dapatkan <span class="gradient-text">Komisi</span> Sambil Bantu UMKM Lokal Laris
+          </h2>
+          <p class="text-stone-600 text-base sm:text-lg mb-7 leading-relaxed">
+            Daftar gratis sebagai afiliator MojoRasa, promosikan kuliner khas Mojokerto & Nusantara, dan raih komisi dari setiap transaksi yang kamu referensikan.
+          </p>
+          <ul class="space-y-3.5 mb-8">
+            <li class="flex items-center gap-3 text-sm font-medium text-stone-700">
+              <div class="w-6 h-6 rounded-full bg-emerald-100 flex items-center justify-center text-emerald-600 shrink-0">
+                <i class="fas fa-check text-xs"></i>
+              </div>
+              <span>Link afiliasi unik untuk setiap produk UMKM Mojokerto & daerah</span>
+            </li>
+            <li class="flex items-center gap-3 text-sm font-medium text-stone-700">
+              <div class="w-6 h-6 rounded-full bg-emerald-100 flex items-center justify-center text-emerald-600 shrink-0">
+                <i class="fas fa-check text-xs"></i>
+              </div>
+              <span>Pantau klik & konversi penjualan secara real-time</span>
+            </li>
+            <li class="flex items-center gap-3 text-sm font-medium text-stone-700">
+              <div class="w-6 h-6 rounded-full bg-emerald-100 flex items-center justify-center text-emerald-600 shrink-0">
+                <i class="fas fa-check text-xs"></i>
+              </div>
+              <span>Komisi dibayar otomatis tanpa potongan tersembunyi</span>
+            </li>
+          </ul>
+          <button class="bg-gradient-to-r from-emerald-600 to-emerald-700 hover:from-emerald-700 hover:to-emerald-800 text-white px-8 py-4 rounded-full text-sm font-bold hover:shadow-lg transition shadow-md">
+            Daftar Afiliasi Sekarang
+          </button>
+        </div>
+        <div class="lg:w-1/2 w-full">
+          <img src="https://images.unsplash.com/photo-1556740738-b6a63e27c4df?w=600&h=400&fit=crop" 
+               class="rounded-3xl shadow-xl w-full h-auto object-cover" 
+               alt="Afiliasi UMKM Mojokerto MojoRasa"
+               onerror="this.src='https://via.placeholder.com/600x400/f58421/ffffff?text=Afiliasi+MojoRasa'">
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="bg-stone-950 text-stone-400 pt-16 pb-10 border-t border-stone-900">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
+        <div>
+          <div class="flex items-center gap-3 mb-4">
+            <img src="https://i.ibb.co.com/QdvhmJc/citarasa-logo.png" 
+                 alt="MojoRasa Logo" 
+                 class="w-9 h-9 rounded-xl object-cover"
+                 onerror="this.src='https://via.placeholder.com/32x32/f58421/ffffff?text=MR'">
+            <span class="text-white font-extrabold text-xl tracking-tight">Mojo<span class="text-amber-500">Rasa</span></span>
+          </div>
+          <p class="text-sm leading-relaxed text-stone-400">
+            Platform digital pemberdayaan UMKM kuliner Mojokerto dan pelestarian kekayaan gastronomi daerah Nusantara.
+          </p>
+        </div>
+        <div>
+          <h4 class="text-white font-bold text-sm uppercase tracking-wider mb-4">Jelajahi</h4>
+          <ul class="space-y-2.5 text-sm">
+            <li><a href="#beranda" class="hover:text-amber-400 transition">Beranda</a></li>
+            <li><a href="kuliner.html" class="hover:text-amber-400 transition">Kuliner Daerah</a></li>
+            <li><a href="#umkm" class="hover:text-amber-400 transition">UMKM Mojokerto</a></li>
+            <li><a href="sejarah.html" class="hover:text-amber-400 transition">AI Sejarah</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="text-white font-bold text-sm uppercase tracking-wider mb-4">Program</h4>
+          <ul class="space-y-2.5 text-sm">
+            <li><a href="reward.html" class="hover:text-amber-400 transition">Reward</a></li>
+            <li><a href="#afiliasi" class="hover:text-amber-400 transition">Afiliasi</a></li>
+            <li><a href="leaderboard.html" class="hover:text-amber-400 transition">Leaderboard</a></li>
+            <li><a href="premium.html" class="hover:text-amber-400 transition">Premium</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="text-white font-bold text-sm uppercase tracking-wider mb-4">Ikuti Kami</h4>
+          <div class="flex gap-3">
+            <a href="#" class="w-10 h-10 rounded-full bg-stone-900 hover:bg-amber-600 text-stone-300 hover:text-white flex items-center justify-center transition"><i class="fab fa-facebook-f text-sm"></i></a>
+            <a href="#" class="w-10 h-10 rounded-full bg-stone-900 hover:bg-amber-600 text-stone-300 hover:text-white flex items-center justify-center transition"><i class="fab fa-instagram text-sm"></i></a>
+            <a href="#" class="w-10 h-10 rounded-full bg-stone-900 hover:bg-amber-600 text-stone-300 hover:text-white flex items-center justify-center transition"><i class="fab fa-twitter text-sm"></i></a>
+            <a href="#" class="w-10 h-10 rounded-full bg-stone-900 hover:bg-amber-600 text-stone-300 hover:text-white flex items-center justify-center transition"><i class="fab fa-tiktok text-sm"></i></a>
+          </div>
+        </div>
+      </div>
+      <div class="border-t border-stone-800/80 pt-8 text-center text-xs text-stone-500">
+        © 2026 MojoRasa - Pemberdayaan UMKM Mojokerto & Pelestarian Kuliner Daerah
+      </div>
+    </div>
+  </footer>
+
+  <!-- ===== CHATBOT MOJORASA ===== -->
+  <div id="chatbot-toggle" title="Tanya MojoRasa">
+    <i class="fas fa-comment-alt"></i>
+  </div>
+
+  <div id="chatbot-citarasa">
+    <div id="chatbot-header">
+      <span><i class="fas fa-robot mr-2"></i> MojoRasa - UMKM Mojokerto & Kuliner</span>
+      <button id="chatbot-close" class="text-white text-2xl leading-5">&times;</button>
+    </div>
+    <div id="chatbot-messages">
+      <div class="chatbot-message bot">
+        🌾 Halo! Saya asisten MojoRasa. 
+        <br><br>
+        Saya siap membantu kamu:
+- Eksplorasi UMKM kuliner Mojokerto
+- Melestarikan kuliner khas daerah
+- Cara beli produk UMKM lokal
+- Program reward & afiliasi
+        <br><br>
+        💡 Coba tanya: "rekomendasi kuliner khas Mojokerto?"
+      </div>
+    </div>
+    <div id="chatbot-input-container">
+      <input type="text" id="chatbot-input" placeholder="Tanya tentang UMKM Mojokerto & kuliner...">
+      <button id="chatbot-send">
+        <i class="fas fa-paper-plane"></i>
+      </button>
+    </div>
+  </div>
+
+  <!-- ===== JAVASCRIPT ===== -->
+  <script src="script.js"></script>
+</body>
+</html>

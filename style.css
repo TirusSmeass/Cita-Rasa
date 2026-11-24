@@ -1,0 +1,386 @@
+/* -----------------------------------------------
+   CITARASA - MELESTARIKAN KULINER DAERAH
+   File CSS Terpisah
+------------------------------------------------ */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --primary-50: #fef3e2;
+  --primary-100: #fde6c5;
+  --primary-200: #fbce9c;
+  --primary-300: #f9b573;
+  --primary-400: #f79d4a;
+  --primary-500: #f58421;
+  --primary-600: #d96a0c;
+  --primary-700: #b45309;
+  --primary-800: #8f3f07;
+  --primary-900: #6a2e05;
+  
+  --quiz-50: #f0f9ff;
+  --quiz-100: #e0f2fe;
+  --quiz-200: #bae6fd;
+  --quiz-300: #7dd3fc;
+  --quiz-400: #38bdf8;
+  --quiz-500: #0ea5e9;
+  --quiz-600: #0284c7;
+  --quiz-700: #0369a1;
+  --quiz-800: #075985;
+  --quiz-900: #0c4a6e;
+  
+  --neutral-50: #faf7f2;
+  --neutral-100: #f5efe6;
+  --neutral-200: #e9dfd2;
+  --neutral-300: #ddd0be;
+  --neutral-400: #d1c0aa;
+  --neutral-500: #b8a48c;
+  --neutral-600: #9c8870;
+  --neutral-700: #7f6c54;
+  --neutral-800: #625038;
+  --neutral-900: #45341f;
+  
+  --font-primary: 'Plus Jakarta Sans', sans-serif;
+  --shadow-sm: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+  --shadow-md: 0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -2px rgba(0, 0, 0, 0.025);
+  --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.05), 0 10px 10px -5px rgba(0, 0, 0, 0.02);
+  --shadow-xl: 0 25px 50px -12px rgba(0, 0, 0, 0.15);
+}
+
+body {
+  font-family: var(--font-primary);
+  background-color: var(--neutral-50);
+  color: var(--neutral-800);
+  line-height: 1.6;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--neutral-200);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--primary-500);
+  border-radius: 20px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--primary-600);
+}
+
+.gradient-text {
+  background: linear-gradient(135deg, var(--primary-700) 0%, var(--primary-500) 70%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.card-modern {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.card-modern:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-xl);
+}
+
+/* Navbar */
+.glass-nav {
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(201, 167, 107, 0.2);
+}
+
+.nav-link {
+  position: relative;
+  font-weight: 500;
+  transition: color 0.2s;
+  color: var(--neutral-700);
+}
+.nav-link:hover {
+  color: var(--primary-600);
+}
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--primary-600);
+  transition: width 0.2s ease;
+}
+.nav-link:hover::after {
+  width: 100%;
+}
+
+/* Dropdown */
+.dropdown-menu {
+  position: absolute;
+  right: 0;
+  margin-top: 0.5rem;
+  width: 12rem;
+  background: white;
+  border: 1px solid rgba(201, 167, 107, 0.2);
+  border-radius: 1rem;
+  box-shadow: var(--shadow-lg);
+  overflow: hidden;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.2s;
+}
+.group:hover .dropdown-menu {
+  opacity: 1;
+  visibility: visible;
+}
+.dropdown-menu a {
+  display: block;
+  padding: 0.75rem 1rem;
+  font-size: 0.875rem;
+  transition: all 0.2s;
+  color: var(--neutral-700);
+}
+.dropdown-menu a:hover {
+  background: var(--neutral-100);
+  color: var(--primary-600);
+}
+
+/* Product Card */
+.product-card {
+  background: white;
+  border-radius: 1.5rem;
+  overflow: hidden;
+  border: 1px solid rgba(201, 167, 107, 0.2);
+}
+.product-image {
+  height: 200px;
+  width: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+.product-card:hover .product-image {
+  transform: scale(1.05);
+}
+
+.section-title {
+  font-size: 2rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+@media (max-width: 640px) {
+  .section-title {
+    font-size: 1.75rem;
+  }
+}
+
+/* Chatbot CitaRasa */
+#chatbot-citarasa {
+  position: fixed;
+  bottom: 90px;
+  right: 20px;
+  width: 380px;
+  max-height: 550px;
+  background: #ffffff;
+  border-radius: 24px;
+  box-shadow: var(--shadow-xl);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  z-index: 1000;
+  display: none;
+  border: 1px solid rgba(201, 167, 107, 0.3);
+  backdrop-filter: blur(10px);
+}
+#chatbot-header {
+  background: linear-gradient(135deg, #b45309 0%, #d97706 100%);
+  color: white;
+  padding: 16px 20px;
+  font-weight: 700;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+#chatbot-messages {
+  flex-grow: 1;
+  padding: 16px;
+  overflow-y: auto;
+  background: #fefcf7;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-height: 350px;
+}
+.chatbot-message {
+  max-width: 85%;
+  padding: 10px 14px;
+  border-radius: 18px;
+  line-height: 1.5;
+  font-size: 14px;
+  animation: fadeIn 0.3s ease;
+  white-space: pre-line;
+}
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.chatbot-message.user {
+  background: #f3e9d2;
+  color: var(--neutral-800);
+  align-self: flex-end;
+  border-bottom-right-radius: 4px;
+}
+.chatbot-message.bot {
+  background: white;
+  color: var(--neutral-800);
+  align-self: flex-start;
+  border-bottom-left-radius: 4px;
+  border: 1px solid #e9dccd;
+}
+#chatbot-input-container {
+  display: flex;
+  padding: 12px 16px;
+  gap: 8px;
+  background: white;
+  border-top: 1px solid #f0e5d6;
+}
+#chatbot-input {
+  flex-grow: 1;
+  border: 1px solid #e9dccd;
+  border-radius: 40px;
+  padding: 10px 16px;
+  font-size: 14px;
+  outline: none;
+}
+#chatbot-input:focus {
+  border-color: var(--primary-600);
+  box-shadow: 0 0 0 3px rgba(180, 83, 9, 0.1);
+}
+#chatbot-send {
+  background: var(--primary-600);
+  border: none;
+  color: white;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+#chatbot-send:hover {
+  background: var(--primary-700);
+}
+#chatbot-toggle {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: linear-gradient(135deg, #b45309 0%, #d97706 100%);
+  color: white;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  box-shadow: 0 10px 25px -5px rgba(180, 83, 9, 0.4);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  z-index: 1001;
+  font-size: 24px;
+}
+#chatbot-toggle:hover {
+  transform: scale(1.1);
+}
+
+/* Guide Card */
+.guide-card {
+  background: linear-gradient(135deg, #fef3e2 0%, #fff 100%);
+  border: 2px dashed var(--primary-300);
+}
+
+/* Quiz Styles */
+.quiz-card {
+  background: linear-gradient(135deg, var(--quiz-50) 0%, #ffffff 100%);
+  border: 2px solid var(--quiz-200);
+  border-radius: 32px;
+  overflow: hidden;
+}
+.quiz-option {
+  background: white;
+  border: 2px solid var(--quiz-200);
+  border-radius: 40px;
+  padding: 16px 20px;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+  width: 100%;
+  text-align: left;
+}
+.quiz-option:hover:not(.disabled) {
+  background: var(--quiz-100);
+  border-color: var(--quiz-500);
+  transform: translateX(8px);
+}
+.quiz-option.correct {
+  background: #d1fae5;
+  border-color: #10b981;
+  color: #065f46;
+}
+.quiz-option.wrong {
+  background: #fee2e2;
+  border-color: #ef4444;
+  color: #991b1b;
+}
+.quiz-option.disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+.quiz-option.selected {
+  border-width: 3px;
+  border-color: var(--quiz-600);
+  background: var(--quiz-50);
+}
+.badge-points {
+  background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+  color: white;
+  padding: 4px 12px;
+  border-radius: 40px;
+  font-weight: 600;
+  font-size: 14px;
+}
+.timer-bar {
+  height: 8px;
+  background: var(--quiz-200);
+  border-radius: 40px;
+  overflow: hidden;
+}
+.timer-progress {
+  height: 100%;
+  background: var(--quiz-600);
+  transition: width 1s linear;
+}
+.confetti {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 9999;
+}
+
+/* Mobile */
+@media (max-width: 640px) {
+  #chatbot-citarasa {
+    width: 300px;
+    right: 10px;
+  }
+  .quiz-option {
+    padding: 12px 16px;
+    font-size: 14px;
+  }
+}
